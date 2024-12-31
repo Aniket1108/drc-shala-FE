@@ -3,6 +3,8 @@ import WhatWeOffer from 'sections/landing/WhatWeOffer'
 // import WhyChooseUs from 'sections/landing/WhyChooseUS'
 import TestSeriesSection from 'sections/landing/TestSeries';
 import Courses from 'sections/landing/Courses';
+import Testimonial from 'sections/landing/Testimonial';
+
 
 export default function Landing() {
   return (
@@ -12,6 +14,7 @@ export default function Landing() {
       {/* <WhyChooseUs /> */}
       <TestSeriesSection />
       <Courses />
+      <Testimonial />
     </>
   );
 }
