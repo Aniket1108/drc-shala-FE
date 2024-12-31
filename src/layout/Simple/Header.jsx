@@ -112,6 +112,9 @@ export default function Header({ layout = 'landing', ...others }) {
                   sx={{
                     cursor: "pointer"
                   }}
+                  onClick={() => {
+                    navigate("/about-us")
+                  }}
                 >
                   About Us
                 </Typography>

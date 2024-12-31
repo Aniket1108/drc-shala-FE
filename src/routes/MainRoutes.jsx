@@ -13,6 +13,7 @@ const MaintenanceUnderConstruction = Loadable(lazy(() => import('pages/maintenan
 const MaintenanceComingSoon = Loadable(lazy(() => import('pages/maintenance/coming-soon/coming-soon')));
 
 const AppContactUS = Loadable(lazy(() => import('pages/contact-us')));
+const AboutUs = Loadable(lazy(() => import('pages/about-us')));
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 
@@ -38,6 +39,10 @@ const MainRoutes = {
         {
           path: 'contact-us',
           element: <AppContactUS />
+        },
+        {
+          path: 'about-us',
+          element: <AboutUs />
         }
       ]
     },
