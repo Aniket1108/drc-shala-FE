@@ -14,6 +14,8 @@ const MaintenanceComingSoon = Loadable(lazy(() => import('pages/maintenance/comi
 
 const AppContactUS = Loadable(lazy(() => import('pages/contact-us')));
 const AboutUs = Loadable(lazy(() => import('pages/about-us')));
+const JEEStudyMaterials = Loadable(lazy(() => import('pages/statics_pages/study_materials/JEE')));
+
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 
@@ -43,6 +45,10 @@ const MainRoutes = {
         {
           path: 'about-us',
           element: <AboutUs />
+        },
+        {
+          path: 'study-materials/jee',
+          element: <JEEStudyMaterials />
         }
       ]
     },
