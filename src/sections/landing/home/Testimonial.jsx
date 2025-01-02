@@ -58,27 +58,21 @@ export default function TestimonialPage() {
   const items = [
     {
       image: Avatar3,
-      text: '“This has been one of my favorite. 😍“',
-      name: 'htmhell',
-      designation: 'Design Quality'
+      text: '“The weekly Online practice tests were a great way to get familiar with the actual JEE exam and build my confidence. 😍“',
+      name: 'Shreya',
+      designation: 'Test Series'
     },
     {
       image: Avatar4,
-      text: '“Excellent support, they are doing immediately“',
-      name: 'hemchandkodali',
-      designation: 'Customer Support'
+      text: '“My experience with the Drcshala JEE course was fantastic! The course offers high-quality video lectures, well-designed study materials, DPPs, and a test series, making it stand out from other programs.“',
+      name: 'Aaradhya',
+      designation: 'Courses and Study Materials'
     },
     {
       image: Avatar7,
-      text: '“The author is very nice and solved my problem inmediately 😍 “',
-      name: 'richitela',
-      designation: 'Customer Support'
-    },
-    {
-      image: Avatar8,
-      text: '“Perfect for my need. 💎“',
-      name: 'Genstiade',
-      designation: 'Feature Availability'
+      text: '“I enrolled in Drcshala’s online MHT-CET preparation course, and it was a wonderful experience. 😍 “',
+      name: 'Sagar',
+      designation: 'MHT-CET'
     }
   ];
   return (

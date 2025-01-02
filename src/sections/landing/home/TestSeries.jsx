@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Typography, Button, Container, Stack } from '@mui/material';
-import ScienceIcon from '@mui/icons-material/Science';
-import EngineeringIcon from '@mui/icons-material/Engineering';
-import SchoolIcon from '@mui/icons-material/School';
+import ScienceIcon from 'assets/images/landing/healthcare.gif';
+import EngineeringIcon from 'assets/images/landing/helmet.gif';
+import SchoolIcon from 'assets/images/landing/online-degree.gif';
 import TestSeries from 'assets/images/landing/testSeries.png'
 
 const TestSeriesSection = () => {
@@ -10,21 +10,21 @@ const TestSeriesSection = () => {
         {
             title: 'NEET',
             description: 'Comprehensive test series designed for aspiring medical students. Practice biology, physics, and chemistry with detailed performance reports.',
-            icon: <ScienceIcon sx={{ fontSize: 50 }} />,
+            icon: ScienceIcon,
             gradient: 'linear-gradient(135deg, #ff758c, #ff7eb3)', // Pink-Red
             link: '/neet-test-series',
         },
         {
             title: 'JEE',
             description: 'Ace your engineering entrance exams with test series tailored for JEE Mains and Advanced. Includes practice for physics, chemistry, and mathematics.',
-            icon: <EngineeringIcon sx={{ fontSize: 50 }} />,
+            icon: EngineeringIcon,
             gradient: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Purple-Blue
             link: '/jee-test-series',
         },
         {
             title: 'MHT-CET',
             description: 'Prepare for Maharashtra’s state-level CET with mock tests covering physics, chemistry, and mathematics/biology.',
-            icon: <SchoolIcon sx={{ fontSize: 50 }} />,
+            icon: SchoolIcon,
             gradient: 'linear-gradient(135deg, #43cea2, #185a9d)', // Green-Blue
             link: '/mht-cet-test-series',
         },
@@ -67,7 +67,7 @@ const TestSeriesSection = () => {
                                     },
                                 }}
                             >
-                                <Box>{stream.icon}</Box>
+                                <img src={stream.icon} alt={stream.icon} width="50px" />
                                 <Box>
                                     <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
                                         {stream.title}
