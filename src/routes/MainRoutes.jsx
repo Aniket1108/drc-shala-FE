@@ -46,10 +46,10 @@ const MainRoutes = {
           path: 'about-us',
           element: <AboutUs />
         },
-        {
-          path: 'study-materials/jee',
-          element: <JEEStudyMaterials />
-        }
+        // {
+        //   path: 'study-materials/jee',
+        //   element: <JEEStudyMaterials />
+        // }
       ]
     },
     {
