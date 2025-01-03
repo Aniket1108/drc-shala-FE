@@ -17,8 +17,12 @@ const Courses = () => {
     };
 
     const handleClose = () => {
-        navigate("/courses")
+        setAnchorEl(null);
     };
+
+    const handleMenuClick = () => {
+        navigate("/courses")
+    }
 
     return (
         <Box>
@@ -39,10 +43,10 @@ const Courses = () => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleClose}>Foundation</MenuItem>
-                <MenuItem onClick={handleClose}>NEET</MenuItem>
-                <MenuItem onClick={handleClose}>JEE</MenuItem>
-                <MenuItem onClick={handleClose}>MHT-CET</MenuItem>
+                <MenuItem onClick={handleMenuClick}>Foundation</MenuItem>
+                <MenuItem onClick={handleMenuClick}>NEET</MenuItem>
+                <MenuItem onClick={handleMenuClick}>JEE</MenuItem>
+                <MenuItem onClick={handleMenuClick}>MHT-CET</MenuItem>
             </Menu>
         </Box>
     )
