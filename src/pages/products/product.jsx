@@ -102,161 +102,92 @@ export default function ProductsPage() {
             {
                 "id": 5,
                 "image": "prod-5.png",
-                "name": "Canon EOS 1500D 24.1 Digital SLR",
+                "name": "NEET Course",
                 "brand": "Canon",
-                "offer": "30%",
-                "description": "SLR Camera (Black) with EF S18-55...",
-                "about": "Image Enlargement: After shooting, you can enlarge photographs of the objects for clear zoomed view. Change In Aspect Ratio: Boldly crop the subject and save it with a composition that has impact. You can convert it to a 1:1 square format, and after shooting you can create a photo that will be popular on SNS.",
-                "quantity": 50,
-                "rating": 3.5,
-                "discount": 15,
-                "salePrice": 15.99,
-                "offerPrice": 12.99,
+                "offerPrice": 899,
                 "courses": "NEET",
-                "standard": [
-                    "11"
-                ],
-                "colors": [
-                    "warningMain",
-                    "primary200"
-                ],
-                "popularity": 6091968610304000,
-                "date": 8313557112324096,
-                "created": "2024-12-31T18:47:19.773Z",
-                "isStock": true,
-                "new": 25
+                "standard": "11",
+                "features": [
+                    "Recorded lectures",
+                    "Test Series",
+                    "Up to 20 online tests",
+                    "Study Materials"
+                ]
             },
             {
                 "id": 7,
                 "image": "prod-7.png",
-                "name": "Apple MacBook Pro with Iphone",
+                "name": "NEET Courses & Test Series",
                 "brand": "Apple",
-                "description": "11th Generation Intel® Core™ i5-11320H ...",
-                "about": "Great choice for those who love poweful and fast laptopts. It comes with 2TB of harddrive and 12GB of RAM.Its fast and comes with a powerful processor",
-                "quantity": 70,
-                "rating": 4,
-                "discount": 16,
-                "offerPrice": 14.59,
+                "offerPrice": 899,
                 "courses": "NEET",
-                "standard": [
-                    "12"
-                ],
-                "colors": [
-                    "errorDark",
-                    "secondaryMain",
-                    "errorMain"
-                ],
-                "popularity": 7511163459862528,
-                "date": 6254159986688000,
-                "created": "2025-01-17T06:27:19.773Z",
-                "isStock": true,
-                "new": 30
+                "standard": "12",
+                "features": [
+                    "Recorded lectures",
+                    "Test Series",
+                    "Up to 20 online tests",
+                    "Study Materials"
+                ]
             },
             {
                 "id": 4,
                 "image": "prod-4.png",
-                "name": "Luxury Watches Centrix Gold",
+                "name": "NEET Courses & Test Series",
                 "brand": "Centrix",
-                "offer": "20%",
-                "description": "7655 Couple (Refurbished)...",
-                "about": "This product from Centrix is a classic choice who love classical products. It it made of pure gold and weighs around 50 grams",
-                "quantity": 3,
-                "rating": 4,
-                "discount": 20,
-                "salePrice": 36,
-                "offerPrice": 29.99,
+                "offerPrice": 899,
                 "courses": "NEET",
-                "standard": [
-                    "Reapeter"
-                ],
-                "colors": [
-                    "errorLight",
-                    "warningMain"
-                ],
-                "popularity": 5221736679211008,
-                "date": 3143480025022464,
-                "created": "2024-12-26T21:47:19.773Z",
-                "isStock": true,
-                "new": 15
+                "standard": "reapeter",
+                "features": [
+                    "Recorded lectures",
+                    "Test Series",
+                    "Up to 20 online tests",
+                    "Study Materials"
+                ]
             },
             {
                 "id": 3,
                 "image": "prod-3.png",
-                "name": "Fitbit MX30 Smart Watch",
+                "name": "JEE Courses & Test Series",
                 "brand": "Fitbit",
-                "offer": "30%",
-                "description": "(MX30- waterproof) watch",
-                "about": "Fitbit is well known for making amazing smartwatches and this product is one of them, it is waterproof and battery power can last upto 2 days. Great product for smartwatch lovers",
-                "quantity": 70,
-                "rating": 4.5,
-                "discount": 40,
-                "salePrice": 85,
-                "offerPrice": 49.9,
+                "offerPrice": 899,
                 "courses": "JEE",
-                "standard": [
-                    "11"
-                ],
-                "colors": [
-                    "primary200",
-                    "primaryDark"
-                ],
-                "popularity": 1716011562696704,
-                "date": 3235048922808320,
-                "created": "2024-12-29T18:42:19.773Z",
-                "isStock": true,
-                "new": 35
+                "standard": "11",
+                "features": [
+                    "Recorded lectures",
+                    "Test Series",
+                    "Up to 20 online tests",
+                    "Study Materials"
+                ]
             },
             {
                 "id": 2,
                 "image": "prod-2.png",
-                "name": "Boat On-Ear Wireless ",
+                "name": "MHT-CET Courses & Test Series",
                 "brand": "Boat",
-                "description": "Mic(Bluetooth 4.2, Rockerz 450R...",
-                "about": "Boat On-ear wireless headphones comes with bluethooth technology, comes with better sound quality and weighs around 200gm which seems very light when using ",
-                "quantity": 45,
-                "rating": 3.5,
-                "discount": 10,
-                "offerPrice": 81.99,
+                "offerPrice": 799,
                 "courses": "MHT-CET",
-                "standard": [
-                    "11"
-                ],
-                "colors": [
-                    "primary200",
-                    "successLight",
-                    "secondary200",
-                    "warningMain"
-                ],
-                "popularity": 3674032507453440,
-                "date": 600948923695104,
-                "created": "2024-12-23T19:23:19.773Z",
-                "isStock": false,
-                "new": 40
+                "standard": "11",
+                "features": [
+                    "Recorded lectures",
+                    "Test Series",
+                    "Up to 20 online tests",
+                    "Study Materials"
+                ]
             },
             {
                 "id": 6,
                 "image": "prod-6.png",
-                "name": "Apple iPhone 13 Mini ",
+                "name": "MHT-CET Courses & Test Series",
                 "brand": "Apple",
-                "offer": "70%",
-                "description": "13 cm (5.4-inch) Super",
-                "about": "It fits for those who love photography since it has 48MP camera which shoots great photos even in low light. Also it has 8GB of RAm and 4000MAH battery which can last upto 12 hours a day ",
-                "quantity": 40,
-                "rating": 4.5,
-                "discount": 10,
-                "offerPrice": 86.99,
+                "offerPrice": 799,
                 "courses": "MHT-CET",
-                "standard": [
-                    "Reapeter"
-                ],
-                "colors": [
-                    "primaryDark"
-                ],
-                "popularity": 6201476837801984,
-                "date": 212166948945920,
-                "created": "2025-01-09T14:32:19.773Z",
-                "isStock": true,
-                "new": 15
+                "standard": "reapeter",
+                "features": [
+                    "Recorded lectures",
+                    "Test Series",
+                    "Up to 20 online tests",
+                    "Study Materials"
+                ]
             }
         ]);
         setLoading(false);
@@ -274,15 +205,9 @@ export default function ProductsPage() {
                     id={product.id}
                     image={product.image}
                     name={product.name}
-                    brand={product.brand}
-                    offer={product.offer}
-                    isStock={product.isStock}
-                    description={product.description}
+                    brand={product.standard}
                     offerPrice={product.offerPrice}
-                    salePrice={product.salePrice}
-                    rating={product.rating}
-                    color={product.colors ? product.colors[0] : undefined}
-                    open={openFilterDrawer}
+                    features={product.features}
                 />
             </Grid>
         ));

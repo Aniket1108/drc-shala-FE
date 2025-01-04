@@ -55,6 +55,10 @@ const MainRoutes = {
           path: 'courses',
           element: <Courses />
         },
+        {
+          path: 'courses/:course/:id',
+          element: <Courses />
+        },
       ]
     },
     {
