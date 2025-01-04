@@ -1,8 +1,15 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import { Box, Typography, Popover, Menu, MenuItem } from '@mui/material'
+import { Box, Typography, Paper, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material'
+import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
+import LaptopMacIcon from '@mui/icons-material/LaptopMac';
+import BookIcon from '@mui/icons-material/Book';
+import SchoolIcon from '@mui/icons-material/School';
+import ScienceIcon from '@mui/icons-material/Science';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 
 
 const Courses = () => {
@@ -20,8 +27,8 @@ const Courses = () => {
         setAnchorEl(null);
     };
 
-    const handleMenuClick = () => {
-        navigate("/courses")
+    const handleMenuClick = (path) => {
+        navigate(path)
     }
 
     return (
@@ -39,14 +46,58 @@ const Courses = () => {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                MenuListProps={{
+                MenuProps={{
                     'aria-labelledby': 'basic-button',
                 }}
+                sx={{ marginTop: "10px" }}
             >
-                <MenuItem onClick={handleMenuClick}>Foundation</MenuItem>
-                <MenuItem onClick={handleMenuClick}>NEET</MenuItem>
-                <MenuItem onClick={handleMenuClick}>JEE</MenuItem>
-                <MenuItem onClick={handleMenuClick}>MHT-CET</MenuItem>
+
+                <MenuItem onClick={() => handleMenuClick("/courses")}>
+                    <ListItemIcon>
+                        <CollectionsBookmarkIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>All Courses</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={() => handleMenuClick("/courses?id=foundation")}>
+                    <ListItemIcon>
+                        <BookIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>Foundation</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/courses?id=neet")}>
+                    <ListItemIcon>
+                        <ScienceIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>NEET</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/courses?id=jee")}>
+                    <ListItemIcon>
+                        <LaptopMacIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>JEE</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/courses?id=mht-cet")}>
+                    <ListItemIcon>
+                        <SchoolIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>MHT-CET</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
             </Menu>
         </Box>
     )

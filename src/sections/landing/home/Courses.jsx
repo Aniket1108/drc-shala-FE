@@ -18,7 +18,7 @@ const CoursesSection = () => {
         {
             title: 'NEET Preparation',
             description: 'Comprehensive courses for medical aspirants, covering all key topics with expert guidance.',
-            icon: <SchoolIcon sx={{ fontSize: 50, color: 'white' }} />,
+            icon: <ScienceIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff758c, #ff7eb3)', // Pink-Red
             link: '/neet-courses',
         },
@@ -32,7 +32,7 @@ const CoursesSection = () => {
         {
             title: 'MHT-CET Preparation',
             description: 'Specialized courses for Maharashtra’s state-level CET, focusing on physics, chemistry, and mathematics/biology.',
-            icon: <ScienceIcon sx={{ fontSize: 50, color: 'white' }} />,
+            icon: <SchoolIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff9966, #ff5e62)', // Orange-Red
             link: '/mht-cet-courses',
         },

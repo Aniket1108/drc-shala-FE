@@ -24,6 +24,8 @@ function Courses({ courses, handelFilter }) {
     setGenderLoading(false);
   }, []);
 
+  console.log("filter", courses)
+
   return (
     <Stack>
       {isGenderLoading ? (
@@ -34,15 +36,15 @@ function Courses({ courses, handelFilter }) {
           <Box sx={{ pl: 0.5 }}>
             <Stack>
               <FormControlLabel
-                control={<Checkbox checked={courses.some((item) => item === 'Foundation')} />}
-                onChange={() => handelFilter('courses', 'Foundation')}
+                control={<Checkbox checked={courses.some((item) => item === 'foundation')} />}
+                onChange={() => handelFilter('courses', 'foundation')}
                 label="Foundation (7th - 10th)"
               />
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={courses.some((item) => item === 'NEET')}
-                    onChange={() => handelFilter('courses', 'NEET')}
+                    checked={courses.some((item) => item === 'neet')}
+                    onChange={() => handelFilter('courses', 'neet')}
                   />
                 }
                 label="NEET"
@@ -50,8 +52,8 @@ function Courses({ courses, handelFilter }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={courses.some((item) => item === 'JEE')}
-                    onChange={() => handelFilter('courses', 'JEE')}
+                    checked={courses.some((item) => item === 'jee')}
+                    onChange={() => handelFilter('courses', 'jee')}
                   />
                 }
                 label="JEE"
@@ -59,8 +61,8 @@ function Courses({ courses, handelFilter }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={courses.some((item) => item === 'MHT-CET')}
-                    onChange={() => handelFilter('courses', 'MHT-CET')}
+                    checked={courses.some((item) => item === 'mht-cet')}
+                    onChange={() => handelFilter('courses', 'mht-cet')}
                   />
                 }
                 label="MHT-CET"

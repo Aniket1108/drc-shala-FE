@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -48,6 +48,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
 
 export default function ProductsPage() {
     const theme = useTheme();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     // const { cart } = useGetCart();
     const { container } = useConfig();
@@ -86,6 +87,15 @@ export default function ProductsPage() {
         rating: 0
     };
     const [filter, setFilter] = useState(initialState);
+
+    const id = searchParams.get('id');
+    useEffect(() => {
+        if (id) {
+            initialState.courses.push(id)
+        }
+        setFilter(initialState)
+    }, [id])
+
 
     const filterData = async () => {
         setProducts([
