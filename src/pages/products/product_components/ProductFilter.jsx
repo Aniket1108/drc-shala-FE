@@ -18,13 +18,13 @@ import Colors from './Colors';
 
 // ==============================|| PRODUCT - Courses FILTER ||============================== //
 
-function Courses({ courses, handelFilter }) {
+function Courses({ course, handelFilter }) {
   const [isGenderLoading, setGenderLoading] = useState(true);
   useEffect(() => {
     setGenderLoading(false);
   }, []);
 
-  console.log("filter", courses)
+  console.log("filter", course)
 
   return (
     <Stack>
@@ -36,15 +36,15 @@ function Courses({ courses, handelFilter }) {
           <Box sx={{ pl: 0.5 }}>
             <Stack>
               <FormControlLabel
-                control={<Checkbox checked={courses.some((item) => item === 'foundation')} />}
-                onChange={() => handelFilter('courses', 'foundation')}
+                control={<Checkbox checked={course === 'foundation'} />}
+                onChange={() => handelFilter('course', 'foundation')}
                 label="Foundation (7th - 10th)"
               />
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={courses.some((item) => item === 'neet')}
-                    onChange={() => handelFilter('courses', 'neet')}
+                    checked={course === 'neet'}
+                    onChange={() => handelFilter('course', 'neet')}
                   />
                 }
                 label="NEET"
@@ -52,8 +52,8 @@ function Courses({ courses, handelFilter }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={courses.some((item) => item === 'jee')}
-                    onChange={() => handelFilter('courses', 'jee')}
+                    checked={course === 'jee'}
+                    onChange={() => handelFilter('course', 'jee')}
                   />
                 }
                 label="JEE"
@@ -61,8 +61,8 @@ function Courses({ courses, handelFilter }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={courses.some((item) => item === 'mht-cet')}
-                    onChange={() => handelFilter('courses', 'mht-cet')}
+                    checked={course === 'mht-cet'}
+                    onChange={() => handelFilter('course', 'mht-cet')}
                   />
                 }
                 label="MHT-CET"
@@ -130,7 +130,7 @@ const ProductFilter = ({ filter, handelFilter }) => (
 
 export default ProductFilter;
 
-Courses.propTypes = { courses: PropTypes.array, handelFilter: PropTypes.func };
+Courses.propTypes = { course: PropTypes.array, handelFilter: PropTypes.func };
 
 Standard.propTypes = { standard: PropTypes.array, handelFilter: PropTypes.func };
 

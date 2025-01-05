@@ -32,7 +32,7 @@ export default function ProductFilterDrawer({ filter, initialState, handleDrawer
       a1.sort === a2.sort &&
       a1.price === a2.price &&
       a1.rating === a2.rating &&
-      JSON.stringify(a1.courses) === JSON.stringify(a2.courses) &&
+      JSON.stringify(a1.course) === JSON.stringify(a2.course) &&
       JSON.stringify(a1.standard) === JSON.stringify(a2.standard)
     );
 
@@ -40,11 +40,11 @@ export default function ProductFilterDrawer({ filter, initialState, handleDrawer
     console.log(type, params)
     setLoading(true);
     switch (type) {
-      case 'courses':
-        if (filter.courses.some((item) => item === params)) {
-          setFilter({ ...filter, courses: filter.courses.filter((item) => item !== params) });
+      case 'course':
+        if (filter.course === params) {
+          setFilter({ ...filter, course: filter.course.filter((item) => item !== params) });
         } else {
-          setFilter({ ...filter, courses: [...filter.courses, params] });
+          setFilter({ ...filter, course: [...filter.course, params] });
         }
         break;
       case 'standard':

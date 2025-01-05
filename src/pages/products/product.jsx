@@ -80,7 +80,7 @@ export default function ProductsPage() {
     const initialState = {
         search: '',
         sort: 'low',
-        courses: [],
+        course: [],
         standard: ['all'],
         colors: [],
         price: '',
@@ -91,7 +91,7 @@ export default function ProductsPage() {
     const id = searchParams.get('id');
     useEffect(() => {
         if (id) {
-            initialState.courses.push(id)
+            initialState.course.push(id)
         }
         setFilter(initialState)
     }, [id])
@@ -104,9 +104,11 @@ export default function ProductsPage() {
                 "image": "prod-5.png",
                 "name": "NEET Course",
                 "brand": "Canon",
+                "salePrice": 1299,
                 "offerPrice": 899,
-                "courses": "NEET",
+                "course": "neet",
                 "standard": "11",
+                "type": "course",
                 "features": [
                     "Recorded lectures",
                     "Test Series",
@@ -117,13 +119,14 @@ export default function ProductsPage() {
             {
                 "id": 7,
                 "image": "prod-7.png",
-                "name": "NEET Courses & Test Series",
+                "name": "NEET Test Series",
                 "brand": "Apple",
+                "salePrice": 1299,
                 "offerPrice": 899,
-                "courses": "NEET",
+                "course": "neet",
                 "standard": "12",
+                "type": "test-series",
                 "features": [
-                    "Recorded lectures",
                     "Test Series",
                     "Up to 20 online tests",
                     "Study Materials"
@@ -134,9 +137,11 @@ export default function ProductsPage() {
                 "image": "prod-4.png",
                 "name": "NEET Courses & Test Series",
                 "brand": "Centrix",
+                "salePrice": 1299,
                 "offerPrice": 899,
-                "courses": "NEET",
+                "course": "neet",
                 "standard": "reapeter",
+                "type": "course",
                 "features": [
                     "Recorded lectures",
                     "Test Series",
@@ -149,9 +154,11 @@ export default function ProductsPage() {
                 "image": "prod-3.png",
                 "name": "JEE Courses & Test Series",
                 "brand": "Fitbit",
+                "salePrice": 1299,
                 "offerPrice": 899,
-                "courses": "JEE",
+                "course": "jee",
                 "standard": "11",
+                "type": "course",
                 "features": [
                     "Recorded lectures",
                     "Test Series",
@@ -164,9 +171,11 @@ export default function ProductsPage() {
                 "image": "prod-2.png",
                 "name": "MHT-CET Courses & Test Series",
                 "brand": "Boat",
+                "salePrice": 1099,
                 "offerPrice": 799,
-                "courses": "MHT-CET",
+                "course": "mht-cet",
                 "standard": "11",
+                "type": "course",
                 "features": [
                     "Recorded lectures",
                     "Test Series",
@@ -179,9 +188,11 @@ export default function ProductsPage() {
                 "image": "prod-6.png",
                 "name": "MHT-CET Courses & Test Series",
                 "brand": "Apple",
+                "salePrice": 1099,
                 "offerPrice": 799,
-                "courses": "MHT-CET",
+                "course": "mht-cet",
                 "standard": "reapeter",
+                "type": "course",
                 "features": [
                     "Recorded lectures",
                     "Test Series",
@@ -205,9 +216,12 @@ export default function ProductsPage() {
                     id={product.id}
                     image={product.image}
                     name={product.name}
-                    brand={product.standard}
+                    salePrice={product.salePrice}
                     offerPrice={product.offerPrice}
+                    type={product.type}
                     features={product.features}
+                    course={product.course}
+                    standard={product.standard}
                 />
             </Grid>
         ));

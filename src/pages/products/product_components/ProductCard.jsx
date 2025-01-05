@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -13,7 +13,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Divider from '@mui/material/Divider';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 
 // project-imports
 import MainCard from 'components/MainCard';
@@ -29,8 +29,9 @@ import { Heart } from 'iconsax-react';
 
 // ==============================|| PRODUCT CARD ||============================== //
 
-export default function ProductCard({ id, name, brand, image, offerPrice, features }) {
+export default function ProductCard({ id, name, image, salePrice, offerPrice, type, features, standard, course }) {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [wishlisted, setWishlisted] = useState(false);
 
   const addToFavourite = () => {
@@ -69,8 +70,6 @@ export default function ProductCard({ id, name, brand, image, offerPrice, featur
     >
       <Stack>
         <Typography
-          component={Link}
-          to={`/apps/e-commerce/product-details/${id}`}
           color="text.primary"
           variant="h5"
           sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
@@ -78,7 +77,7 @@ export default function ProductCard({ id, name, brand, image, offerPrice, featur
           {name}
         </Typography>
         <Typography variant="h6" color="text.secondary">
-          Standard - {brand}
+          Standard - {standard}
         </Typography>
       </Stack>
 
@@ -99,14 +98,19 @@ export default function ProductCard({ id, name, brand, image, offerPrice, featur
       <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{
         mt: "10px"
       }}>
-        <Typography variant="h5">{offerPrice}</Typography>
+        <Box>
+          <Typography variant="body" sx={{ textDecoration: "line-through" }}>₹{salePrice}</Typography>
+          <Typography variant="h5">₹{offerPrice}</Typography>
+        </Box>
 
         <Box>
           <Button variant='outlined'>
             <ShoppingCartIcon />
           </Button>
 
-          <Button variant="contained" sx={{ ml: "5px" }}>
+          <Button variant="contained" sx={{ ml: "5px" }} onClick={() => {
+            navigate(type + "/" + course)
+          }}>
             View Details
           </Button>
         </Box>

@@ -19,6 +19,7 @@ const JEEStudyMaterials = Loadable(lazy(() => import('pages/statics_pages/study_
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const Courses = Loadable(lazy(() => import('pages/courses')));
+const CourseDetails = Loadable(lazy(() => import('pages/course_details')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -50,14 +51,14 @@ const MainRoutes = {
         // {
         //   path: 'study-materials/jee',
         //   element: <JEEStudyMaterials />
-        // }
+        // },
         {
           path: 'courses',
           element: <Courses />
         },
         {
-          path: 'courses/:course/:id',
-          element: <Courses />
+          path: 'courses/:type/:course',
+          element: <CourseDetails />
         },
       ]
     },
