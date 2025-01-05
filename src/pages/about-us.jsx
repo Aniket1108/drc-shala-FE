@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Typography, Box, Button, Stack } from '@mui/material';
+import { Container, Grid, Typography, Box, Button, Stack, Card, Avatar } from '@mui/material';
 import { styled } from '@mui/system';
 import aboutUsImg from "assets/images/landing/aboutUs.png"
 
@@ -9,6 +9,65 @@ const StyledImage = styled('img')(({ theme }) => ({
     height: 'auto',
     borderRadius: theme.shape.borderRadius,
 }));
+
+const GradientBox = styled(Box)(({ theme }) => ({
+    position: 'relative',
+    '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '500px',
+        background: 'linear-gradient(135deg, #e0f2fe 0%, #f3e8ff 100%)',
+        zIndex: -1,
+        borderRadius: '0 0 50% 50%/0 0 100% 100%',
+        transform: 'scaleX(1.5)',
+    },
+}));
+
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+    width: 120,
+    height: 120,
+    marginBottom: theme.spacing(3),
+    border: `4px solid ${theme.palette.primary.main}`,
+    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
+}));
+
+const StyledCard = styled(Card)(({ theme }) => ({
+    padding: theme.spacing(4),
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: '24px',
+    background: 'rgba(255, 255, 255, 0.8)',
+    backdropFilter: 'blur(20px)',
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+    border: '1px solid rgba(255, 255, 255, 0.3)',
+    transition: 'transform 0.3s ease-in-out',
+    '&:hover': {
+        transform: 'translateY(-10px)',
+    },
+}));
+
+const teamMembers = [
+    {
+        name: "Nilesh Maher",
+        role: "Founder & CEO",
+        description: "With over a decade of experience in education, our CEO believes in creating an education system that nurtures critical thinking and practical skills while maintaining academic excellence."
+    },
+    {
+        name: "Sagar Maher",
+        role: "Co-Founder & COO",
+        description: "Dedicated to making quality education accessible to all, our CMO champions the cause of affordable education, ensuring financial constraints never limit one's access to learning."
+    },
+    {
+        name: "Aniket Gholap",
+        role: "Co-Founder & CTO",
+        description: "As an expert in educational psychology, our CTO specializes in creating effective mentorship programs and building sustainable learning communities where students can thrive."
+    }
+];
 
 const AboutUs = () => {
     return (
@@ -65,6 +124,51 @@ const AboutUs = () => {
                         </Grid>
                     </Grid>
                 </Box>
+
+                <GradientBox>
+                    <Container sx={{ py: 10 }}>
+                        <Typography
+                            variant="h4"
+                            align="center"
+                            gutterBottom
+                            sx={{
+                                mb: 6,
+                                background: 'linear-gradient(135deg, #1e40af 0%, #5b21b6 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                            }}
+                        >
+                            Our Leadership Team
+                        </Typography>
+
+                        <Grid container spacing={4}>
+                            {teamMembers.map((member, index) => (
+                                <Grid item xs={12} md={4} key={index}>
+                                    <StyledCard>
+                                        <StyledAvatar src={""} />
+                                        <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
+                                            {member.name}
+                                        </Typography>
+                                        <Typography
+                                            variant="subtitle1"
+                                            gutterBottom
+                                            sx={{
+                                                color: 'primary.main',
+                                                fontWeight: 600,
+                                                mb: 0.5,
+                                            }}
+                                        >
+                                            {member.role}
+                                        </Typography>
+                                        <Typography variant="body1" sx={{ color: 'text.secondary', textAlign: 'center' }}>
+                                            {member.description}
+                                        </Typography>
+                                    </StyledCard>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Container>
+                </GradientBox>
 
                 {/* Call to Action Section */}
                 <Box sx={{ mt: 8, textAlign: 'center' }}>

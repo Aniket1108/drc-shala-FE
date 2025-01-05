@@ -13,9 +13,11 @@ import Typography from '@mui/material/Typography';
 
 // select company-size
 const sizes = [
-  { value: '1', label: '1 - 5' },
-  { value: '2', label: '5 - 10' },
-  { value: '3', label: '10+' }
+  { value: '1', label: 'NEET' },
+  { value: '2', label: 'JEE' },
+  { value: '3', label: 'MHT-CET' },
+  { value: '4', label: 'Foundation (7th - 10th)' },
+  { value: '5', label: 'Buisness' },
 ];
 
 // ==============================|| CONTACT US - FORM ||============================== //
