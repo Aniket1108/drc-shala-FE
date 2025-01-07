@@ -44,13 +44,10 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
     })
 }));
 
-// ==============================|| ECOMMERCE - PRODUCTS ||============================== //
-
 export default function ProductsPage() {
     const theme = useTheme();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // const { cart } = useGetCart();
     const { container } = useConfig();
 
     const [isLoading, setLoading] = useState(true);
@@ -62,15 +59,6 @@ export default function ProductsPage() {
     const initialProducts = useLoaderData();
     const [products, setProducts] = useState(initialProducts);
 
-    // useEffect(() => {
-    //     // clear cart if complete order
-    //     if (cart && cart.step > 2) {
-    //         resetCart();
-    //     }
-
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
     const [openFilterDrawer, setOpenFilterDrawer] = useState(true);
     const handleDrawerOpen = () => {
         setOpenFilterDrawer((prevState) => !prevState);
@@ -78,13 +66,8 @@ export default function ProductsPage() {
 
     // filter
     const initialState = {
-        search: '',
-        sort: 'low',
         course: [],
-        standard: ['all'],
-        colors: [],
-        price: '',
-        rating: 0
+        standard: [],
     };
     const [filter, setFilter] = useState(initialState);
 
@@ -98,110 +81,10 @@ export default function ProductsPage() {
 
 
     const filterData = async () => {
-        setProducts([
-            {
-                "id": 5,
-                "image": "prod-5.png",
-                "name": "NEET Course",
-                "brand": "Canon",
-                "salePrice": 1299,
-                "offerPrice": 899,
-                "course": "neet",
-                "standard": "11",
-                "type": "course",
-                "features": [
-                    "Recorded lectures",
-                    "Test Series",
-                    "Up to 20 online tests",
-                    "Study Materials"
-                ]
-            },
-            {
-                "id": 7,
-                "image": "prod-7.png",
-                "name": "NEET Test Series",
-                "brand": "Apple",
-                "salePrice": 1299,
-                "offerPrice": 899,
-                "course": "neet",
-                "standard": "12",
-                "type": "test-series",
-                "features": [
-                    "Test Series",
-                    "Up to 20 online tests",
-                    "Study Materials"
-                ]
-            },
-            {
-                "id": 4,
-                "image": "prod-4.png",
-                "name": "NEET Courses & Test Series",
-                "brand": "Centrix",
-                "salePrice": 1299,
-                "offerPrice": 899,
-                "course": "neet",
-                "standard": "reapeter",
-                "type": "course",
-                "features": [
-                    "Recorded lectures",
-                    "Test Series",
-                    "Up to 20 online tests",
-                    "Study Materials"
-                ]
-            },
-            {
-                "id": 3,
-                "image": "prod-3.png",
-                "name": "JEE Courses & Test Series",
-                "brand": "Fitbit",
-                "salePrice": 1299,
-                "offerPrice": 899,
-                "course": "jee",
-                "standard": "11",
-                "type": "course",
-                "features": [
-                    "Recorded lectures",
-                    "Test Series",
-                    "Up to 20 online tests",
-                    "Study Materials"
-                ]
-            },
-            {
-                "id": 2,
-                "image": "prod-2.png",
-                "name": "MHT-CET Courses & Test Series",
-                "brand": "Boat",
-                "salePrice": 1099,
-                "offerPrice": 799,
-                "course": "mht-cet",
-                "standard": "11",
-                "type": "course",
-                "features": [
-                    "Recorded lectures",
-                    "Test Series",
-                    "Up to 20 online tests",
-                    "Study Materials"
-                ]
-            },
-            {
-                "id": 6,
-                "image": "prod-6.png",
-                "name": "MHT-CET Courses & Test Series",
-                "brand": "Apple",
-                "salePrice": 1099,
-                "offerPrice": 799,
-                "course": "mht-cet",
-                "standard": "reapeter",
-                "type": "course",
-                "features": [
-                    "Recorded lectures",
-                    "Test Series",
-                    "Up to 20 online tests",
-                    "Study Materials"
-                ]
-            }
-        ]);
+        const data = filterProducts(filter)
+        setProducts(data);
         setLoading(false);
+
     };
 
     useEffect(() => {
@@ -265,3 +148,118 @@ export default function ProductsPage() {
         </Box>
     );
 }
+
+const data = [
+    {
+        "id": 5,
+        "image": "prod-5.png",
+        "name": "NEET Course",
+        "brand": "Canon",
+        "salePrice": 1299,
+        "offerPrice": 899,
+        "course": "neet",
+        "standard": "11",
+        "type": "course",
+        "features": [
+            "Recorded lectures",
+            "Test Series",
+            "Up to 20 online tests",
+            "Study Materials"
+        ]
+    },
+    {
+        "id": 7,
+        "image": "prod-7.png",
+        "name": "NEET Test Series",
+        "brand": "Apple",
+        "salePrice": 1299,
+        "offerPrice": 899,
+        "course": "neet",
+        "standard": "12",
+        "type": "test-series",
+        "features": [
+            "Test Series",
+            "Up to 20 online tests",
+            "Study Materials"
+        ]
+    },
+    {
+        "id": 4,
+        "image": "prod-4.png",
+        "name": "NEET Courses & Test Series",
+        "brand": "Centrix",
+        "salePrice": 1299,
+        "offerPrice": 899,
+        "course": "neet",
+        "standard": "reapeter",
+        "type": "course",
+        "features": [
+            "Recorded lectures",
+            "Test Series",
+            "Up to 20 online tests",
+            "Study Materials"
+        ]
+    },
+    {
+        "id": 3,
+        "image": "prod-3.png",
+        "name": "JEE Courses & Test Series",
+        "brand": "Fitbit",
+        "salePrice": 1299,
+        "offerPrice": 899,
+        "course": "jee",
+        "standard": "11",
+        "type": "course",
+        "features": [
+            "Recorded lectures",
+            "Test Series",
+            "Up to 20 online tests",
+            "Study Materials"
+        ]
+    },
+    {
+        "id": 2,
+        "image": "prod-2.png",
+        "name": "MHT-CET Courses & Test Series",
+        "brand": "Boat",
+        "salePrice": 1099,
+        "offerPrice": 799,
+        "course": "mht-cet",
+        "standard": "11",
+        "type": "course",
+        "features": [
+            "Recorded lectures",
+            "Test Series",
+            "Up to 20 online tests",
+            "Study Materials"
+        ]
+    },
+    {
+        "id": 6,
+        "image": "prod-6.png",
+        "name": "MHT-CET Courses & Test Series",
+        "brand": "Apple",
+        "salePrice": 1099,
+        "offerPrice": 799,
+        "course": "mht-cet",
+        "standard": "reapeter",
+        "type": "course",
+        "features": [
+            "Recorded lectures",
+            "Test Series",
+            "Up to 20 online tests",
+            "Study Materials"
+        ]
+    }
+]
+
+const filterProducts = (filter) => {
+    console.log("filtering data", filter);
+    if ((filter.course?.length || 0) > 0 || (filter.standard?.length || 0) > 0) {
+        return data.filter((item) =>
+            filter.course.includes(item.course) || filter.standard.includes(item.standard)
+        );
+    }
+    return data;
+};
+

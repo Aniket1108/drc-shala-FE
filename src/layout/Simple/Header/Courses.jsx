@@ -29,6 +29,7 @@ const Courses = () => {
 
     const handleMenuClick = (path) => {
         navigate(path)
+        setAnchorEl(null);
     }
 
     return (

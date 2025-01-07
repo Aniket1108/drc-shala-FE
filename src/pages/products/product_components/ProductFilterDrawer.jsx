@@ -27,7 +27,8 @@ export default function ProductFilterDrawer({ filter, initialState, handleDrawer
 
   const filterIsEqual = (a1, a2) =>
     a1 === a2 ||
-    (a1.length === a2.length &&
+    (
+      a1.length === a2.length &&
       a1.search === a2.search &&
       a1.sort === a2.sort &&
       a1.price === a2.price &&
@@ -37,11 +38,11 @@ export default function ProductFilterDrawer({ filter, initialState, handleDrawer
     );
 
   const handelFilter = (type, params, rating) => {
-    console.log(type, params)
+    console.log("handle filter", type, params)
     setLoading(true);
     switch (type) {
       case 'course':
-        if (filter.course === params) {
+        if (filter.course.some((item) => item === params)) {
           setFilter({ ...filter, course: filter.course.filter((item) => item !== params) });
         } else {
           setFilter({ ...filter, course: [...filter.course, params] });

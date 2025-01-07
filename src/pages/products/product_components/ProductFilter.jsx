@@ -24,8 +24,6 @@ function Courses({ course, handelFilter }) {
     setGenderLoading(false);
   }, []);
 
-  console.log("filter", course)
-
   return (
     <Stack>
       {isGenderLoading ? (
@@ -36,14 +34,14 @@ function Courses({ course, handelFilter }) {
           <Box sx={{ pl: 0.5 }}>
             <Stack>
               <FormControlLabel
-                control={<Checkbox checked={course === 'foundation'} />}
+                control={<Checkbox checked={course.some((item) => item === 'foundation')} />}
                 onChange={() => handelFilter('course', 'foundation')}
-                label="Foundation (7th - 10th)"
+                label="Foundation ( 7th - 10th )"
               />
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={course === 'neet'}
+                    checked={course.some((item) => item === 'neet')}
                     onChange={() => handelFilter('course', 'neet')}
                   />
                 }
@@ -52,7 +50,7 @@ function Courses({ course, handelFilter }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={course === 'jee'}
+                    checked={course.some((item) => item === 'jee')}
                     onChange={() => handelFilter('course', 'jee')}
                   />
                 }
@@ -61,7 +59,7 @@ function Courses({ course, handelFilter }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={course === 'mht-cet'}
+                    checked={course.some((item) => item === 'mht-cet')}
                     onChange={() => handelFilter('course', 'mht-cet')}
                   />
                 }
@@ -75,7 +73,7 @@ function Courses({ course, handelFilter }) {
   );
 }
 
-// ==============================|| PRODUCT GRID - Standard FILTER ||============================== //
+// ==============================|| PRODUCT GRID - CATEGORIES FILTER ||============================== //
 
 function Standard({ standard, handelFilter }) {
   const [isCategoriesLoading, setCategoriesLoading] = useState(true);
@@ -105,9 +103,9 @@ function Standard({ standard, handelFilter }) {
                 label="12th"
               />
               <FormControlLabel
-                control={<Checkbox checked={standard.some((item) => item === 'Reapeter')} />}
-                onChange={() => handelFilter('standard', 'Reapeter')}
-                label="11th / 12th Reapeter"
+                control={<Checkbox checked={standard.some((item) => item === 'repeater')} />}
+                onChange={() => handelFilter('standard', 'repeater')}
+                label="11th / 12th Repeater"
               />
             </Stack>
           </Box>
@@ -120,7 +118,7 @@ function Standard({ standard, handelFilter }) {
 const ProductFilter = ({ filter, handelFilter }) => (
   <Grid container direction="column" rowSpacing={3}>
     <Grid item>
-      <Courses courses={filter.courses} handelFilter={handelFilter} />
+      <Courses course={filter.course} handelFilter={handelFilter} />
     </Grid>
     <Grid item>
       <Standard standard={filter.standard} handelFilter={handelFilter} />
