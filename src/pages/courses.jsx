@@ -4,12 +4,18 @@ import Container from '@mui/material/Container';
 
 import CoursesIntro from 'sections/landing/courses/CourseIntro';
 import Products from 'pages/products/product'
+import TestSeries from 'sections/landing/test-series/TestSeries';
 
-const courses = () => {
+const courses = ({ type }) => {
     return (
         <Container sx={{ marginTop: "60px", marginBottom: "50px" }}>
-            <CoursesIntro />
-            <Products />
+            {
+                type == "course" ?
+                    <CoursesIntro />
+                    :
+                    <TestSeries />
+            }
+            <Products type={type} />
         </Container>
     )
 }

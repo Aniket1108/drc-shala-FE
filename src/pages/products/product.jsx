@@ -44,7 +44,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
     })
 }));
 
-export default function ProductsPage() {
+export default function ProductsPage({ type }) {
     const theme = useTheme();
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -81,7 +81,7 @@ export default function ProductsPage() {
 
 
     const filterData = async () => {
-        const data = filterProducts(filter)
+        const data = filterProducts(filter, type)
         setProducts(data);
         setLoading(false);
 
@@ -89,7 +89,7 @@ export default function ProductsPage() {
 
     useEffect(() => {
         filterData();
-    }, [filter]);
+    }, [filter, type]);
 
     let productResult = <></>;
     if (products && products.length > 0) {
@@ -253,13 +253,16 @@ const data = [
     }
 ]
 
-const filterProducts = (filter) => {
-    console.log("filtering data", filter);
+const filterProducts = (filter, type) => {
+    console.log("filtering data", filter, type);
     if ((filter.course?.length || 0) > 0 || (filter.standard?.length || 0) > 0) {
-        return data.filter((item) =>
-            filter.course.includes(item.course) || filter.standard.includes(item.standard)
+        return data.filter(
+            (item) =>
+                item.type === type &&
+                (filter.course.includes(item.course) || filter.standard.includes(item.standard))
         );
     }
-    return data;
+    return data.filter((item) => item.type === type);
 };
+
 

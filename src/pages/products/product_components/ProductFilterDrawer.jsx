@@ -17,7 +17,7 @@ import useConfig from 'hooks/useConfig';
 
 // ==============================|| PRODUCT - FILTER DRAWER ||============================== //
 
-export default function ProductFilterDrawer({ filter, initialState, handleDrawerOpen, openFilterDrawer, setFilter, setLoading }) {
+export default function ProductFilterDrawer({ type, filter, initialState, handleDrawerOpen, openFilterDrawer, setFilter, setLoading }) {
   const theme = useTheme();
 
   const { mode, container } = useConfig();

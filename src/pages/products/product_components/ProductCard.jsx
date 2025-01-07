@@ -99,21 +99,16 @@ export default function ProductCard({ id, name, image, salePrice, offerPrice, ty
         mt: "10px"
       }}>
         <Box>
-          <Typography variant="body" sx={{ textDecoration: "line-through" }}>₹{salePrice}</Typography>
+          <Typography variant="body2" sx={{ textDecoration: "line-through" }}>₹{salePrice}</Typography>
           <Typography variant="h5">₹{offerPrice}</Typography>
         </Box>
 
-        <Box>
-          <Button variant='outlined'>
-            <ShoppingCartIcon />
-          </Button>
+        <Button variant="contained" sx={{ ml: "5px" }} onClick={() => {
+          navigate("/" + type + "/" + course)
+        }}>
+          View Details
+        </Button>
 
-          <Button variant="contained" sx={{ ml: "5px" }} onClick={() => {
-            navigate(type + "/" + course)
-          }}>
-            View Details
-          </Button>
-        </Box>
       </Stack>
     </MainCard>
   );

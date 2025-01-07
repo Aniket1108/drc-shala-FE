@@ -17,7 +17,7 @@ const sizes = [
   { value: '2', label: 'JEE' },
   { value: '3', label: 'MHT-CET' },
   { value: '4', label: 'Foundation (7th - 10th)' },
-  { value: '5', label: 'Buisness' },
+  { value: '5', label: 'Business' },
 ];
 
 // ==============================|| CONTACT US - FORM ||============================== //

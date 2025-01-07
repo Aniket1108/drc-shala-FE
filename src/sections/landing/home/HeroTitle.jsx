@@ -43,7 +43,7 @@ export default function HeroTitle() {
                 >
                     Learn, Achived, Succeed
                 </Typography>{' '}
-                - with best in the buisness
+                - with best in the business
             </Typography>
 
             <Typography

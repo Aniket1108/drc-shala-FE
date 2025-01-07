@@ -7,8 +7,8 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 import getData from "./product_details/course_data"
 
-const product_details = () => {
-    const { type, course } = useParams();
+const product_details = ({ type }) => {
+    const { course } = useParams();
     const courseDetails = getData(type, course);
 
     return (
@@ -102,15 +102,6 @@ const product_details = () => {
                                 startIcon={<ShoppingCartIcon />}
                             >
                                 Buy Now
-                            </Button>
-                            <Button
-                                variant="outlined"
-                                color="primary"
-                                fullWidth
-                                size="large"
-                                sx={{ marginTop: 2 }}
-                            >
-                                Add to Cart
                             </Button>
                         </CardContent>
                     </Card>

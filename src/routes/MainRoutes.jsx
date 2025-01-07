@@ -54,11 +54,19 @@ const MainRoutes = {
         // },
         {
           path: 'courses',
-          element: <Courses />
+          element: <Courses type={"course"} />
         },
         {
-          path: 'courses/:type/:course',
-          element: <CourseDetails />
+          path: '/course/:course',
+          element: <CourseDetails type={"course"} />
+        },
+        {
+          path: 'test-series',
+          element: <Courses type={"test-series"} />
+        },
+        {
+          path: '/test-series/:course',
+          element: <CourseDetails type={"test-series"} />
         },
       ]
     },

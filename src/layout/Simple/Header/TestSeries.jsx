@@ -1,60 +1,97 @@
 import { useState } from 'react'
-import { Box, Typography, Popover } from '@mui/material'
+import { useNavigate } from 'react-router-dom';
+
+import { Box, Typography, Paper, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material'
+import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
+import LaptopMacIcon from '@mui/icons-material/LaptopMac';
+import BookIcon from '@mui/icons-material/Book';
+import SchoolIcon from '@mui/icons-material/School';
+import ScienceIcon from '@mui/icons-material/Science';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 
 
-const Courses = () => {
+const TestSeries = () => {
     const theme = useTheme();
-    const [anchorEl, setAnchorEl] = useState(null);
+    const navigate = useNavigate();
 
-    const handlePopoverOpen = (event) => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handlePopoverClose = () => {
+    const handleClose = () => {
         setAnchorEl(null);
     };
 
-    const open = Boolean(anchorEl);
-
-
+    const handleMenuClick = (path) => {
+        navigate(path)
+        setAnchorEl(null);
+    }
 
     return (
         <Box>
             <Typography
                 sx={{ mr: 2, cursor: "pointer" }}
-                aria-owns={open ? 'mouse-over-popover' : undefined}
                 aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}
+                onClick={handleClick}
             >
                 Test Series
             </Typography>
 
-            <Popover
-                id="mouse-over-popover"
-                sx={{
-                    pointerEvents: 'none',
-                    boxShadow: theme.customShadows.z1
-                }}
-                open={open}
+            <Menu
+                id="basic-menu"
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
+                open={open}
+                onClose={handleClose}
+                MenuProps={{
+                    'aria-labelledby': 'basic-button',
                 }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                onClose={handlePopoverClose}
+                sx={{ marginTop: "10px" }}
             >
-                <Typography sx={{ p: 1 }}>NEET</Typography>
-                <Typography sx={{ p: 1 }}>JEE</Typography>
-                <Typography sx={{ p: 1 }}>MHT-CET</Typography>
-            </Popover>
+                <MenuItem onClick={() => handleMenuClick("/test-series")}>
+                    <ListItemIcon>
+                        <CollectionsBookmarkIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>All Test Series</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={() => handleMenuClick("/test-series?id=neet")}>
+                    <ListItemIcon>
+                        <ScienceIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>NEET</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/test-series?id=jee")}>
+                    <ListItemIcon>
+                        <LaptopMacIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>JEE</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuClick("/test-series?id=mht-cet")}>
+                    <ListItemIcon>
+                        <SchoolIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText sx={{ width: "180px" }}>MHT-CET</ListItemText>
+                    <ListItemIcon>
+                        <ArrowForwardIcon size="small" />
+                    </ListItemIcon>
+                </MenuItem>
+            </Menu>
         </Box>
     )
 }
 
-export default Courses
+export default TestSeries

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -27,6 +29,7 @@ const FooterLink = styled(Link)(({ theme }) => ({
 
 export default function FooterBlock({ isFull }) {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const linkSX = {
     color: theme.palette.text.secondary,
@@ -72,15 +75,12 @@ export default function FooterBlock({ isFull }) {
                   <Stack spacing={3}>
                     <Typography variant="h5">Company</Typography>
                     <Stack spacing={{ xs: 1.5, md: 2.5 }}>
-                      <FooterLink href="/" target="_blank" underline="none">
+                      <Typography sx={{ cursor: "pointer" }} onClick={() => { navigate("/about-us") }} >
                         About Us
-                      </FooterLink>
-                      <FooterLink href="/" target="_blank" underline="none">
+                      </Typography>
+                      <Typography sx={{ cursor: "pointer" }} onClick={() => { navigate("/contact-us") }} >
                         Contact Us
-                      </FooterLink>
-                      <FooterLink href="/" target="_blank" underline="none">
-                        Privacy Policy
-                      </FooterLink>
+                      </Typography>
                     </Stack>
                   </Stack>
                 </Grid>
@@ -88,27 +88,30 @@ export default function FooterBlock({ isFull }) {
                   <Stack spacing={3}>
                     <Typography variant="h5">Resources</Typography>
                     <Stack spacing={{ xs: 1.5, md: 2.5 }}>
-                      <FooterLink href="/" target="_blank" underline="none">
+                      <Typography sx={{ cursor: "pointer" }} onClick={() => { navigate("/courses") }} >
                         Courses
-                      </FooterLink>
-                      <FooterLink href="/" target="_blank" underline="none">
+                      </Typography>
+                      <Typography sx={{ cursor: "pointer" }} onClick={() => { navigate("/test-series") }} >
                         Test Series
-                      </FooterLink>
-                      <FooterLink href="/" target="_blank" underline="none">
+                      </Typography>
+                      <Typography sx={{ cursor: "pointer", opacity: "0.5" }} >
                         Study Materials
-                      </FooterLink>
+                      </Typography>
                     </Stack>
                   </Stack>
                 </Grid>
                 <Grid item xs={6} sm={4}>
                   <Stack spacing={3}>
-                    <Typography variant="h5">Support</Typography>
+                    <Typography variant="h5">Help & Support</Typography>
                     <Stack spacing={{ xs: 1.5, md: 2.5 }}>
                       <FooterLink href="/" target="_blank" underline="none">
-                        FAQ
+                        Terms & Conditions
                       </FooterLink>
                       <FooterLink href="/" target="_blank" underline="none">
-                        Help Center
+                        Refund policy
+                      </FooterLink>
+                      <FooterLink href="/privacy-policy" target="_blank" underline="none">
+                        Privacy Policy
                       </FooterLink>
                     </Stack>
                   </Stack>
