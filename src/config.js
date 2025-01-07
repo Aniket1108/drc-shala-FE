@@ -69,7 +69,7 @@ const config = {
   menuCaption: true,
   miniDrawer: false,
   container: false,
-  mode: ThemeMode.DARK,
+  mode: ThemeMode.LIGHT,
   presetColor: 'default',
   themeDirection: ThemeDirection.LTR,
   themeContrast: false
