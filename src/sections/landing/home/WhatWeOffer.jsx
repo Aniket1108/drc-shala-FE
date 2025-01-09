@@ -35,7 +35,7 @@ const FeaturesSection = () => {
             title: 'Book a Demo',
             description: 'Schedule a demo session to experience the platform features.',
             buttonText: 'Book Now',
-            link: '/book-demo',
+            link: '/contact-us',
             icon: <EventIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff9966, #ff5e62)', // Orange-Red
         },

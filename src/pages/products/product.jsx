@@ -186,7 +186,7 @@ const data = [
     {
         "id": 4,
         "image": "prod-4.png",
-        "name": "NEET Courses & Test Series",
+        "name": "NEET Course",
         "brand": "Centrix",
         "salePrice": 1299,
         "offerPrice": 899,
@@ -203,7 +203,7 @@ const data = [
     {
         "id": 3,
         "image": "prod-3.png",
-        "name": "JEE Courses & Test Series",
+        "name": "JEE Course",
         "brand": "Fitbit",
         "salePrice": 1299,
         "offerPrice": 899,
@@ -220,7 +220,7 @@ const data = [
     {
         "id": 2,
         "image": "prod-2.png",
-        "name": "MHT-CET Courses & Test Series",
+        "name": "MHT-CET Course",
         "brand": "Boat",
         "salePrice": 1099,
         "offerPrice": 799,
@@ -237,7 +237,7 @@ const data = [
     {
         "id": 6,
         "image": "prod-6.png",
-        "name": "MHT-CET Courses & Test Series",
+        "name": "MHT-CET Course",
         "brand": "Apple",
         "salePrice": 1099,
         "offerPrice": 799,

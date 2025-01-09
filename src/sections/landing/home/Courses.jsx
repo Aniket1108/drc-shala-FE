@@ -13,28 +13,28 @@ const CoursesSection = () => {
             description: 'Build a strong foundation with expert-curated courses for middle and high school students.',
             icon: <BookIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Purple-Blue
-            link: '/grades-6-10-courses',
+            link: '/course/foundation',
         },
         {
             title: 'NEET Preparation',
             description: 'Comprehensive courses for medical aspirants, covering all key topics with expert guidance.',
             icon: <ScienceIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff758c, #ff7eb3)', // Pink-Red
-            link: '/neet-courses',
+            link: '/course/neet',
         },
         {
             title: 'JEE Preparation',
             description: 'Top-notch courses for aspiring engineers, focusing on physics, chemistry, and mathematics.',
             icon: <LaptopMacIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #43cea2, #185a9d)', // Green-Blue
-            link: '/jee-courses',
+            link: '/course/jee',
         },
         {
             title: 'MHT-CET Preparation',
             description: 'Specialized courses for Maharashtra’s state-level CET, focusing on physics, chemistry, and mathematics/biology.',
             icon: <SchoolIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff9966, #ff5e62)', // Orange-Red
-            link: '/mht-cet-courses',
+            link: '/course/mht-cet',
         },
     ];
 

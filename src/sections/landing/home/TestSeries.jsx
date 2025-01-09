@@ -12,21 +12,21 @@ const TestSeriesSection = () => {
             description: 'Comprehensive test series designed for aspiring medical students. Practice biology, physics, and chemistry with detailed performance reports.',
             icon: ScienceIcon,
             gradient: 'linear-gradient(135deg, #ff758c, #ff7eb3)', // Pink-Red
-            link: '/neet-test-series',
+            link: '/test-series/neet',
         },
         {
             title: 'JEE',
             description: 'Ace your engineering entrance exams with test series tailored for JEE Mains and Advanced. Includes practice for physics, chemistry, and mathematics.',
             icon: EngineeringIcon,
             gradient: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Purple-Blue
-            link: '/jee-test-series',
+            link: '/test-series/jee',
         },
         {
             title: 'MHT-CET',
             description: 'Prepare for Maharashtra’s state-level CET with mock tests covering physics, chemistry, and mathematics/biology.',
             icon: SchoolIcon,
             gradient: 'linear-gradient(135deg, #43cea2, #185a9d)', // Green-Blue
-            link: '/mht-cet-test-series',
+            link: '/test-series/mht-cet',
         },
     ];
 

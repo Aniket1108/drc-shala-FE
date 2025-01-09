@@ -13,7 +13,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Divider from '@mui/material/Divider';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
+import { Typography, List, ListItem } from '@mui/material';
 
 // project-imports
 import MainCard from 'components/MainCard';
@@ -84,13 +84,13 @@ export default function ProductCard({ id, name, image, salePrice, offerPrice, ty
       <Divider />
 
       <Box sx={{ width: 250, m: 'auto' }}>
-        {
-          features?.map((item) => {
-            return (
+        <List sx={{ listStyleType: 'disc', pl: 2 }}>
+          {features?.map((item, index) => (
+            <ListItem key={index} sx={{ display: 'list-item', pl: 0, paddingTop: '0px !important', paddingBottom: '0px !important' }}>
               <Typography>{item}</Typography>
-            )
-          })
-        }
+            </ListItem>
+          ))}
+        </List>
       </Box>
 
       <Divider />
