@@ -21,6 +21,8 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Popover from '@mui/material/Popover';
+import Collapse from '@mui/material/Collapse';
+import Dot from 'components/@extended/Dot';
 
 
 // project-imports
@@ -31,9 +33,10 @@ import { APP_DEFAULT_PATH, ThemeDirection } from 'config';
 import Courses from './Header/Courses';
 import TestSeries from './Header/TestSeries';
 import StudyMaterial from './Header/StudyMaterial';
+import BookIcon from '@mui/icons-material/Book';
 
 // assets
-import { DocumentDownload, ExportSquare, HambergerMenu, Minus, CallCalling } from 'iconsax-react';
+import { ArrowDown2, ArrowUp2, DocumentDownload, ExportSquare, HambergerMenu, Minus, CallCalling } from 'iconsax-react';
 
 // elevation scroll
 function ElevationScroll({ children, window }) {
@@ -61,6 +64,8 @@ export default function Header({ layout = 'landing', ...others }) {
   const [drawerToggle, setDrawerToggle] = useState(false);
 
   const { menuMaster } = useGetMenuMaster();
+  const [openDrawerCourses, setOpenDrawerCourses] = useState(false);
+  const [openDrawerTestSeries, setOpenDrawerTestSeries] = useState(false);
 
   /** Method called on multiple components with different event types */
   const drawerToggler = (open) => (event) => {
@@ -69,6 +74,91 @@ export default function Header({ layout = 'landing', ...others }) {
     }
     setDrawerToggle(open);
   };
+
+  const courses = [
+    {
+      label: 'All Courses',
+      image: BookIcon,
+      url: '/courses',
+    },
+    {
+      label: 'Foundation',
+      image: BookIcon,
+      url: '/courses?id=foundation',
+    },
+    {
+      label: 'NEET',
+      image: BookIcon,
+      url: '/courses?id=neet',
+    },
+    {
+      label: 'JEE',
+      image: BookIcon,
+      url: '/courses?id=jee',
+    },
+    {
+      label: 'MHT-CET',
+      image: BookIcon,
+      url: '/courses?id=mht-cet',
+    },
+  ]
+
+  const testSeries = [
+    {
+      label: 'All Test Series',
+      image: BookIcon,
+      url: '/test-series',
+    },
+    {
+      label: 'NEET',
+      image: BookIcon,
+      url: '/test-series?id=neet',
+    },
+    {
+      label: 'JEE',
+      image: BookIcon,
+      url: '/test-series?id=jee',
+    },
+    {
+      label: 'MHT-CET',
+      image: BookIcon,
+      url: '/test-series?id=mht-cet',
+    },
+  ]
+
+  const MobileMenuListItemCourses = courses.map((item, index) => {
+    const finalUrl = item.url;
+    return (
+      <ListItemButton
+        key={index}
+        component={item.label === 'React MUI' ? RouterLink : 'a'}
+        onClick={() => navigate(finalUrl)}
+        sx={{ p: 0 }}
+      >
+        <ListItemIcon>
+          <Dot size={4} color="secondary" />
+        </ListItemIcon>
+        <ListItemText primary={item.label} primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+      </ListItemButton>
+    );
+  });
+
+  const MobileMenuListItemTestSeries = testSeries.map((item, index) => {
+    const finalUrl = item.url;
+    return (
+      <ListItemButton
+        key={index}
+        component={item.label === 'React MUI' ? RouterLink : 'a'}
+        onClick={() => navigate(finalUrl)}
+        sx={{ p: 0 }}
+      >
+        <ListItemIcon>
+          <Dot size={4} color="secondary" />
+        </ListItemIcon>
+        <ListItemText primary={item.label} primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+      </ListItemButton>
+    );
+  });
 
   return (
     <ElevationScroll layout={layout} {...others}>
@@ -86,13 +176,13 @@ export default function Header({ layout = 'landing', ...others }) {
               <Typography sx={{ textAlign: 'left', display: 'inline-block' }}>
                 <Logo to="/" />
               </Typography>
-              <Chip
+              {/* <Chip
                 label={"Development"}
                 variant="outlined"
                 size="small"
                 color="secondary"
                 sx={{ mt: 0.5, ml: 1, fontSize: '0.725rem', height: 20, '& .MuiChip-label': { px: 0.5 } }}
-              />
+              /> */}
             </Stack>
 
             <Stack
@@ -181,7 +271,7 @@ export default function Header({ layout = 'landing', ...others }) {
               </Stack>
 
               <Drawer
-                anchor="right"
+                anchor="top"
                 open={drawerToggle}
                 onClose={drawerToggler(false)}
                 sx={{ '& .MuiDrawer-paper': { backgroundImage: 'none' } }}
@@ -195,10 +285,73 @@ export default function Header({ layout = 'landing', ...others }) {
                     }
                   }}
                   role="presentation"
-                  onClick={drawerToggler(false)}
                   onKeyDown={drawerToggler(false)}
                 >
+                  <List>
+                    <Link
+                      style={{ textDecoration: 'none' }}
+                      component={RouterLink}
+                      to='/'
+                    >
+                      <ListItemButton>
+                        <Logo to="/" />
+                      </ListItemButton>
+                    </Link>
 
+                    <Link style={{ textDecoration: 'none' }} onClick={() => setOpenDrawerCourses(!openDrawerCourses)}>
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <Minus color={theme.palette.secondary.main} />
+                        </ListItemIcon>
+                        <ListItemText primary="Courses" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                        <Stack sx={{ path: { strokeWidth: 2 } }}>{openDrawerCourses ? <ArrowUp2 size="16" /> : <ArrowDown2 size="16" />}</Stack>
+                      </ListItemButton>
+                    </Link>
+
+                    <Collapse in={openDrawerCourses} timeout="auto" unmountOnExit>
+                      {openDrawerCourses && <List sx={{ p: 0, pl: 6, '& .MuiListItemIcon-root': { minWidth: 20 } }}>{MobileMenuListItemCourses}</List>}
+                    </Collapse>
+
+                    <Link style={{ textDecoration: 'none' }} onClick={() => setOpenDrawerTestSeries(!openDrawerTestSeries)}>
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <Minus color={theme.palette.secondary.main} />
+                        </ListItemIcon>
+                        <ListItemText primary="Test Series" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                        <Stack sx={{ path: { strokeWidth: 2 } }}>{openDrawerTestSeries ? <ArrowUp2 size="16" /> : <ArrowDown2 size="16" />}</Stack>
+                      </ListItemButton>
+                    </Link>
+
+                    <Collapse in={openDrawerTestSeries} timeout="auto" unmountOnExit>
+                      {openDrawerTestSeries && <List sx={{ p: 0, pl: 6, '& .MuiListItemIcon-root': { minWidth: 20 } }}>{MobileMenuListItemTestSeries}</List>}
+                    </Collapse>
+
+                    <Link
+                      style={{ textDecoration: 'none' }}
+                      component={RouterLink}
+                    // to='/'
+                    >
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <Minus color={theme.palette.secondary.main} />
+                        </ListItemIcon>
+                        <ListItemText primary="Study Materials - Comming Soon ..." primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                      </ListItemButton>
+                    </Link>
+
+                    <Link
+                      style={{ textDecoration: 'none' }}
+                      component={RouterLink}
+                      to='/about-us'
+                    >
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <Minus color={theme.palette.secondary.main} />
+                        </ListItemIcon>
+                        <ListItemText primary="About Us" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                      </ListItemButton>
+                    </Link>
+                  </List>
                 </Box>
               </Drawer>
             </Box>

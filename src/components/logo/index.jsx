@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-import ButtonBase from '@mui/material/ButtonBase';
+import { ButtonBase, Typography } from '@mui/material';
+import DRCSHALA from 'assets/images/drcshala.png'
 
 // ==============================|| MAIN LOGO ||============================== //
 
@@ -10,10 +11,16 @@ export default function LogoSection({ isIcon, sx, to }) {
 
   return (
     <ButtonBase
-      sx={{ fontSize: "20px", fontWeight: 600, color: "#0a69a1" }}
+      sx={{ fontSize: "24px", fontWeight: 600 }}
       onClick={() => { navigate("/") }}
     >
-      DRC Shala
+      <img src={DRCSHALA} width="24px" />
+      <Typography component="span" sx={{ color: "#0a69a1", fontSize: "22px", fontWeight: 600, letterSpacing: 0.7, ml: 1 }}>
+        Drc
+      </Typography>
+      <Typography component="span" sx={{ color: "#f57c00", fontSize: "22px", fontWeight: 600, letterSpacing: 0.7 }}>
+        shala
+      </Typography>
     </ButtonBase>
   );
 }

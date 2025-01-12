@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Grid, Typography, Box, Button, Stack, Card, Avatar } from '@mui/material';
 import { styled } from '@mui/system';
 import aboutUsImg from "assets/images/landing/aboutUs.png"
@@ -8,22 +9,6 @@ const StyledImage = styled('img')(({ theme }) => ({
     width: '100%',
     height: 'auto',
     borderRadius: theme.shape.borderRadius,
-}));
-
-const GradientBox = styled(Box)(({ theme }) => ({
-    position: 'relative',
-    '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '500px',
-        background: 'linear-gradient(135deg, #e0f2fe 0%, #f3e8ff 100%)',
-        zIndex: -1,
-        borderRadius: '0 0 50% 50%/0 0 100% 100%',
-        transform: 'scaleX(1.5)',
-    },
 }));
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
@@ -70,6 +55,7 @@ const teamMembers = [
 ];
 
 const AboutUs = () => {
+    const navigate = useNavigate()
     return (
         <Box sx={{ bgcolor: 'background.default', py: 8, pt: "150px" }}>
             <Container>
@@ -125,50 +111,49 @@ const AboutUs = () => {
                     </Grid>
                 </Box>
 
-                <GradientBox>
-                    <Container sx={{ py: 10 }}>
-                        <Typography
-                            variant="h4"
-                            align="center"
-                            gutterBottom
-                            sx={{
-                                mb: 6,
-                                background: 'linear-gradient(135deg, #1e40af 0%, #5b21b6 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                            }}
-                        >
-                            Our Leadership Team
-                        </Typography>
 
-                        <Grid container spacing={4}>
-                            {teamMembers.map((member, index) => (
-                                <Grid item xs={12} md={4} key={index}>
-                                    <StyledCard>
-                                        <StyledAvatar src={""} />
-                                        <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
-                                            {member.name}
-                                        </Typography>
-                                        <Typography
-                                            variant="subtitle1"
-                                            gutterBottom
-                                            sx={{
-                                                color: 'primary.main',
-                                                fontWeight: 600,
-                                                mb: 0.5,
-                                            }}
-                                        >
-                                            {member.role}
-                                        </Typography>
-                                        <Typography variant="body1" sx={{ color: 'text.secondary', textAlign: 'center' }}>
-                                            {member.description}
-                                        </Typography>
-                                    </StyledCard>
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </Container>
-                </GradientBox>
+                <Container sx={{ py: 10 }}>
+                    <Typography
+                        variant="h4"
+                        align="center"
+                        gutterBottom
+                        sx={{
+                            mb: 6,
+                            background: 'linear-gradient(135deg, #1e40af 0%, #5b21b6 100%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                        }}
+                    >
+                        Our Leadership Team
+                    </Typography>
+
+                    <Grid container spacing={4}>
+                        {teamMembers.map((member, index) => (
+                            <Grid item xs={12} md={4} key={index}>
+                                <StyledCard>
+                                    <StyledAvatar src={""} />
+                                    <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
+                                        {member.name}
+                                    </Typography>
+                                    <Typography
+                                        variant="subtitle1"
+                                        gutterBottom
+                                        sx={{
+                                            color: 'primary.main',
+                                            fontWeight: 600,
+                                            mb: 0.5,
+                                        }}
+                                    >
+                                        {member.role}
+                                    </Typography>
+                                    <Typography variant="body1" sx={{ color: 'text.secondary', textAlign: 'center' }}>
+                                        {member.description}
+                                    </Typography>
+                                </StyledCard>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
 
                 {/* Call to Action Section */}
                 <Box sx={{ mt: 8, textAlign: 'center' }}>
@@ -178,7 +163,9 @@ const AboutUs = () => {
                     <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
                         Join DRC Shala today and take the first step towards success.
                     </Typography>
-                    <Button variant="contained" color="primary" size="large">
+                    <Button variant="contained" color="primary" size="large" onClick={() => {
+                        navigate("/")
+                    }}>
                         Get Started
                     </Button>
                 </Box>
