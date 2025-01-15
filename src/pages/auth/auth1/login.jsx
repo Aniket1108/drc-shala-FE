@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 
 // project-imports
 import Logo from 'components/logo';
-import useAuth from 'hooks/useAuth';
 import AuthWrapper from 'sections/auth/AuthWrapper';
 import AuthLogin from 'sections/auth/auth-forms/AuthLogin';
 
@@ -16,8 +15,6 @@ import AuthLogin from 'sections/auth/auth-forms/AuthLogin';
 // ================================|| LOGIN ||================================ //
 
 export default function Login() {
-  const { isLoggedIn } = useAuth();
-
   return (
     <AuthWrapper>
       <Grid container spacing={3}>
@@ -30,7 +27,7 @@ export default function Login() {
             <Typography variant="h3">Login</Typography>
             <Typography
               component={Link}
-              to={isLoggedIn ? '/auth/register' : '/register'}
+              to='/register'
               variant="body1"
               sx={{ textDecoration: 'none' }}
               color="primary"

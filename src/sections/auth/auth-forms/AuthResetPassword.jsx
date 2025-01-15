@@ -18,7 +18,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project-imports
-import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import IconButton from 'components/@extended/IconButton';
 
@@ -34,7 +33,6 @@ export default function AuthResetPassword() {
   const scriptedRef = useScriptRef();
   const navigate = useNavigate();
 
-  const { isLoggedIn } = useAuth();
 
   const [level, setLevel] = useState();
   const [showPassword, setShowPassword] = useState(false);
@@ -87,7 +85,7 @@ export default function AuthResetPassword() {
               });
 
               setTimeout(() => {
-                navigate(isLoggedIn ? '/auth/login' : '/login', { replace: true });
+                navigate('/login');
               }, 1500);
             }
           } catch (err) {

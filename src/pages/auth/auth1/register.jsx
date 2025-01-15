@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 
 // project-imports
 import Logo from 'components/logo';
-import useAuth from 'hooks/useAuth';
 import AuthSocButton from 'sections/auth/AuthSocButton';
 import AuthDivider from 'sections/auth/AuthDivider';
 import AuthWrapper from 'sections/auth/AuthWrapper';
@@ -21,7 +20,6 @@ import imgGoogle from 'assets/images/auth/google.svg';
 // ================================|| REGISTER ||================================ //
 
 export default function Register() {
-  const { isLoggedIn } = useAuth();
 
   return (
     <AuthWrapper>
@@ -58,7 +56,7 @@ export default function Register() {
             <Typography variant="h3">Sign up</Typography>
             <Typography
               component={Link}
-              to={isLoggedIn ? '/auth/login' : '/login'}
+              to='/login'
               variant="body1"
               sx={{ textDecoration: 'none' }}
               color="primary"

@@ -19,7 +19,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project-imports
-import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import IconButton from 'components/@extended/IconButton';
 
@@ -32,7 +31,6 @@ import { Eye, EyeSlash } from 'iconsax-react';
 // ============================|| JWT - REGISTER ||============================ //
 
 export default function AuthRegister() {
-  const { register } = useAuth();
   const scriptedRef = useScriptRef();
   const navigate = useNavigate();
 
@@ -74,7 +72,6 @@ export default function AuthRegister() {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            await register(values.email, values.password, values.firstname, values.lastname);
             if (scriptedRef.current) {
               setStatus({ success: true });
               setSubmitting(false);

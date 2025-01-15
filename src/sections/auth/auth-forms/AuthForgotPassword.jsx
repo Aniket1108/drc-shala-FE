@@ -14,7 +14,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project-imports
-import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import { openSnackbar } from 'api/snackbar';
 
@@ -23,8 +22,6 @@ import { openSnackbar } from 'api/snackbar';
 export default function AuthForgotPassword() {
   const scriptedRef = useScriptRef();
   const navigate = useNavigate();
-
-  const { isLoggedIn, resetPassword } = useAuth();
 
   return (
     <>
@@ -38,34 +35,7 @@ export default function AuthForgotPassword() {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            await resetPassword(values.email).then(
-              () => {
-                setStatus({ success: true });
-                setSubmitting(false);
-                openSnackbar({
-                  open: true,
-                  message: 'Check mail for reset password link',
-                  variant: 'alert',
 
-                  alert: {
-                    color: 'success'
-                  }
-                });
-                setTimeout(() => {
-                  navigate(isLoggedIn ? '/auth/check-mail' : '/check-mail', { replace: true });
-                }, 1500);
-
-                // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
-                // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
-                // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
-                // github issue: https://github.com/formium/formik/issues/2430
-              },
-              (err) => {
-                setStatus({ success: false });
-                setErrors({ submit: err.message });
-                setSubmitting(false);
-              }
-            );
           } catch (err) {
             console.error(err);
             if (scriptedRef.current) {

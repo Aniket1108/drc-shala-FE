@@ -6,14 +6,12 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 // project-imports
-import useAuth from 'hooks/useAuth';
 import AuthWrapper from 'sections/auth/AuthWrapper';
 import AuthForgotPassword from 'sections/auth/auth-forms/AuthForgotPassword';
 
 // ================================|| FORGOT PASSWORD ||================================ //
 
 export default function ForgotPassword() {
-  const { isLoggedIn } = useAuth();
 
   return (
     <AuthWrapper>
@@ -23,7 +21,7 @@ export default function ForgotPassword() {
             <Typography variant="h3">Forgot Password</Typography>
             <Typography
               component={Link}
-              to={isLoggedIn ? '/auth/login' : '/login'}
+              to='/login'
               variant="body1"
               sx={{ textDecoration: 'none' }}
               color="primary"

@@ -15,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 
 // project import
 import Avatar from 'components/@extended/Avatar';
-import useAuth from 'hooks/useAuth';
 import { useGetMenuMaster } from 'api/menu';
 
 // assets
@@ -48,10 +47,8 @@ export default function UserList() {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
 
-  const { logout, user } = useAuth();
   const handleLogout = async () => {
     try {
-      await logout();
       navigate(`/login`, {
         state: {
           from: ''
@@ -100,7 +97,7 @@ export default function UserList() {
           <ListItemAvatar>
             <Avatar alt="Avatar" src={avatar1} sx={{ ...(drawerOpen && { width: 46, height: 46 }) }} />
           </ListItemAvatar>
-          <ListItemText primary={user?.name} sx={{ ...(!drawerOpen && { display: 'none' }) }} secondary="UI/UX Designer" />
+          <ListItemText primary={"demoname"} sx={{ ...(!drawerOpen && { display: 'none' }) }} secondary="UI/UX Designer" />
         </ListItem>
       </List>
       <Menu
