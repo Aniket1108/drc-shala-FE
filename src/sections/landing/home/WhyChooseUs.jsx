@@ -34,10 +34,10 @@ const WhyDRCShalaSection = () => {
     ];
 
     return (
-        <Box sx={{ padding: '4rem 0', backgroundColor: '#f9f9f9' }}>
+        <Box sx={{ padding: '3rem 0', backgroundColor: '#f9f9f9' }}>
             <Container maxWidth="lg">
                 <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
-                    Why Choose DRC Shala?
+                    Why Choose Drcshala?
                 </Typography>
                 <Typography variant="subtitle1" align="center" color="textSecondary" gutterBottom>
                     Discover the benefits of learning with us and see how we help you succeed in your academic journey.

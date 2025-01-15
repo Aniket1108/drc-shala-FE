@@ -31,8 +31,14 @@ export default function HeroPage() {
   return (
     <Box
       sx={{
-        marginTop: "180px",
-        marginBottom: "100px",
+        marginTop: {
+          xs: "60px", // for mobile devices
+          sm: "140px", // for tablets and larger
+        },
+        marginBottom: {
+          xs: "20px", // for mobile devices
+          sm: "40px", // for tablets and larger
+        },
         display: 'flex',
         alignItems: 'center',
         position: 'relative',

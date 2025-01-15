@@ -10,7 +10,7 @@ const CoursesIntro = () => {
                         Explore Our Courses
                     </Typography>
                     <Typography variant="body1" sx={{ color: 'text.secondary', maxWidth: '600px', margin: '0 auto' }}>
-                        At DRC Shala, we offer a range of courses designed to help students excel in competitive exams like NEET, JEE, and
+                        At Drcshala, we offer a range of courses designed to help students excel in competitive exams like NEET, JEE, and
                         MHT-CET, as well as build a strong foundation in grades 6 to 10. Each course is meticulously crafted to ensure a
                         comprehensive and engaging learning experience.
                     </Typography>

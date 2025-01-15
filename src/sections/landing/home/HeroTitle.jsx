@@ -5,7 +5,7 @@ export default function HeroTitle() {
     return (
         <Box>
             <Stack direction="row" spacing={1} alignItems="center" mb={2}>
-                <BookSquare /> 
+                <BookSquare />
                 <Typography
                     variant="overline"
                     sx={{
@@ -15,7 +15,7 @@ export default function HeroTitle() {
                         color: 'primary.main'
                     }}
                 >
-                    DRC SHALA
+                    Drcshala
                 </Typography>
             </Stack>
 

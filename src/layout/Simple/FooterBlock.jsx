@@ -62,7 +62,7 @@ export default function FooterBlock({ isFull }) {
                   </Grid>
                   <Grid item xs={12}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 400, maxWidth: 320 }}>
-                      DRC Shala is your trusted partner in preparing for competitive exams like NEET, JEE, MHT-CET, and more.
+                      Drcshala is your trusted partner in preparing for competitive exams like NEET, JEE, MHT-CET, and more.
                       We offer expert-curated courses and advanced tools to track your progress.
                     </Typography>
                   </Grid>
@@ -126,7 +126,7 @@ export default function FooterBlock({ isFull }) {
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={8}>
               <Typography>
-                © {new Date().getFullYear()} DRC Shala. All Rights Reserved.
+                © {new Date().getFullYear()} Drcshala. All Rights Reserved.
               </Typography>
             </Grid>
             <Grid item xs={12} sm={4}>

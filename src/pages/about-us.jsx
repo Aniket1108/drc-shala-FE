@@ -63,10 +63,10 @@ const AboutUs = () => {
                 <Grid container spacing={4} alignItems="center">
                     <Grid item xs={12} md={6}>
                         <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'text.primary' }}>
-                            About DRC Shala
+                            About Drcshala
                         </Typography>
                         <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
-                            At DRC Shala, we believe in empowering students to achieve their dreams. Our mission is to provide high-quality
+                            At Drcshala, we believe in empowering students to achieve their dreams. Our mission is to provide high-quality
                             educational resources and tools to help students excel in competitive exams like NEET, JEE, and MHT-CET. With
                             comprehensive courses, interactive test series, and expert-curated study materials, we strive to make learning
                             accessible, engaging, and effective.
@@ -76,7 +76,7 @@ const AboutUs = () => {
                         </Button>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <StyledImage src={aboutUsImg} alt="About DRC Shala" />
+                        <StyledImage src={aboutUsImg} alt="About Drcshala" />
                     </Grid>
                 </Grid>
 
@@ -161,7 +161,7 @@ const AboutUs = () => {
                         Ready to Achieve Your Dreams?
                     </Typography>
                     <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
-                        Join DRC Shala today and take the first step towards success.
+                        Join Drcshala today and take the first step towards success.
                     </Typography>
                     <Button variant="contained" color="primary" size="large" onClick={() => {
                         navigate("/")

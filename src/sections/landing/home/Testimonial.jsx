@@ -96,7 +96,7 @@ export default function TestimonialPage() {
                   <Typography variant="h2" component="span" sx={{ color: theme.palette.primary.main }}>
                     love
                   </Typography>{' '}
-                  DRC SHALA, Now your turn 😍
+                  Drcshala, Now your turn 😍
                 </Typography>
               </motion.div>
             </Grid>
