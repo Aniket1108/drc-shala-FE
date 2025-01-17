@@ -16,10 +16,10 @@ const icons = {
 // ==============================|| MENU ITEMS - SAMPLE PAGE ||============================== //
 
 const samplePage = {
-  id: 'sample-page',
-  title: <FormattedMessage id="sample-page" />,
+  id: 'Overview',
+  title: <FormattedMessage id="overview" />,
   type: 'group',
-  url: '/sample-page',
+  url: '/overview',
   icon: icons.samplePage
 };
 

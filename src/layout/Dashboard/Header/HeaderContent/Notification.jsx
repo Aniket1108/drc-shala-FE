@@ -119,55 +119,6 @@ export default function NotificationPage() {
                   >
                     <ListItemButton>
                       <ListItemAvatar>
-                        <Avatar type="filled">
-                          <Gift size={20} variant="Bold" />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            It&apos;s{' '}
-                            <Typography component="span" variant="subtitle1">
-                              Cristina danny&apos;s
-                            </Typography>{' '}
-                            birthday today.
-                          </Typography>
-                        }
-                        secondary="2 min ago"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          3:00 AM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar type="outlined">
-                          <MessageText1 size={20} variant="Bold" />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            <Typography component="span" variant="subtitle1">
-                              Aida Burg
-                            </Typography>{' '}
-                            commented your post.
-                          </Typography>
-                        }
-                        secondary="5 August"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          6:00 PM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-
-                    <ListItemButton>
-                      <ListItemAvatar>
                         <Avatar>
                           <Setting2 size={20} variant="Bold" />
                         </Avatar>
@@ -190,30 +141,6 @@ export default function NotificationPage() {
                       </ListItemSecondaryAction>
                     </ListItemButton>
 
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar type="combined">C</Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            <Typography component="span" variant="subtitle1">
-                              Cristina Danny
-                            </Typography>{' '}
-                            invited to join{' '}
-                            <Typography component="span" variant="subtitle1">
-                              Meeting.
-                            </Typography>
-                          </Typography>
-                        }
-                        secondary="Daily scrum meeting time"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          9:10 PM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
                   </List>
                   <Stack direction="row" justifyContent="center">
                     <Link href="#" variant="h6" color="primary">

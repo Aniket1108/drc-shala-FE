@@ -10,7 +10,7 @@ import ContactHeader from 'sections/extra-pages/contact/ContactHeader';
 
 export default function contactUS() {
   return (
-    <Grid container spacing={12} justifyContent="center" alignItems="center" sx={{ mb: 12 }}>
+    <Grid container spacing={12} justifyContent="center" alignItems="center">
       <Grid item xs={12} md={12}>
         <ContactHeader />
       </Grid>

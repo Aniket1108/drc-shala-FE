@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 // material-ui
 import { alpha, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import AppBar from '@mui/material/AppBar';
+import { AppBar, Box } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 
 // project-imports
@@ -38,7 +38,7 @@ export default function Header() {
 
   // common header
   const mainHeader = (
-    <Toolbar sx={{ px: { xs: 2, sm: 4.5, lg: 8 } }}>
+    <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', px: { xs: 2, sm: 4.5, lg: 8 } }}>
       {!isHorizontal ? (
         <IconButton
           aria-label="open drawer"
@@ -52,7 +52,9 @@ export default function Header() {
           <HambergerMenu />
         </IconButton>
       ) : null}
-      {headerContent}
+      <Box sx={{display: 'flex'}}>
+        {headerContent}
+      </Box>
     </Toolbar>
   );
 

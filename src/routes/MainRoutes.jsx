@@ -17,7 +17,7 @@ const AboutUs = Loadable(lazy(() => import('pages/about-us')));
 const JEEStudyMaterials = Loadable(lazy(() => import('pages/statics_pages/study_materials/JEE')));
 
 // render - sample page
-const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
+const Overview = Loadable(lazy(() => import('pages/overview/overview')));
 const Courses = Loadable(lazy(() => import('pages/courses')));
 const CourseDetails = Loadable(lazy(() => import('pages/course_details')));
 
@@ -31,8 +31,8 @@ const MainRoutes = {
       element: <DashboardLayout />,
       children: [
         {
-          path: 'sample-page',
-          element: <SamplePage />
+          path: 'Overview',
+          element: <Overview />
         }
       ]
     },
