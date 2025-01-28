@@ -1,15 +1,17 @@
 // project import
 import overview from './overview';
-import management from './management';
-import products from './products'
+import products from './products';
+import myLearnings from './my_learnings';
+import profile from './profile';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
   items: [
     overview,
-    management,
     products,
+    myLearnings,
+    profile
   ]
 };
 

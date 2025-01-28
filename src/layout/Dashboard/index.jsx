@@ -13,7 +13,6 @@ import Drawer from './Drawer';
 import Header from './Header';
 import HorizontalBar from './Drawer/HorizontalBar';
 import Loader from 'components/Loader';
-import Breadcrumbs from 'components/@extended/Breadcrumbs';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 
 import { DRAWER_WIDTH, MenuOrientation } from 'config';
@@ -62,7 +61,6 @@ export default function MainLayout() {
               flexDirection: 'column'
             }}
           >
-            <Breadcrumbs />
             <Outlet />
           </Container>
         </Box>
