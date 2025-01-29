@@ -15,6 +15,7 @@ import DrawerHeader from 'layout/Dashboard/Drawer/DrawerHeader';
 
 export default function HeaderContent() {
   const { menuOrientation } = useConfig();
+
   const downLG = useMediaQuery((theme) => theme.breakpoints.down('lg'));
 
   return (
