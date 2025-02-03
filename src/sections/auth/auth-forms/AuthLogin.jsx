@@ -1,26 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 // material-ui
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
-import Link from '@mui/material/Link';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import { Button, Checkbox, FormControlLabel, Grid, InputAdornment, InputLabel, Link, OutlinedInput, Stack, Typography } from '@mui/material';
 
-// third-party
-
-// project-imports
 import IconButton from 'components/@extended/IconButton';
-
-// assets
 import { Eye, EyeSlash } from 'iconsax-react';
 
 import { useHttp } from 'src/utils/api_intercepters.js';
@@ -46,13 +31,20 @@ export default function AuthLogin({ forgot }) {
 
   const login = () => {
     setIsSubmitting(true)
+
     useHttpMethod.post('/user/login', {
       mobileNumber: values.mobileNumber,
       password: values.password
     }).then(res => {
       setIsSubmitting(false)
+
       if (res.statusCode == 200) {
-        navigate("/sample-page")
+        localStorage.setItem("token", res.data.token)
+        localStorage.setItem("userData", JSON.stringify(res.data))
+
+        navigate("/overview")
+      } else {
+        alert(res.message)
       }
     });
   }
@@ -63,6 +55,7 @@ export default function AuthLogin({ forgot }) {
         <Grid item xs={12}>
           <Stack spacing={1}>
             <InputLabel htmlFor="mobile-number">Mobile Number</InputLabel>
+
             <OutlinedInput
               id="mobile-number"
               value={values?.mobileNumber}
@@ -76,6 +69,7 @@ export default function AuthLogin({ forgot }) {
         <Grid item xs={12}>
           <Stack spacing={1}>
             <InputLabel htmlFor="password-login">Password</InputLabel>
+
             <OutlinedInput
               fullWidth
               id="-password-login"

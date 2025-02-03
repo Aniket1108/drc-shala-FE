@@ -7,8 +7,8 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-// third-party
 import OtpInput from 'react18-input-otp';
+import { useHttp } from 'src/utils/api_intercepters.js';
 
 import { ThemeMode } from 'config';
 
@@ -16,9 +16,28 @@ import { ThemeMode } from 'config';
 
 export default function AuthCodeVerification() {
   const theme = useTheme();
+  const useHttpMethod = useHttp()
+
   const [otp, setOtp] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const borderColor = theme.palette.mode === ThemeMode.DARK ? theme.palette.secondary[200] : theme.palette.secondary.light;
+
+  const verifyAccount = () => {
+    setIsSubmitting(true)
+
+    useHttpMethod.post('/user/verify-otp', {
+      otp: otp
+    }).then(res => {
+      setIsSubmitting(false)
+
+      if (res.statusCode == 200) {
+        navigate("/login")
+      } else {
+        alert(res.message)
+      }
+    });
+  }
 
   return (
     <Grid container spacing={3}>
@@ -26,7 +45,7 @@ export default function AuthCodeVerification() {
         <OtpInput
           value={otp}
           onChange={(otp) => setOtp(otp)}
-          numInputs={4}
+          numInputs={6}
           containerStyle={{ justifyContent: 'space-between' }}
           inputStyle={{
             width: '100%',
@@ -46,7 +65,7 @@ export default function AuthCodeVerification() {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button disableElevation fullWidth size="large" type="submit" variant="contained">
+        <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" onClick={() => { verifyAccount() }}>
           Continue
         </Button>
       </Grid>
