@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
-// third-party
-import { IntlProvider } from 'react-intl';
-
-// project-imports
 import useConfig from 'hooks/useConfig';
 
 // load locales files
@@ -31,10 +27,9 @@ export default function Locales({ children }) {
 
   return (
     <>
-      {messages && (
-        <IntlProvider locale={i18n} defaultLocale="en" messages={messages}>
-          {children}
-        </IntlProvider>
+      {messages && (<>
+        {children}
+      </>
       )}
     </>
   );

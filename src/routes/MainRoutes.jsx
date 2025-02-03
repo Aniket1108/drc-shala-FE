@@ -71,28 +71,6 @@ const MainRoutes = {
       ]
     },
     {
-      path: '/maintenance',
-      element: <PagesLayout />,
-      children: [
-        {
-          path: '404',
-          element: <MaintenanceError />
-        },
-        {
-          path: '500',
-          element: <MaintenanceError500 />
-        },
-        {
-          path: 'under-construction',
-          element: <MaintenanceUnderConstruction />
-        },
-        {
-          path: 'coming-soon',
-          element: <MaintenanceComingSoon />
-        }
-      ]
-    },
-    {
       path: '*',
       element: <MaintenanceError />
     }
