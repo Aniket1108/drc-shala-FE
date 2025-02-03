@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
-import { cloneElement, useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useState, cloneElement } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 // material-ui
+import { alpha, useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -15,28 +17,19 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
-import { alpha, useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Popover from '@mui/material/Popover';
-import Collapse from '@mui/material/Collapse';
-import Dot from 'components/@extended/Dot';
-
 
 // project-imports
-import { handlerComponentDrawer, useGetMenuMaster } from 'api/menu';
-import IconButton from 'components/@extended/IconButton';
-import Logo from 'components/logo';
 import { APP_DEFAULT_PATH, ThemeDirection } from 'config';
-import Courses from './Header/Courses';
-import TestSeries from './Header/TestSeries';
-import StudyMaterial from './Header/StudyMaterial';
-import BookIcon from '@mui/icons-material/Book';
+import IconButton from 'components/@extended/IconButton';
+import AnimateButton from 'components/@extended/AnimateButton';
+import Logo from 'components/logo';
+import { handlerComponentDrawer, useGetMenuMaster } from 'api/menu';
 
 // assets
-import { ArrowDown2, ArrowUp2, DocumentDownload, ExportSquare, HambergerMenu, Minus, CallCalling } from 'iconsax-react';
+import { DocumentDownload, ExportSquare, HambergerMenu, Minus } from 'iconsax-react';
 
 // elevation scroll
 function ElevationScroll({ children, window }) {
@@ -59,13 +52,10 @@ function ElevationScroll({ children, window }) {
 
 export default function Header({ layout = 'landing', ...others }) {
   const theme = useTheme();
-  const navigate = useNavigate();
   const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
   const [drawerToggle, setDrawerToggle] = useState(false);
 
   const { menuMaster } = useGetMenuMaster();
-  const [openDrawerCourses, setOpenDrawerCourses] = useState(false);
-  const [openDrawerTestSeries, setOpenDrawerTestSeries] = useState(false);
 
   /** Method called on multiple components with different event types */
   const drawerToggler = (open) => (event) => {
@@ -75,90 +65,16 @@ export default function Header({ layout = 'landing', ...others }) {
     setDrawerToggle(open);
   };
 
-  const courses = [
-    {
-      label: 'All Courses',
-      image: BookIcon,
-      url: '/courses',
-    },
-    {
-      label: 'Foundation',
-      image: BookIcon,
-      url: '/courses?id=foundation',
-    },
-    {
-      label: 'NEET',
-      image: BookIcon,
-      url: '/courses?id=neet',
-    },
-    {
-      label: 'JEE',
-      image: BookIcon,
-      url: '/courses?id=jee',
-    },
-    {
-      label: 'MHT-CET',
-      image: BookIcon,
-      url: '/courses?id=mht-cet',
-    },
-  ]
+  let url;
+  let value = window.location.search;
+  const params = new URLSearchParams(value);
+  const ispValue = params.get('isp');
 
-  const testSeries = [
-    {
-      label: 'All Test Series',
-      image: BookIcon,
-      url: '/test-series',
-    },
-    {
-      label: 'NEET',
-      image: BookIcon,
-      url: '/test-series?id=neet',
-    },
-    {
-      label: 'JEE',
-      image: BookIcon,
-      url: '/test-series?id=jee',
-    },
-    {
-      label: 'MHT-CET',
-      image: BookIcon,
-      url: '/test-series?id=mht-cet',
-    },
-  ]
-
-  const MobileMenuListItemCourses = courses.map((item, index) => {
-    const finalUrl = item.url;
-    return (
-      <ListItemButton
-        key={index}
-        component={item.label === 'React MUI' ? RouterLink : 'a'}
-        onClick={() => navigate(finalUrl)}
-        sx={{ p: 0 }}
-      >
-        <ListItemIcon>
-          <Dot size={4} color="secondary" />
-        </ListItemIcon>
-        <ListItemText primary={item.label} primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
-      </ListItemButton>
-    );
-  });
-
-  const MobileMenuListItemTestSeries = testSeries.map((item, index) => {
-    const finalUrl = item.url;
-    return (
-      <ListItemButton
-        key={index}
-        component={item.label === 'React MUI' ? RouterLink : 'a'}
-        onClick={() => navigate(finalUrl)}
-        sx={{ p: 0 }}
-      >
-        <ListItemIcon>
-          <Dot size={4} color="secondary" />
-        </ListItemIcon>
-        <ListItemText primary={item.label} primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
-      </ListItemButton>
-    );
-  });
+  if (ispValue !== null && parseInt(ispValue) === 1) {
+    url = 'https://1.envato.market/OrJ5nn';
+  } else {
+    url = 'https://1.envato.market/zNkqj6';
+  }
 
   return (
     <ElevationScroll layout={layout} {...others}>
@@ -176,15 +92,14 @@ export default function Header({ layout = 'landing', ...others }) {
               <Typography sx={{ textAlign: 'left', display: 'inline-block' }}>
                 <Logo to="/" />
               </Typography>
-              {/* <Chip
-                label={"Development"}
+              <Chip
+                label={import.meta.env.VITE_APP_VERSION}
                 variant="outlined"
                 size="small"
                 color="secondary"
                 sx={{ mt: 0.5, ml: 1, fontSize: '0.725rem', height: 20, '& .MuiChip-label': { px: 0.5 } }}
-              /> */}
+              />
             </Stack>
-
             <Stack
               direction="row"
               sx={{
@@ -193,47 +108,66 @@ export default function Header({ layout = 'landing', ...others }) {
               }}
               spacing={3}
             >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-
-                <Courses />
-                <TestSeries />
-                <StudyMaterial />
-                <Typography
+              <Link
+                className="header-link"
+                sx={{ ml: theme.direction === ThemeDirection.RTL ? 3 : 0 }}
+                color="secondary.main"
+                component={RouterLink}
+                to="/login"
+                target="_blank"
+                underline="none"
+              >
+                Dashboard
+              </Link>
+              <Link
+                className="header-link"
+                color="secondary.main"
+                component={RouterLink}
+                to="/components-overview/buttons"
+                underline="none"
+              >
+                Components
+              </Link>
+              <Link
+                className="header-link"
+                color="secondary.main"
+                href="https://phoenixcoded.gitbook.io/able-pro/v/react/"
+                target="_blank"
+                underline="none"
+              >
+                Documentation
+              </Link>
+              <Link href="https://github.com/phoenixcoded/able-pro-free-admin-dashboard-template" target="_blank" underline="none">
+                <IconButton
+                  size="large"
+                  shape="rounded"
+                  color="secondary"
                   sx={{
-                    cursor: "pointer"
-                  }}
-                  onClick={() => {
-                    navigate("/about-us")
-                  }}
-                >
-                  About Us
-                </Typography>
-
-                <Button
-                  startIcon={<CallCalling />}
-                  size="small"
-                  variant="outlined"
-                  sx={{ ml: 2 }}
-                  onClick={() => {
-                    navigate("/contact-us")
+                    bgcolor: 'secondary.light',
+                    color: 'secondary.darker',
+                    '&:hover': { color: 'secondary.lighter', bgcolor: 'secondary.darker' }
                   }}
                 >
-                  Contact us
-                </Button>
-
-                <Button
-                  startIcon={<ExportSquare />}
-                  size="small"
-                  variant="contained"
-                  sx={{ ml: 1 }}
-                  onClick={() => { navigate("/login") }}
-                >
-                  Login
-                </Button>
-
+                  <DocumentDownload />
+                </IconButton>
+              </Link>
+              <Box sx={{ display: 'inline-block' }}>
+                <AnimateButton>
+                  <Button
+                    component={Link}
+                    href={url}
+                    target="_blank"
+                    disableElevation
+                    startIcon={<ExportSquare />}
+                    color="success"
+                    size="large"
+                    variant="contained"
+                  >
+                    Purchase Now
+                  </Button>
+                </AnimateButton>
               </Box>
             </Stack>
-
             <Box
               sx={{
                 width: '100%',
@@ -245,7 +179,6 @@ export default function Header({ layout = 'landing', ...others }) {
               <Typography sx={{ textAlign: 'left', display: 'inline-block' }}>
                 <Logo to="/" />
               </Typography>
-
               <Stack direction="row" spacing={2}>
                 {layout === 'component' && (
                   <Button variant="outlined" color="warning" component={RouterLink} to={APP_DEFAULT_PATH} sx={{ mt: 0.25 }}>
@@ -253,16 +186,9 @@ export default function Header({ layout = 'landing', ...others }) {
                   </Button>
                 )}
                 {layout !== 'component' && (
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <CallCalling size="28" />
-                    <Button
-                      variant='contained'
-                      sx={{ ml: 3 }}
-                      onClick={() => { navigate("/login") }}
-                    >
-                      Login
-                    </Button>
-                  </Box>
+                  <Button variant="outlined" color="warning" component={RouterLink} to="/components-overview/buttons" sx={{ mt: 0.25 }}>
+                    All Components
+                  </Button>
                 )}
 
                 <IconButton
@@ -276,7 +202,6 @@ export default function Header({ layout = 'landing', ...others }) {
                   <HambergerMenu />
                 </IconButton>
               </Stack>
-
               <Drawer
                 anchor="top"
                 open={drawerToggle}
@@ -292,77 +217,71 @@ export default function Header({ layout = 'landing', ...others }) {
                     }
                   }}
                   role="presentation"
+                  onClick={drawerToggler(false)}
                   onKeyDown={drawerToggler(false)}
                 >
                   <List>
-                    <Link
-                      style={{ textDecoration: 'none' }}
-                      component={RouterLink}
-                      to='/'
-                    >
-                      <ListItemButton>
-                        <Logo to="/" />
-                      </ListItemButton>
-                    </Link>
-
-                    <Link style={{ textDecoration: 'none' }} onClick={() => setOpenDrawerCourses(!openDrawerCourses)}>
+                    <Link style={{ textDecoration: 'none' }} href="/login" target="_blank">
                       <ListItemButton>
                         <ListItemIcon>
                           <Minus color={theme.palette.secondary.main} />
                         </ListItemIcon>
-                        <ListItemText primary="Courses" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
-                        <Stack sx={{ path: { strokeWidth: 2 } }}>{openDrawerCourses ? <ArrowUp2 size="16" /> : <ArrowDown2 size="16" />}</Stack>
+                        <ListItemText primary="Dashboard" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
                       </ListItemButton>
                     </Link>
-
-                    <Collapse in={openDrawerCourses} timeout="auto" unmountOnExit>
-                      {openDrawerCourses && <List sx={{ p: 0, pl: 6, '& .MuiListItemIcon-root': { minWidth: 20 } }}>{MobileMenuListItemCourses}</List>}
-                    </Collapse>
-
-                    <Link style={{ textDecoration: 'none' }} onClick={() => setOpenDrawerTestSeries(!openDrawerTestSeries)}>
+                    <Link style={{ textDecoration: 'none' }} component={RouterLink} to="/components-overview/buttons" target="_blank">
                       <ListItemButton>
                         <ListItemIcon>
                           <Minus color={theme.palette.secondary.main} />
                         </ListItemIcon>
-                        <ListItemText primary="Test Series" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
-                        <Stack sx={{ path: { strokeWidth: 2 } }}>{openDrawerTestSeries ? <ArrowUp2 size="16" /> : <ArrowDown2 size="16" />}</Stack>
+                        <ListItemText primary="All Components" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
                       </ListItemButton>
                     </Link>
-
-                    <Collapse in={openDrawerTestSeries} timeout="auto" unmountOnExit>
-                      {openDrawerTestSeries && <List sx={{ p: 0, pl: 6, '& .MuiListItemIcon-root': { minWidth: 20 } }}>{MobileMenuListItemTestSeries}</List>}
-                    </Collapse>
-
                     <Link
                       style={{ textDecoration: 'none' }}
-                      component={RouterLink}
-                    // to='/'
+                      href="https://github.com/phoenixcoded/able-pro-free-admin-dashboard-template"
+                      target="_blank"
                     >
                       <ListItemButton>
                         <ListItemIcon>
                           <Minus color={theme.palette.secondary.main} />
                         </ListItemIcon>
-                        <ListItemText primary="Study Materials - Comming Soon ..." primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                        <ListItemText primary="Free Version" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
                       </ListItemButton>
                     </Link>
-
+                    <Link style={{ textDecoration: 'none' }} href="https://phoenixcoded.gitbook.io/able-pro/v/react/" target="_blank">
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <Minus color={theme.palette.secondary.main} />
+                        </ListItemIcon>
+                        <ListItemText primary="Documentation" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                      </ListItemButton>
+                    </Link>
+                    <Link style={{ textDecoration: 'none' }} href="https://phoenixcoded.authordesk.app/" target="_blank">
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <Minus color={theme.palette.secondary.main} />
+                        </ListItemIcon>
+                        <ListItemText primary="Support" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                      </ListItemButton>
+                    </Link>
                     <Link
                       style={{ textDecoration: 'none' }}
-                      component={RouterLink}
-                      to='/about-us'
+                      href="https://1.envato.market/c/1289604/275988/4415?subId1=phoenixcoded&u=https%3A%2F%2Fthemeforest.net%2Fitem%2Fable-pro-responsive-bootstrap-4-admin-template%2F19300403"
+                      target="_blank"
                     >
                       <ListItemButton>
                         <ListItemIcon>
                           <Minus color={theme.palette.secondary.main} />
                         </ListItemIcon>
-                        <ListItemText primary="About Us" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                        <ListItemText primary="Purchase Now" primaryTypographyProps={{ variant: 'h6', color: 'secondary.main' }} />
+                        <Chip color="primary" label="v1.0" size="small" />
                       </ListItemButton>
                     </Link>
                   </List>
                 </Box>
               </Drawer>
             </Box>
-
           </Toolbar>
         </Container>
       </AppBar>
@@ -371,4 +290,5 @@ export default function Header({ layout = 'landing', ...others }) {
 }
 
 ElevationScroll.propTypes = { children: PropTypes.node, window: PropTypes.any };
+
 Header.propTypes = { layout: PropTypes.string, others: PropTypes.any };

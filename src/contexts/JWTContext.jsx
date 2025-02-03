@@ -1,5 +1,7 @@
 import { createContext, useEffect, useReducer } from 'react';
 
+// third-party
+import { Chance } from 'chance';
 import { jwtDecode } from 'jwt-decode';
 
 // reducer - state management
@@ -9,6 +11,8 @@ import authReducer from 'store/reducers/auth';
 // project-imports
 import Loader from 'components/Loader';
 import axios from 'utils/axios';
+
+const chance = new Chance();
 
 // constant
 const initialState = {
@@ -93,8 +97,9 @@ export const JWTProvider = ({ children }) => {
 
   const register = async (email, password, firstName, lastName) => {
     // todo: this flow need to be recode as it not verified
+    const id = chance.bb_pin();
     const response = await axios.post('/api/account/register', {
-      id: 12,
+      id,
       email,
       password,
       firstName,

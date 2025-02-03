@@ -1,39 +1,42 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
+import { preload } from 'swr';
 
 // material-ui
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
-import Link from '@mui/material/Link';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
+import Link from '@mui/material/Link';
+import InputLabel from '@mui/material/InputLabel';
 import Typography from '@mui/material/Typography';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 // third-party
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 
 // project-imports
+import useAuth from 'hooks/useAuth';
+import useScriptRef from 'hooks/useScriptRef';
 import IconButton from 'components/@extended/IconButton';
+import AnimateButton from 'components/@extended/AnimateButton';
+import { fetcher } from 'utils/axios';
 
 // assets
 import { Eye, EyeSlash } from 'iconsax-react';
 
-import { useHttp } from 'src/utils/api_intercepters.js';
-
 // ============================|| JWT - LOGIN ||============================ //
 
 export default function AuthLogin({ forgot }) {
-  const useHttpMethod = useHttp()
-  const navigate = useNavigate()
-
   const [checked, setChecked] = useState(false);
-  const [values, setValues] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { isLoggedIn, login } = useAuth();
+  const scriptedRef = useScriptRef();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -44,99 +47,131 @@ export default function AuthLogin({ forgot }) {
     event.preventDefault();
   };
 
-  const login = () => {
-    setIsSubmitting(true)
-    useHttpMethod.post('/user/login', {
-      mobileNumber: values.mobileNumber,
-      password: values.password
-    }).then(res => {
-      setIsSubmitting(false)
-      if (res.statusCode == 200) {
-        navigate("/sample-page")
-      }
-    });
-  }
-
   return (
     <>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <InputLabel htmlFor="mobile-number">Mobile Number</InputLabel>
-            <OutlinedInput
-              id="mobile-number"
-              value={values?.mobileNumber}
-              onChange={(event) => { setValues({ ...values, mobileNumber: event.target.value }) }}
-              placeholder="Enter mobile number"
-              fullWidth
-            />
-          </Stack>
-        </Grid>
+      <Formik
+        initialValues={{
+          email: 'info@phoenixcoded.co',
+          password: '123456',
+          submit: null
+        }}
+        validationSchema={Yup.object().shape({
+          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+          password: Yup.string().max(255).required('Password is required')
+        })}
+        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+          try {
+            await login(values.email, values.password);
+            if (scriptedRef.current) {
+              setStatus({ success: true });
+              setSubmitting(false);
+              preload('api/menu/dashboard', fetcher); // load menu on login success
+            }
+          } catch (err) {
+            console.error(err);
+            if (scriptedRef.current) {
+              setStatus({ success: false });
+              setErrors({ submit: err.message });
+              setSubmitting(false);
+            }
+          }
+        }}
+      >
+        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+          <form noValidate onSubmit={handleSubmit}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="email-login">Email Address</InputLabel>
+                  <OutlinedInput
+                    id="email-login"
+                    type="email"
+                    value={values.email}
+                    name="email"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Enter email address"
+                    fullWidth
+                    error={Boolean(touched.email && errors.email)}
+                  />
+                </Stack>
+                {touched.email && errors.email && (
+                  <FormHelperText error id="standard-weight-helper-text-email-login">
+                    {errors.email}
+                  </FormHelperText>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="password-login">Password</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    error={Boolean(touched.password && errors.password)}
+                    id="-password-login"
+                    type={showPassword ? 'text' : 'password'}
+                    value={values.password}
+                    name="password"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                          color="secondary"
+                        >
+                          {showPassword ? <Eye /> : <EyeSlash />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    placeholder="Enter password"
+                  />
+                </Stack>
+                {touched.password && errors.password && (
+                  <FormHelperText error id="standard-weight-helper-text-password-login">
+                    {errors.password}
+                  </FormHelperText>
+                )}
+              </Grid>
 
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <InputLabel htmlFor="password-login">Password</InputLabel>
-            <OutlinedInput
-              fullWidth
-              id="-password-login"
-              type={showPassword ? 'text' : 'password'}
-              value={values?.password}
-              name="password"
-              onChange={(event) => { setValues({ ...values, password: event.target.value }) }}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                    color="secondary"
-                  >
-                    {showPassword ? <Eye /> : <EyeSlash />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              placeholder="Enter password"
-            />
-          </Stack>
-        </Grid>
+              <Grid item xs={12} sx={{ mt: -1 }}>
+                <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={checked}
+                        onChange={(event) => setChecked(event.target.checked)}
+                        name="checked"
+                        color="primary"
+                        size="small"
+                      />
+                    }
+                    label={<Typography variant="h6">Keep me sign in</Typography>}
+                  />
 
-        <Grid item xs={12} sx={{ mt: -1 }}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={checked}
-                  onChange={(event) => setChecked(event.target.checked)}
-                  name="checked"
-                  color="primary"
-                  size="small"
-                />
-              }
-              label={<Typography variant="h6">Keep me sign in</Typography>}
-            />
-
-            <Link variant="h6" component={RouterLink} to='/forgot-password' color="text.primary">
-              Forgot Password?
-            </Link>
-          </Stack>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Button
-            disableElevation
-            disabled={isSubmitting}
-            fullWidth size="large"
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              login()
-            }}
-          >
-            Login
-          </Button>
-        </Grid>
-      </Grid>
+                  <Link variant="h6" component={RouterLink} to={isLoggedIn && forgot ? forgot : '/forgot-password'} color="text.primary">
+                    Forgot Password?
+                  </Link>
+                </Stack>
+              </Grid>
+              {errors.submit && (
+                <Grid item xs={12}>
+                  <FormHelperText error>{errors.submit}</FormHelperText>
+                </Grid>
+              )}
+              <Grid item xs={12}>
+                <AnimateButton>
+                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                    Login
+                  </Button>
+                </AnimateButton>
+              </Grid>
+            </Grid>
+          </form>
+        )}
+      </Formik>
     </>
   );
 }

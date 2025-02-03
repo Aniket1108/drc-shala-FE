@@ -7,11 +7,14 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 // project-imports
+import useAuth from 'hooks/useAuth';
+import AnimateButton from 'components/@extended/AnimateButton';
 import AuthWrapper from 'sections/auth/AuthWrapper';
 
 // ================================|| CHECK MAIL ||================================ //
 
 export default function CheckMail() {
+  const { isLoggedIn } = useAuth();
 
   return (
     <AuthWrapper>
@@ -25,18 +28,20 @@ export default function CheckMail() {
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Button
-            component={Link}
-            to='/login'
-            disableElevation
-            fullWidth
-            size="large"
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            Sign in
-          </Button>
+          <AnimateButton>
+            <Button
+              component={Link}
+              to={isLoggedIn ? '/auth/login' : '/login'}
+              disableElevation
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Sign in
+            </Button>
+          </AnimateButton>
         </Grid>
       </Grid>
     </AuthWrapper>

@@ -13,13 +13,8 @@ const MaintenanceUnderConstruction = Loadable(lazy(() => import('pages/maintenan
 const MaintenanceComingSoon = Loadable(lazy(() => import('pages/maintenance/coming-soon/coming-soon')));
 
 const AppContactUS = Loadable(lazy(() => import('pages/contact-us')));
-const AboutUs = Loadable(lazy(() => import('pages/about-us')));
-const JEEStudyMaterials = Loadable(lazy(() => import('pages/statics_pages/study_materials/JEE')));
-
 // render - sample page
-const Overview = Loadable(lazy(() => import('pages/overview/overview')));
-const Courses = Loadable(lazy(() => import('pages/courses')));
-const CourseDetails = Loadable(lazy(() => import('pages/course_details')));
+const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -31,8 +26,8 @@ const MainRoutes = {
       element: <DashboardLayout />,
       children: [
         {
-          path: 'Overview',
-          element: <Overview />
+          path: 'sample-page',
+          element: <SamplePage />
         }
       ]
     },
@@ -43,31 +38,7 @@ const MainRoutes = {
         {
           path: 'contact-us',
           element: <AppContactUS />
-        },
-        {
-          path: 'about-us',
-          element: <AboutUs />
-        },
-        // {
-        //   path: 'study-materials/jee',
-        //   element: <JEEStudyMaterials />
-        // },
-        {
-          path: 'courses',
-          element: <Courses type={"course"} />
-        },
-        {
-          path: '/course/:course',
-          element: <CourseDetails type={"course"} />
-        },
-        {
-          path: 'test-series',
-          element: <Courses type={"test-series"} />
-        },
-        {
-          path: '/test-series/:course',
-          element: <CourseDetails type={"test-series"} />
-        },
+        }
       ]
     },
     {

@@ -19,8 +19,10 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project-imports
+import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import IconButton from 'components/@extended/IconButton';
+import AnimateButton from 'components/@extended/AnimateButton';
 
 import { openSnackbar } from 'api/snackbar';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
@@ -31,6 +33,7 @@ import { Eye, EyeSlash } from 'iconsax-react';
 // ============================|| JWT - REGISTER ||============================ //
 
 export default function AuthRegister() {
+  const { register } = useAuth();
   const scriptedRef = useScriptRef();
   const navigate = useNavigate();
 
@@ -72,6 +75,7 @@ export default function AuthRegister() {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
+            await register(values.email, values.password, values.firstname, values.lastname);
             if (scriptedRef.current) {
               setStatus({ success: true });
               setSubmitting(false);
@@ -256,9 +260,11 @@ export default function AuthRegister() {
                 </Grid>
               )}
               <Grid item xs={12}>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                  Create Account
-                </Button>
+                <AnimateButton>
+                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                    Create Account
+                  </Button>
+                </AnimateButton>
               </Grid>
             </Grid>
           </form>

@@ -1,26 +1,23 @@
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { ButtonBase, Typography } from '@mui/material';
-import DRCSHALA from 'assets/images/drcshala.png'
+// material-ui
+import ButtonBase from '@mui/material/ButtonBase';
+
+// project-imports
+import Logo from './LogoMain';
+import LogoIcon from './LogoIcon';
+import useAuth from 'hooks/useAuth';
+import { APP_DEFAULT_PATH } from 'config';
 
 // ==============================|| MAIN LOGO ||============================== //
 
 export default function LogoSection({ isIcon, sx, to }) {
-  const navigate = useNavigate()
+  const { isLoggedIn } = useAuth();
 
   return (
-    <ButtonBase
-      sx={{ fontSize: "24px", fontWeight: 600 }}
-      onClick={() => { navigate("/") }}
-    >
-      <img src={DRCSHALA} width="24px" />
-      <Typography component="span" sx={{ color: "#0a69a1", fontSize: "22px", fontWeight: 600, letterSpacing: 0.7, ml: 1 }}>
-        Drc
-      </Typography>
-      <Typography component="span" sx={{ color: "#f57c00", fontSize: "22px", fontWeight: 600, letterSpacing: 0.7 }}>
-        shala
-      </Typography>
+    <ButtonBase disableRipple {...(isLoggedIn && { component: Link, to: !to ? APP_DEFAULT_PATH : to, sx })}>
+      {isIcon ? <LogoIcon /> : <Logo />}
     </ButtonBase>
   );
 }

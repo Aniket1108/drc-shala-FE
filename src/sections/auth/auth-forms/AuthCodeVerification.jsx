@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 // third-party
 import OtpInput from 'react18-input-otp';
 
+// project-imports
+import AnimateButton from 'components/@extended/AnimateButton';
 import { ThemeMode } from 'config';
 
 // ============================|| STATIC - CODE VERIFICATION ||============================ //
@@ -46,9 +48,11 @@ export default function AuthCodeVerification() {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button disableElevation fullWidth size="large" type="submit" variant="contained">
-          Continue
-        </Button>
+        <AnimateButton>
+          <Button disableElevation fullWidth size="large" type="submit" variant="contained">
+            Continue
+          </Button>
+        </AnimateButton>
       </Grid>
       <Grid item xs={12}>
         <Stack direction="row" justifyContent="space-between" alignItems="baseline">

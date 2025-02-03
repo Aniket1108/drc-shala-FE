@@ -1,5 +1,5 @@
 {
-  "name": "drc-shala",
+  "name": "able-pro-material-react",
   "version": "9.2.1",
   "private": true,
   "dependencies": {
@@ -11,16 +11,21 @@
     "@fontsource/public-sans": "^5.0.17",
     "@fontsource/roboto": "^5.0.12",
     "@mui/base": "^5.0.0-beta.40",
-    "@mui/icons-material": "^5.16.13",
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.15",
     "@mui/system": "^5.15.15",
+    "@svgr/webpack": "8.1.0",
     "@vitejs/plugin-react": "^4.2.1",
     "axios": "^1.6.8",
+    "chance": "^1.1.11",
+    "crypto-js": "^4.2.0",
     "formik": "^2.4.5",
+    "framer-motion": "^11.0.25",
+    "history": "^5.3.0",
     "iconsax-react": "^0.0.8",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
+    "notistack": "^3.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
@@ -40,10 +45,7 @@
     "vite": "^5.2.10",
     "vite-jsconfig-paths": "^2.0.1",
     "web-vitals": "^3.5.2",
-    "yup": "^1.4.0",
-    "framer-motion": "^11.0.25",
-    "react-fast-marquee": "^1.6.4",
-    "react-intersection-observer": "^9.8.1"
+    "yup": "^1.4.0"
   },
   "scripts": {
     "start": "vite",

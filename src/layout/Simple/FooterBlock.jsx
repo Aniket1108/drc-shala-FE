@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
@@ -11,11 +9,14 @@ import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
+// third-party
+import { motion } from 'framer-motion';
+
 // project-imports
 import Logo from 'components/logo';
 
 // assets
-import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material'; // Use Material UI icons for simplicity
+import { Dribbble, Facebook, Link2, Youtube, Xrp } from 'iconsax-react';
 
 // link - custom style
 const FooterLink = styled(Link)(({ theme }) => ({
@@ -25,11 +26,10 @@ const FooterLink = styled(Link)(({ theme }) => ({
   }
 }));
 
-// ==============================|| FOOTER - DRC SHALA ||============================== //
+// ==============================|| LANDING - FOOTER PAGE ||============================== //
 
 export default function FooterBlock({ isFull }) {
   const theme = useTheme();
-  const navigate = useNavigate();
 
   const linkSX = {
     color: theme.palette.text.secondary,
@@ -47,7 +47,7 @@ export default function FooterBlock({ isFull }) {
         <Container>
           <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
-              <div
+              <motion.div
                 initial={{ opacity: 0, translateY: 550 }}
                 animate={{ opacity: 1, translateY: 0 }}
                 transition={{
@@ -62,12 +62,12 @@ export default function FooterBlock({ isFull }) {
                   </Grid>
                   <Grid item xs={12}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 400, maxWidth: 320 }}>
-                      Drcshala is your trusted partner in preparing for competitive exams like NEET, JEE, MHT-CET, and more.
-                      We offer expert-curated courses and advanced tools to track your progress.
+                      Phoenixcoded has gained the trust of over 5.5K customers since 2015, thanks to our commitment to delivering
+                      high-quality products. Our experienced team players are responsible for managing Able Pro.
                     </Typography>
                   </Grid>
                 </Grid>
-              </div>
+              </motion.div>
             </Grid>
             <Grid item xs={12} md={8}>
               <Grid container spacing={{ xs: 5, md: 2 }}>
@@ -75,28 +75,18 @@ export default function FooterBlock({ isFull }) {
                   <Stack spacing={3}>
                     <Typography variant="h5">Company</Typography>
                     <Stack spacing={{ xs: 1.5, md: 2.5 }}>
-                      <Typography sx={{ cursor: "pointer" }} onClick={() => { navigate("/about-us") }} >
-                        About Us
-                      </Typography>
-                      <Typography sx={{ cursor: "pointer" }} onClick={() => { navigate("/contact-us") }} >
-                        Contact Us
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </Grid>
-                <Grid item xs={6} sm={4}>
-                  <Stack spacing={3}>
-                    <Typography variant="h5">Resources</Typography>
-                    <Stack spacing={{ xs: 1.5, md: 2.5 }}>
-                      <Typography sx={{ cursor: "pointer" }} onClick={() => { navigate("/courses") }} >
-                        Courses
-                      </Typography>
-                      <Typography sx={{ cursor: "pointer" }} onClick={() => { navigate("/test-series") }} >
-                        Test Series
-                      </Typography>
-                      <Typography sx={{ cursor: "pointer", opacity: "0.5" }} >
-                        Study Materials
-                      </Typography>
+                      <FooterLink href="https://1.envato.market/xk3bQd" target="_blank" underline="none">
+                        Profile
+                      </FooterLink>
+                      <FooterLink href="https://1.envato.market/Qyre4x" target="_blank" underline="none">
+                        Portfolio
+                      </FooterLink>
+                      <FooterLink href="https://1.envato.market/Py9k4X" target="_blank" underline="none">
+                        Follow Us
+                      </FooterLink>
+                      <FooterLink href="https://phoenixcoded.net" target="_blank" underline="none">
+                        Website
+                      </FooterLink>
                     </Stack>
                   </Stack>
                 </Grid>
@@ -104,14 +94,33 @@ export default function FooterBlock({ isFull }) {
                   <Stack spacing={3}>
                     <Typography variant="h5">Help & Support</Typography>
                     <Stack spacing={{ xs: 1.5, md: 2.5 }}>
-                      <FooterLink href="/" target="_blank" underline="none">
-                        Terms & Conditions
+                      <FooterLink href="https://phoenixcoded.gitbook.io/able-pro/v/react/" target="_blank" underline="none">
+                        Documentation
                       </FooterLink>
-                      <FooterLink href="/" target="_blank" underline="none">
-                        Refund policy
+                      <FooterLink href="https://phoenixcoded.gitbook.io/able-pro/v/react/roadmap/" target="_blank" underline="none">
+                        Feature Request
                       </FooterLink>
-                      <FooterLink href="/privacy-policy" target="_blank" underline="none">
-                        Privacy Policy
+                      <FooterLink href="https://phoenixcoded.gitbook.io/able-pro/v/react/roadmap/" target="_blank" underline="none">
+                        RoadMap
+                      </FooterLink>
+                      <FooterLink href="https://phoenixcoded.authordesk.app/" target="_blank" underline="none">
+                        Support
+                      </FooterLink>
+                      <FooterLink href="https://themeforest.net/user/phoenixcoded#contact" target="_blank" underline="none">
+                        Email Us
+                      </FooterLink>
+                    </Stack>
+                  </Stack>
+                </Grid>
+                <Grid item xs={6} sm={4}>
+                  <Stack spacing={3}>
+                    <Typography variant="h5">Useful Resources</Typography>
+                    <Stack spacing={{ xs: 1.5, md: 2.5 }}>
+                      <FooterLink href="https://themeforest.net/page/item_support_policy" target="_blank" underline="none">
+                        Support Policy
+                      </FooterLink>
+                      <FooterLink href="https://themeforest.net/licenses/standard" target="_blank" underline="none">
+                        Licenses Term
                       </FooterLink>
                     </Stack>
                   </Stack>
@@ -121,34 +130,58 @@ export default function FooterBlock({ isFull }) {
           </Grid>
         </Container>
       </Box>
-      <Box sx={{ py: 2.4, borderTop: `1px solid ${theme.palette.divider}`, bgcolor: 'secondary.200' }}>
+      <Box
+        sx={{
+          py: 2.4,
+          borderTop: `1px solid ${theme.palette.divider}`,
+          bgcolor: 'secondary.200'
+        }}
+      >
         <Container>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={8}>
               <Typography>
-                © {new Date().getFullYear()} Drcshala. All Rights Reserved.
+                © Handcrafted by Team{' '}
+                <Link href="https://1.envato.market/xk3bQd" underline="none">
+                  {' '}
+                  Phoenixcoded
+                </Link>
               </Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Grid container spacing={2} alignItems="center" sx={{ justifyContent: 'flex-end' }}>
                 <Grid item>
-                  <Tooltip title="LinkedIn">
-                    <Link href="https://www.linkedin.com/company/drcshala" underline="none" target="_blank" sx={linkSX}>
-                      <LinkedIn sx={{ fontSize: 24 }} />
+                  <Tooltip title="Linkedin">
+                    <Link href="https://in.linkedin.com/company/phoenixcoded" underline="none" target="_blank" sx={linkSX}>
+                      <Link2 variant="Bold" size={24} />
+                    </Link>
+                  </Tooltip>
+                </Grid>
+                <Grid item>
+                  <Tooltip title="Twitter">
+                    <Link href="https://twitter.com/phoenixcoded?lang=en" underline="none" target="_blank" sx={linkSX}>
+                      <Xrp variant="Bold" size={16} />
                     </Link>
                   </Tooltip>
                 </Grid>
                 <Grid item>
                   <Tooltip title="Facebook">
-                    <Link href="https://www.facebook.com/drcshala" underline="none" target="_blank" sx={linkSX}>
-                      <Facebook sx={{ fontSize: 24 }} />
+                    <Link href="https://www.facebook.com/Phoenixcoded/" underline="none" target="_blank" sx={linkSX}>
+                      <Facebook variant="Bold" size={20} />
                     </Link>
                   </Tooltip>
                 </Grid>
                 <Grid item>
-                  <Tooltip title="Instagram">
-                    <Link href="https://www.instagram.com/drcshala" underline="none" target="_blank" sx={linkSX}>
-                      <Instagram sx={{ fontSize: 24 }} />
+                  <Tooltip title="Dribbble">
+                    <Link href="https://dribbble.com/Phoenixcoded" underline="none" target="_blank" sx={linkSX}>
+                      <Dribbble variant="Bold" size={20} />
+                    </Link>
+                  </Tooltip>
+                </Grid>
+                <Grid item>
+                  <Tooltip title="Youtube">
+                    <Link href="https://www.youtube.com/@Phoenixcodedwebsolution?app=desktop" underline="none" target="_blank" sx={linkSX}>
+                      <Youtube variant="Bold" size={20} />
                     </Link>
                   </Tooltip>
                 </Grid>

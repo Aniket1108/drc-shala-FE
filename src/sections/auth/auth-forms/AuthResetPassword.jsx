@@ -18,8 +18,10 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project-imports
+import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import IconButton from 'components/@extended/IconButton';
+import AnimateButton from 'components/@extended/AnimateButton';
 
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
 import { openSnackbar } from 'api/snackbar';
@@ -33,6 +35,7 @@ export default function AuthResetPassword() {
   const scriptedRef = useScriptRef();
   const navigate = useNavigate();
 
+  const { isLoggedIn } = useAuth();
 
   const [level, setLevel] = useState();
   const [showPassword, setShowPassword] = useState(false);
@@ -85,7 +88,7 @@ export default function AuthResetPassword() {
               });
 
               setTimeout(() => {
-                navigate('/login');
+                navigate(isLoggedIn ? '/auth/login' : '/login', { replace: true });
               }, 1500);
             }
           } catch (err) {
@@ -178,9 +181,11 @@ export default function AuthResetPassword() {
                 </Grid>
               )}
               <Grid item xs={12}>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                  Reset Password
-                </Button>
+                <AnimateButton>
+                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                    Reset Password
+                  </Button>
+                </AnimateButton>
               </Grid>
             </Grid>
           </form>

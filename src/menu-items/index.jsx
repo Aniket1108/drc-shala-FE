@@ -1,16 +1,12 @@
 // project import
-import overview from './overview';
-import management from './management';
-import products from './products'
+import samplePage from './sample-page';
+import support from './support';
+import pages from './pages';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [
-    overview,
-    management,
-    products,
-  ]
+  items: [samplePage, pages, support]
 };
 
 export default menuItems;

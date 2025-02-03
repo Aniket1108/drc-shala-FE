@@ -13,11 +13,9 @@ import Typography from '@mui/material/Typography';
 
 // select company-size
 const sizes = [
-  { value: '1', label: 'NEET' },
-  { value: '2', label: 'JEE' },
-  { value: '3', label: 'MHT-CET' },
-  { value: '4', label: 'Foundation (7th - 10th)' },
-  { value: '5', label: 'Business' },
+  { value: '1', label: '1 - 5' },
+  { value: '2', label: '5 - 10' },
+  { value: '3', label: '10+' }
 ];
 
 // ==============================|| CONTACT US - FORM ||============================== //
@@ -30,9 +28,9 @@ export default function ContactForm() {
   };
   return (
     <Box sx={{ p: { xs: 2.5, sm: 0 } }}>
-      <Grid container spacing={5} justifyContent="center" >
-        <Grid item xs={12} sm={10} lg={6} sx={{ pt: "0px !important" }}>
-          <Grid container spacing={3} >
+      <Grid container spacing={5} justifyContent="center">
+        <Grid item xs={12} sm={10} lg={6}>
+          <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
               <Stack spacing={1}>
                 <Typography variant="subtitle1" color="secondary">

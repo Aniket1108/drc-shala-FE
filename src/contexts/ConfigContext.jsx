@@ -8,16 +8,16 @@ import useLocalStorage from 'hooks/useLocalStorage';
 // initial state
 const initialState = {
   ...config,
-  onChangeContainer: () => { },
-  onChangeLocalization: () => { },
-  onChangeMode: () => { },
-  onChangePresetColor: () => { },
-  onChangeDirection: () => { },
-  onChangeMiniDrawer: () => { },
-  onChangeMenuOrientation: () => { },
-  onChangeMenuCaption: () => { },
-  onChangeFontFamily: () => { },
-  onChangeContrast: () => { }
+  onChangeContainer: () => {},
+  onChangeLocalization: () => {},
+  onChangeMode: () => {},
+  onChangePresetColor: () => {},
+  onChangeDirection: () => {},
+  onChangeMiniDrawer: () => {},
+  onChangeMenuOrientation: () => {},
+  onChangeMenuCaption: () => {},
+  onChangeFontFamily: () => {},
+  onChangeContrast: () => {}
 };
 
 // ==============================|| CONFIG CONTEXT & PROVIDER ||============================== //
@@ -25,7 +25,7 @@ const initialState = {
 const ConfigContext = createContext(initialState);
 
 function ConfigProvider({ children }) {
-  const [config, setConfig] = useLocalStorage('drc-shala-config', initialState);
+  const [config, setConfig] = useLocalStorage('able-pro-material-react-ts-config', initialState);
 
   const onChangeContainer = () => {
     setConfig({

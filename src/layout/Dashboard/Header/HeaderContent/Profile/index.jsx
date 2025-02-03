@@ -26,6 +26,7 @@ import Transitions from 'components/@extended/Transitions';
 import IconButton from 'components/@extended/IconButton';
 
 import { ThemeMode } from 'config';
+import useAuth from 'hooks/useAuth';
 
 // assets
 import avatar1 from 'assets/images/users/avatar-6.png';
@@ -60,8 +61,10 @@ export default function ProfilePage() {
   const theme = useTheme();
   const navigate = useNavigate();
 
+  const { logout, user } = useAuth();
   const handleLogout = async () => {
     try {
+      await logout();
       navigate(`/login`, {
         state: {
           from: ''
@@ -140,7 +143,7 @@ export default function ProfilePage() {
                         <Stack direction="row" spacing={1.25} alignItems="center">
                           <Avatar alt="profile user" src={avatar1} />
                           <Stack>
-                            <Typography variant="subtitle1">{"demoname1"}</Typography>
+                            <Typography variant="subtitle1">{user?.name}</Typography>
                             <Typography variant="body2" color="secondary">
                               UI/UX Designer
                             </Typography>
