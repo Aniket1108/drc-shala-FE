@@ -1,20 +1,15 @@
-import Hero from 'sections/landing/home/Header';
-import WhatWeOffer from 'sections/landing/home/WhatWeOffer'
-import WhyChooseUs from 'sections/landing/home/WhyChooseUs'
-import TestSeriesSection from 'sections/landing/home/TestSeries';
-import Courses from 'sections/landing/home/Courses';
-import Testimonial from 'sections/landing/home/Testimonial';
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate('/login')
+  }, [])
+  
   return (
     <>
-      <Hero />
-      <WhatWeOffer />
-      <WhyChooseUs />
-      <TestSeriesSection />
-      <Courses />
-      <Testimonial />
     </>
   );
 }
