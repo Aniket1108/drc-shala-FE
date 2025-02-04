@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -17,7 +18,10 @@ import { ThemeMode } from 'config';
 export default function AuthCodeVerification() {
   const theme = useTheme();
   const useHttpMethod = useHttp()
+  const location = useLocation()
+  const navigate = useNavigate()
 
+  const mobileNumber = location.state?.mobileNumber
   const [otp, setOtp] = useState();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -27,6 +31,7 @@ export default function AuthCodeVerification() {
     setIsSubmitting(true)
 
     useHttpMethod.post('/user/verify-otp', {
+      mobileNumber: mobileNumber,
       otp: otp
     }).then(res => {
       setIsSubmitting(false)

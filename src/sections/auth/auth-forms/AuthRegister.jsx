@@ -71,7 +71,7 @@ export default function AuthRegister() {
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("userData", JSON.stringify(res.data))
 
-        navigate("/code-verification")
+        navigate("/code-verification", { state: { mobileNumber: values.mobileNumber } })
       } else {
         alert(res.message)
       }
