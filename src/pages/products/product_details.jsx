@@ -11,6 +11,40 @@ const product_details = ({ type }) => {
     const { course } = useParams();
     const courseDetails = getData(type, course);
 
+    var options = {
+        "key": "rzp_test_jKP5uKNCoB5oR0",
+        "amount": "5000", 
+        "currency": "INR",
+        "name": "Drcshala",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": "order_PrbY5OjthS6hiP",
+        "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+        "prefill": {
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9000090000"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+
+    const handlePayment = (e) => {
+        try {
+
+            console.log("initiating")
+            var rzp1 = new window.Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <Container sx={{ padding: 4, marginTop: 8 }}>
             <Grid container spacing={4}>
@@ -100,6 +134,7 @@ const product_details = ({ type }) => {
                                 fullWidth
                                 size="large"
                                 startIcon={<ShoppingCartIcon />}
+                                onClick={(e) => {handlePayment(e)}}
                             >
                                 Buy Now
                             </Button>

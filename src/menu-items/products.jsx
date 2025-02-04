@@ -17,14 +17,14 @@ const products = {
       id: 'courses',
       title: "Courses",
       type: 'item',
-      url: '/courses',
+      url: '/products/courses',
       icon: icons.users,
     },
     {
       id: 'test-series',
       title: "Test Series",
       type: 'item',
-      url: '/test-series',
+      url: '/products/test-series',
       icon: icons.invoice,
     }
   ]

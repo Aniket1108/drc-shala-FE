@@ -29,7 +29,7 @@ import { Heart } from 'iconsax-react';
 
 // ==============================|| PRODUCT CARD ||============================== //
 
-export default function ProductCard({ id, name, image, salePrice, offerPrice, type, features, standard, course }) {
+export default function ProductCard({ id, name, image, salePrice, offerPrice, type, features, standard, course, isUser }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const [wishlisted, setWishlisted] = useState(false);
@@ -104,7 +104,7 @@ export default function ProductCard({ id, name, image, salePrice, offerPrice, ty
         </Box>
 
         <Button variant="contained" sx={{ ml: "5px" }} onClick={() => {
-          navigate("/" + type + "/" + course)
+          navigate(isUser ? ("/products" + "/" + type + "/" + course) : ("/" + type + "/" + course))
         }}>
           View Details
         </Button>

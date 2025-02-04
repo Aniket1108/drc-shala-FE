@@ -44,7 +44,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
     })
 }));
 
-export default function ProductsPage({ type }) {
+export default function ProductsPage({ type, isUser }) {
     const theme = useTheme();
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -105,6 +105,7 @@ export default function ProductsPage({ type }) {
                     features={product.features}
                     course={product.course}
                     standard={product.standard}
+                    isUser={isUser}
                 />
             </Grid>
         ));
