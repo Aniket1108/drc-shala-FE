@@ -16,8 +16,7 @@ import ProductsHeader from './product_components/ProductsHeader';
 import ProductEmpty from './product_components/ProductEmpty';
 
 import useConfig from 'hooks/useConfig';
-// import { resetCart, useGetCart } from 'api/cart';
-// import { filterProducts } from 'api/products';
+import { useHttp } from 'src/utils/api_intercepters.js';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && prop !== 'container' })(({ theme, open, container }) => ({
     flexGrow: 1,
@@ -46,30 +45,38 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
 
 export default function ProductsPage({ type, isUser }) {
     const theme = useTheme();
-    const [searchParams, setSearchParams] = useSearchParams();
-
     const { container } = useConfig();
+    const useHttpMethod = useHttp()
 
+    const [searchParams, setSearchParams] = useSearchParams();
     const [isLoading, setLoading] = useState(true);
-    useEffect(() => {
-        setLoading(false);
-    }, []);
 
-    // product data
     const initialProducts = useLoaderData();
     const [products, setProducts] = useState(initialProducts);
-
-    const [openFilterDrawer, setOpenFilterDrawer] = useState(true);
-    const handleDrawerOpen = () => {
-        setOpenFilterDrawer((prevState) => !prevState);
-    };
-
-    // filter
     const initialState = {
         course: [],
         standard: [],
     };
     const [filter, setFilter] = useState(initialState);
+
+    const [openFilterDrawer, setOpenFilterDrawer] = useState(true);
+
+    useEffect(() => {
+
+
+        useHttpMethod.get("/app/products/list").then((res) => {
+            if (res.statusCode == 200) {
+                setProducts(res.data.result)
+            } else {
+                alert(res.message)
+            }
+        })
+        setLoading(false);
+    }, [filter]);
+
+    const handleDrawerOpen = () => {
+        setOpenFilterDrawer((prevState) => !prevState);
+    };
 
     const id = searchParams.get('id');
     useEffect(() => {
@@ -79,30 +86,17 @@ export default function ProductsPage({ type, isUser }) {
         setFilter(initialState)
     }, [id])
 
-
-    const filterData = async () => {
-        const data = filterProducts(filter, type)
-        setProducts(data);
-        setLoading(false);
-
-    };
-
-    useEffect(() => {
-        filterData();
-    }, [filter, type]);
-
     let productResult = <></>;
     if (products && products.length > 0) {
         productResult = products.map((product, index) => (
             <Grid key={index} item xs={12} sm={6} md={4}>
                 <ProductCard
-                    id={product.id}
-                    image={product.image}
-                    name={product.name}
-                    salePrice={product.salePrice}
-                    offerPrice={product.offerPrice}
+                    id={product.product_id}
+                    name={product?.details?.title}
+                    salePrice={product.product_offer_price}
+                    offerPrice={product.product_price}
                     type={product.type}
-                    features={product.features}
+                    features={product?.details?.features}
                     course={product.course}
                     standard={product.standard}
                     isUser={isUser}
@@ -253,17 +247,3 @@ const data = [
         ]
     }
 ]
-
-const filterProducts = (filter, type) => {
-    console.log("filtering data", filter, type);
-    if ((filter.course?.length || 0) > 0 || (filter.standard?.length || 0) > 0) {
-        return data.filter(
-            (item) =>
-                item.type === type &&
-                (filter.course.includes(item.course) || filter.standard.includes(item.standard))
-        );
-    }
-    return data.filter((item) => item.type === type);
-};
-
-

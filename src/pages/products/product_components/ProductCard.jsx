@@ -1,51 +1,29 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
+import { List, ListItem, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Divider from '@mui/material/Divider';
-import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import { Typography, List, ListItem } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // project-imports
 import MainCard from 'components/MainCard';
-import IconButton from 'components/@extended/IconButton';
 import SkeletonProductPlaceholder from './ProductPlaceholder';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import { openSnackbar } from 'api/snackbar';
-import { ImagePath, getImageUrl } from 'utils/getImageUrl';
 
 // assets
-import { Heart } from 'iconsax-react';
 
 // ==============================|| PRODUCT CARD ||============================== //
 
-export default function ProductCard({ id, name, image, salePrice, offerPrice, type, features, standard, course, isUser }) {
+export default function ProductCard({ id, name, salePrice, offerPrice, type, features, standard, course, isUser }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const [wishlisted, setWishlisted] = useState(false);
-
-  const addToFavourite = () => {
-    setWishlisted(!wishlisted);
-    openSnackbar({
-      open: true,
-      message: 'Added to favourites',
-      variant: 'alert',
-
-      alert: {
-        color: 'success'
-      }
-    });
-  };
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {

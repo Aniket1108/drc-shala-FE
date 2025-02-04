@@ -18,7 +18,7 @@ const product_details = ({ type }) => {
         "name": "Drcshala",
         "description": "Test Transaction",
         "image": "https://example.com/your_logo",
-        "order_id": "order_PrbY5OjthS6hiP",
+        "order_id": "order_PrfLh107xYihbw",
         "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
         "prefill": {
             "name": "Gaurav Kumar",

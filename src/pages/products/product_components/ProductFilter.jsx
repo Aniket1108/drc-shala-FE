@@ -3,18 +3,14 @@ import { useEffect, useState } from 'react';
 
 // material-ui
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Rating from '@mui/material/Rating';
-import Slider from '@mui/material/Slider';
 import Checkbox from '@mui/material/Checkbox';
-import Skeleton from '@mui/material/Skeleton';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 // project-imports
-import Colors from './Colors';
 
 // ==============================|| PRODUCT - Courses FILTER ||============================== //
 
@@ -34,15 +30,15 @@ function Courses({ course, handelFilter }) {
           <Box sx={{ pl: 0.5 }}>
             <Stack>
               <FormControlLabel
-                control={<Checkbox checked={course.some((item) => item === 'foundation')} />}
-                onChange={() => handelFilter('course', 'foundation')}
+                control={<Checkbox checked={course.some((item) => item == 5)} />}
+                onChange={() => handelFilter('course', 5)}
                 label="Foundation ( 7th - 10th )"
               />
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={course.some((item) => item === 'neet')}
-                    onChange={() => handelFilter('course', 'neet')}
+                    checked={course.some((item) => item == 1)}
+                    onChange={() => handelFilter('course', 1)}
                   />
                 }
                 label="NEET"
@@ -50,8 +46,8 @@ function Courses({ course, handelFilter }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={course.some((item) => item === 'jee')}
-                    onChange={() => handelFilter('course', 'jee')}
+                    checked={course.some((item) => item == 2)}
+                    onChange={() => handelFilter('course', 2)}
                   />
                 }
                 label="JEE"
@@ -59,8 +55,8 @@ function Courses({ course, handelFilter }) {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={course.some((item) => item === 'mht-cet')}
-                    onChange={() => handelFilter('course', 'mht-cet')}
+                    checked={course.some((item) => item === 3)}
+                    onChange={() => handelFilter('course', 3)}
                   />
                 }
                 label="MHT-CET"
@@ -93,18 +89,18 @@ function Standard({ standard, handelFilter }) {
           <Box sx={{ pl: 0.5 }}>
             <Stack>
               <FormControlLabel
-                control={<Checkbox checked={standard.some((item) => item === '11')} />}
-                onChange={() => handelFilter('standard', '11')}
+                control={<Checkbox checked={standard.some((item) => item === 6)} />}
+                onChange={() => handelFilter('standard', 6)}
                 label="11th"
               />
               <FormControlLabel
-                control={<Checkbox checked={standard.some((item) => item === '12')} />}
-                onChange={() => handelFilter('standard', '12')}
+                control={<Checkbox checked={standard.some((item) => item === 7)} />}
+                onChange={() => handelFilter('standard', 7)}
                 label="12th"
               />
               <FormControlLabel
-                control={<Checkbox checked={standard.some((item) => item === 'repeater')} />}
-                onChange={() => handelFilter('standard', 'repeater')}
+                control={<Checkbox checked={standard.some((item) => item === 8)} />}
+                onChange={() => handelFilter('standard', 8)}
                 label="11th / 12th Repeater"
               />
             </Stack>
