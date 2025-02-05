@@ -20,7 +20,7 @@ import { openSnackbar } from 'api/snackbar';
 
 // ==============================|| PRODUCT CARD ||============================== //
 
-export default function ProductCard({ id, name, salePrice, offerPrice, type, features, standard, course, isUser }) {
+export default function ProductCard({ id, name, salePrice, offerPrice, type, features, standard, stream, isUser }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const [wishlisted, setWishlisted] = useState(false);
@@ -82,7 +82,12 @@ export default function ProductCard({ id, name, salePrice, offerPrice, type, fea
         </Box>
 
         <Button variant="contained" sx={{ ml: "5px" }} onClick={() => {
-          navigate(isUser ? ("/products" + "/" + type + "/" + course) : ("/" + type + "/" + course))
+          navigate(
+            isUser
+              ?
+              ("/products" + "/" + type?.toLowerCase() + "/" + stream?.toLowerCase())
+              :
+              ("/" + type?.toLowerCase() + "/" + stream?.toLowerCase()))
         }}>
           View Details
         </Button>

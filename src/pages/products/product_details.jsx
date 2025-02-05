@@ -6,14 +6,16 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 import getData from "./product_details/course_data"
+import { useHttp } from 'src/utils/api_intercepters.js';
 
 const product_details = ({ type }) => {
     const { course } = useParams();
+    const useHttpMethod = useHttp()
     const courseDetails = getData(type, course);
 
-    var options = {
+    const options = {
         "key": "rzp_test_jKP5uKNCoB5oR0",
-        "amount": "5000", 
+        "amount": "5000",
         "currency": "INR",
         "name": "Drcshala",
         "description": "Test Transaction",
@@ -33,16 +35,28 @@ const product_details = ({ type }) => {
         }
     };
 
-    const handlePayment = (e) => {
+    const handlePayment = (e, data) => {
         try {
-
             console.log("initiating")
+            options["amount"] = data.amount;
+            options["order_id"] = data.id
             var rzp1 = new window.Razorpay(options);
+
             rzp1.open();
             e.preventDefault();
         } catch (err) {
             console.log(err)
         }
+    }
+
+    const createOrder = (e, productId) => {
+        useHttpMethod.post("/app/product/create-order", {
+            "productId": productId
+        }).then((res) => {
+            if (res.statusCode == 200) {
+                handlePayment(e, res.data)
+            }
+        })
     }
 
     return (
@@ -134,7 +148,7 @@ const product_details = ({ type }) => {
                                 fullWidth
                                 size="large"
                                 startIcon={<ShoppingCartIcon />}
-                                onClick={(e) => {handlePayment(e)}}
+                                onClick={(e) => { createOrder(e, 1) }}
                             >
                                 Buy Now
                             </Button>
