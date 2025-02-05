@@ -8,15 +8,10 @@ import SimpleLayout from 'layout/Simple';
 import { SimpleLayoutType } from 'config';
 
 const MaintenanceError = Loadable(lazy(() => import('pages/maintenance/error/404')));
-const MaintenanceError500 = Loadable(lazy(() => import('pages/maintenance/error/500')));
-const MaintenanceUnderConstruction = Loadable(lazy(() => import('pages/maintenance/under-construction/under-construction')));
-const MaintenanceComingSoon = Loadable(lazy(() => import('pages/maintenance/coming-soon/coming-soon')));
 
 const AppContactUS = Loadable(lazy(() => import('pages/contact-us')));
 const AboutUs = Loadable(lazy(() => import('pages/about-us')));
-const JEEStudyMaterials = Loadable(lazy(() => import('pages/statics_pages/study_materials/JEE')));
 
-// render - sample page
 const Overview = Loadable(lazy(() => import('pages/overview/overview')));
 const Courses = Loadable(lazy(() => import('pages/courses')));
 const CourseDetails = Loadable(lazy(() => import('pages/course_details')));
@@ -51,10 +46,6 @@ const MainRoutes = {
           path: 'about-us',
           element: <AboutUs />
         },
-        // {
-        //   path: 'study-materials/jee',
-        //   element: <JEEStudyMaterials />
-        // },
         {
           path: 'courses',
           element: <Courses type={"course"} />
@@ -83,7 +74,7 @@ const MainRoutes = {
         },
         {
           path: '/products/course/:course',
-          element: <ProductDetails type={"course"} />
+          element: <ProductDetails />
         },
         {
           path: 'test-series',
@@ -91,7 +82,7 @@ const MainRoutes = {
         },
         {
           path: '/products/test-series/:course',
-          element: <ProductDetails type={"test-series"} />
+          element: <ProductDetails />
         },
       ]
     },

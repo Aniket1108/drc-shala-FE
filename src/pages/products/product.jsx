@@ -100,6 +100,7 @@ export default function ProductsPage({ type, isUser }) {
                     salePrice={product.product_offer_price}
                     features={product?.details?.features}
                     isUser={isUser}
+                    productDetails={product?.details}
                 />
             </Grid>
         ));

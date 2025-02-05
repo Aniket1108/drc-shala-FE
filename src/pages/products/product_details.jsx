@@ -1,48 +1,51 @@
 import React from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 import { Box, Grid, Typography, Button, Card, CardContent, List, ListItem, ListItemText, Divider, Container, Avatar, Chip } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
-import getData from "./product_details/course_data"
 import { useHttp } from 'src/utils/api_intercepters.js';
 
-const product_details = ({ type }) => {
-    const { course } = useParams();
+const product_details = () => {
     const useHttpMethod = useHttp()
-    const courseDetails = getData(type, course);
+    const location = useLocation();
+    const courseDetails = location.state.productDetails;
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
     const options = {
         "key": "rzp_test_jKP5uKNCoB5oR0",
-        "amount": "5000",
+        "amount": "",
         "currency": "INR",
         "name": "Drcshala",
         "description": "Test Transaction",
         "image": "https://example.com/your_logo",
-        "order_id": "order_PrfLh107xYihbw",
-        "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+        "order_id": "",
+        "handler": function (response) {
+            alert(response.razorpay_order_id);
+        },
         "prefill": {
-            "name": "Gaurav Kumar",
-            "email": "gaurav.kumar@example.com",
-            "contact": "9000090000"
+            "name": userData.firstName,
+            "email": userData.email,
+            "contact": userData.mobileNumber
         },
-        "notes": {
-            "address": "Razorpay Corporate Office"
-        },
-        "theme": {
-            "color": "#3399cc"
-        }
+        "notes": {},
+        "theme": { "color": "#3399cc" }
     };
 
     const handlePayment = (e, data) => {
         try {
-            console.log("initiating")
-            options["amount"] = data.amount;
-            options["order_id"] = data.id
+            options["amount"] = data.order_amount;
+            options["order_id"] = data.razorpay_order_id
+            
             var rzp1 = new window.Razorpay(options);
 
             rzp1.open();
+            rzp1.on('payment.failed', function (response) {
+                console.log(response)
+            });
+
             e.preventDefault();
         } catch (err) {
             console.log(err)
@@ -148,7 +151,7 @@ const product_details = ({ type }) => {
                                 fullWidth
                                 size="large"
                                 startIcon={<ShoppingCartIcon />}
-                                onClick={(e) => { createOrder(e, 1) }}
+                                onClick={(e) => { createOrder(e, location.state.id) }}
                             >
                                 Buy Now
                             </Button>
