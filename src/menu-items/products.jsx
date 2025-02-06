@@ -1,31 +1,58 @@
-import { Fatrows, Bill, Profile2User } from 'iconsax-react';
+import { I24Support, MessageProgramming, ShieldCross } from 'iconsax-react';
 
 const icons = {
-  questions: Fatrows,
-  users: Profile2User,
-  invoice: Bill,
+  maintenance: MessageProgramming,
+  contactus: I24Support,
+  disabledMenu: ShieldCross,
 };
 
 // ==============================|| MENU ITEMS - products ||============================== //
 
 const products = {
   id: 'group-products',
-  title: "products",
   type: 'group',
   children: [
+    {
+      id: 'test-series',
+      title: "Test Series",
+      type: 'collapse',
+      icon: icons.menuLevel,
+      children: [
+        {
+          id: 'test-series-1.1',
+          title: "All Test Series",
+          type: 'item',
+          url: '#'
+        },
+        {
+          id: 'test-series-1.1',
+          title: "Create",
+          type: 'item',
+          url: '#'
+        },
+        {
+          id: 'test-series-1.1',
+          title: "History",
+          type: 'item',
+          url: '#'
+        },
+      ]
+    },
     {
       id: 'courses',
       title: "Courses",
       type: 'item',
-      url: '/courses',
-      icon: icons.users,
+      url: '#',
+      icon: icons.disabledMenu,
+      disabled: true
     },
     {
-      id: 'test-series',
-      title: "Test Series",
+      id: 'study-material',
+      title: "Study Material",
       type: 'item',
-      url: '/test-series',
-      icon: icons.invoice,
+      url: '/study-material',
+      icon: icons.disabledMenu,
+      disabled: true
     }
   ]
 };

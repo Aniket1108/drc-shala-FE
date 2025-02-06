@@ -8,10 +8,9 @@ import { SimpleLayoutType } from 'config';
 
 const MaintenanceError = Loadable(lazy(() => import('pages/maintenance/error/404')));
 
-const AppContactUS = Loadable(lazy(() => import('pages/contact-us')));
-
 // render - sample page
 const Overview = Loadable(lazy(() => import('pages/overview/overview')));
+const AllQuestions = Loadable(lazy(() => import('pages/management/questions/all_questions')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -29,12 +28,12 @@ const MainRoutes = {
       ]
     },
     {
-      path: '/',
-      element: <SimpleLayout layout={SimpleLayoutType.SIMPLE} />,
+      path: '/management',
+      element: <DashboardLayout />,
       children: [
         {
-          path: 'contact-us',
-          element: <AppContactUS />
+          path: 'all-questions',
+          element: <AllQuestions />
         }
       ]
     },
