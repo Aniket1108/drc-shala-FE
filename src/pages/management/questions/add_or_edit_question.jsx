@@ -1,8 +1,9 @@
-import { useState, useMemo, useRef } from 'react';
-import Quill, { Delta } from 'quill';
+import Quill from 'quill';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom'
 
-import ReactQuill from 'react-quill';
 import ImageResize from 'quill-image-resize-module-react';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 import katex from 'katex';
@@ -13,9 +14,267 @@ const Clipboard = Quill.import('modules/clipboard');
 Quill.register('modules/imageResize', ImageResize);
 // Quill.register('modules/clipboard', CustomClipboard);
 
-import { Paper, Box, Typography, Divider, Grid, Button, Dialog, DialogContent, DialogActions, DialogTitle, List, ListItemButton, ListItemText, Switch, TextField } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Grid, Paper, Switch, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Edit } from 'iconsax-react';
+
+import MasterData from './question_actions_components/MasterData';
+
+import { useHttp } from 'src/utils/api_intercepters.js';
+
+const AddOrEditQuestion = () => {
+    const quillRef = useRef(null);
+    const useHttpMethod = useHttp();
+
+    const { question_id } = useParams(); // Get the ID from the URL
+
+    const [selectionType, setSelectionType] = useState(null);
+    const [questionData, setQuestionData] = useState(questionDataFeilds);
+    const [dialogQuestionDataOpen, setDialogQuestionDataOpen] = useState(false);
+
+    useEffect(() => {
+        if (question_id) {
+            useHttpMethod.get(`/admin/question/fetch?question_id=${question_id}`).then(res => {
+                if (res.statusCode == 200) {
+                    setQuestionData({...res.data})
+                } else {
+                    alert(res.message)
+                }
+            });
+        }
+    }, [])
+
+    const handleOpenQuestionDataDialog = (type) => {
+        setSelectionType(type);
+        setDialogQuestionDataOpen(true);
+    };
+
+    const handleCloseQuestionDataDialog = () => {
+        setDialogQuestionDataOpen(false);
+        // setSelectionType(null);
+    };
+
+    const updateQuestion = () => {
+        const url = question_id ? '/admin/question/update' : '/admin/question/create'
+
+        useHttpMethod.post(url, questionData).then(res => {
+            if (res.statusCode == 200) {
+
+            } else {
+                alert(res.message)
+            }
+        });
+    };
+
+    const modules = useMemo(() => {
+        return {
+            toolbar: {
+                container: [
+                    [{ 'header': '1' }, { 'header': '2' }],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    ['bold', 'italic', 'underline'],
+                    [{ 'script': 'sub' }, { 'script': 'super' }], // Add subscript and superscript buttons
+                    ['link', 'image'],
+                    [{ 'color': [] }, { 'background': [] }], // Text color and background color
+                    ['clean'],
+                    ['formula']
+                ],
+            }
+        }
+    }, []);
+
+    return (
+        <>
+
+            <Paper sx={{ width: '100%', minHeight: 'calc(100vh - 150px)', overflow: 'hidden', p: 2 }}>
+
+                <MasterData
+                    questionData={questionData}
+                    setQuestionData={setQuestionData}
+                    selectionType={selectionType}
+                    setSelectionType={setSelectionType}
+                />
+
+                <Divider sx={{ my: 1 }} />
+
+                <Box sx={{ mb: 2 }}>
+                    <Typography variant="h6" gutterBottom color="text.secondary">
+                        Question :-
+                        <Button
+                            size='small'
+                            variant="contained"
+                            onClick={() => handleOpenQuestionDataDialog("question")}
+                            sx={{ ml: 2 }}
+                        >
+                            {questionData?.question ? "Edit Question" : "Add Question"}
+                        </Button>
+                    </Typography>
+                    <Typography>
+                        {questionData?.question && (
+                            <Box
+                                onClick={() => handleOpenQuestionDataDialog("question")}
+                                sx={{
+                                    display: "flex",
+                                    alignItems: 'center',
+                                    border: 'divider',
+                                    ml: 2
+                                }}
+                            >
+                                <StyledDiv dangerouslySetInnerHTML={{ __html: questionData?.question }} />
+                            </Box>
+                        )}
+                    </Typography>
+                </Box>
+
+                <Divider />
+
+                {
+                    questionData?.question &&
+                    <Box sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}>
+                        <Typography color="text.secondary">User Input :-</Typography>
+                        <Switch
+                            checked={questionData.user_input_answer}
+                            onChange={(event) => {
+                                setQuestionData({ ...questionData, user_input_answer: event.target.checked })
+                            }}
+                        />
+                    </Box>
+                }
+
+                {
+                    questionData?.user_input_answer ? null : (
+                        questionData?.question &&
+                        <Box sx={{ mt: 1 }}>
+                            {optionLabels.map((label, index) => {
+                                if (index > 0 && !questionData[`option_${optionLabels[index - 1]}`]) return null;
+                                return (
+                                    <Paper variant="outlined" sx={{ p: 1, display: 'flex', flexDirection: 'column' }} key={index} >
+                                        <Typography variant="body1" color="text.secondary">
+                                            Option {label} :-
+                                            {
+                                                questionData?.[`option_${label}`] &&
+                                                <Button
+                                                    size='small'
+                                                    variant="contained"
+                                                    onClick={() => handleOpenQuestionDataDialog(`option_${label}`)}
+                                                    sx={{ ml: 2 }}
+                                                >
+                                                    Edit Option {label}
+                                                </Button>
+                                            }
+                                        </Typography>
+
+                                        {questionData[`option_${label}`] ? (
+                                            <Box sx={{ mt: 2 }}>
+                                                <StyledDiv dangerouslySetInnerHTML={{ __html: questionData[`option_${label}`] }} />
+                                            </Box>
+                                        ) : (
+                                            <Button
+                                                size='small'
+                                                variant="contained"
+                                                onClick={() => handleOpenQuestionDataDialog(`option_${label}`)}
+                                                fullWidth
+                                            >
+                                                Add Option {label}
+                                            </Button>
+                                        )}
+                                    </Paper>
+                                );
+                            })}
+                        </Box>
+                    )
+                }
+
+                {
+                    questionData?.question && (questionData?.user_input_answer || (questionData?.option_A && questionData?.option_B)) &&
+                    <Grid container spacing={1} sx={{ mb: 2, mt: 3 }}>
+                        <Grid item xs={12} sm={4} md={3}>
+
+                            <TextField
+                                placeholder='Answer *'
+                                size='medium'
+                                label='Answer *'
+                                value={questionData?.answer}
+                                onChange={(event) => setQuestionData({ ...questionData, answer: event.target.value })}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={4} md={3}>
+                            <TextField
+                                placeholder='Marks *'
+                                size='medium'
+                                label='Marks *'
+                                value={questionData?.marks}
+                                onChange={(event) => setQuestionData({ ...questionData, marks: event.target.value })}
+                            />
+                        </Grid>
+                    </Grid>
+                }
+
+                {
+                    <Box sx={{
+                        mt: 5,
+                        display: 'flex',
+                        justifyContent: 'flex-end'
+                    }}>
+
+                        <Button
+                            variant='contained'
+                            onClick={updateQuestion}
+                        >
+                            Add Question
+                        </Button>
+                    </Box>
+                }
+
+                <Dialog
+                    open={dialogQuestionDataOpen}
+                    onClose={handleCloseQuestionDataDialog}
+                    fullWidth
+                >
+                    <DialogTitle>
+                        {questionData[selectionType] ? "Edit" : "Add"} {selectionType && selectionType.replace('_', ' ')}
+                    </DialogTitle>
+                    <StyledReactQuill
+                        value={questionData[selectionType] || ''}
+                        onChange={(value) => {
+                            if (value == '<p><br></p>' || value === '<p></p>') return setQuestionData({ ...questionData, [selectionType]: '' })
+                            setQuestionData({ ...questionData, [selectionType]: value })
+                        }}
+                        modules={modules}
+                        ref={quillRef}
+                        theme="snow"
+                        placeholder="Write something ..."
+                    />
+                    <DialogActions>
+                        <Button onClick={handleCloseQuestionDataDialog}>Done</Button>
+                    </DialogActions>
+                </Dialog>
+            </Paper>
+        </>
+    );
+};
+
+const optionLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+const questionDataFeilds = {
+    stream_id: '',
+    standard_id: '',
+    subject_id: '',
+    section: null,
+    topic_id: '',
+    question: '',
+    option_A: '',
+    option_B: '',
+    option_C: '',
+    option_D: '',
+    option_E: '',
+    option_F: '',
+    user_input_answer: false,
+    answer: '',
+    marks: ''
+}
 
 const StyledReactQuill = styled(ReactQuill)({
     '& .ql-container': {
@@ -49,7 +308,6 @@ const StyledReactQuill = styled(ReactQuill)({
     },
 });
 
-const optionLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
 const StyledDiv = styled('div')({
     '& p': {
         margin: 0,
@@ -64,357 +322,5 @@ const StyledDiv = styled('div')({
         padding: 0,
     },
 });
-const AddOrEditQuestion = () => {
-    const quillRef = useRef(null);
-
-    const selectionOptions = {
-        stream: {
-            1: 'NEET',
-            2: 'JEE',
-            3: 'MHT-CET'
-        },
-        standard: {
-            6: 'Grade 11',
-            7: 'Grade 12',
-            8: 'Repeater'
-        },
-        subject: {
-            1: 'Physics',
-            2: 'Chemistry',
-            3: 'Mathematics',
-            4: 'Biology',
-        },
-        section: {
-            1: 'Section A',
-            2: 'Section B'
-        },
-        topic: {
-            1: 'Mechanics',
-            2: 'Thermodynamics',
-            3: 'Optics',
-            4: 'Modern Physics'
-        }
-    };
-
-    const [questionData, setQuestionData] = useState({
-        stream: '',
-        standard: '',
-        subject: '',
-        section: null,
-        topic: '',
-        question: '',
-        option_A: '',
-        option_B: '',
-        option_C: '',
-        option_D: '',
-        option_E: '',
-        option_F: '',
-        userInputAnswer: false,
-        answer: '',
-        marks: ''
-    });
-
-    console.log(questionData)
-
-    const [dialogMasterDataOpen, setDialogMasterDataOpen] = useState(false);
-    const [dialogQuestionDataOpen, setDialogQuestionDataOpen] = useState(false);
-    const [selectionType, setSelectionType] = useState(null);
-
-    const handleOpenMasterDataDialog = (type) => {
-        setSelectionType(type);
-        setDialogMasterDataOpen(true);
-    };
-
-    const handleCloseMasterDataDialog = () => {
-        setDialogMasterDataOpen(false);
-        setSelectionType(null);
-    };
-
-    const handleOpenQuestionDataDialog = (type) => {
-        setSelectionType(type);
-        setDialogQuestionDataOpen(true);
-    };
-
-    const handleCloseQuestionDataDialog = () => {
-        setDialogQuestionDataOpen(false);
-        // setSelectionType(null);
-    };
-
-    const handleSelection = (id) => {
-        setQuestionData(prev => ({
-            ...prev,
-            [selectionType]: id
-        }));
-        handleCloseMasterDataDialog();
-    };
-
-    const renderSelectionField = (type, label) => (
-        <Grid item xs={6} sm={4} md={3}>
-            <Paper
-                variant="outlined"
-                sx={{
-                    p: 1,
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-
-                }}
-            >
-                <Typography variant="body1" color="text.secondary">
-                    {label}
-                </Typography>
-                {questionData[type] ? (
-                    <Button
-                        variant="outlined"
-                        size='small'
-                        startIcon={<Edit size={16} />}
-                        onClick={() => handleOpenMasterDataDialog(type)}
-                        fullWidth
-                    >
-                        {selectionOptions[type][questionData[type]]}
-                    </Button>
-                ) : (
-                    <Button
-                        size='small'
-                        variant="contained"
-                        onClick={() => handleOpenMasterDataDialog(type)}
-                        fullWidth
-                    >
-                        Select {label}
-                    </Button>
-                )}
-            </Paper>
-        </Grid>
-    );
-
-    const modules = useMemo(() => {
-        return {
-            toolbar: {
-                container: [
-                    [{ 'header': '1' }, { 'header': '2' }],
-                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                    ['bold', 'italic', 'underline'],
-                    [{ 'script': 'sub' }, { 'script': 'super' }], // Add subscript and superscript buttons
-                    ['link', 'image'],
-                    [{ 'color': [] }, { 'background': [] }], // Text color and background color
-                    ['clean'],
-                    ['formula']
-                ],
-            }
-        }
-    }, []);
-
-    return (
-        <Paper sx={{ width: '100%', minHeight: 'calc(100vh - 150px)', overflow: 'hidden', p: 2 }}>
-            <Grid container spacing={1} sx={{ mb: 2 }}>
-                {renderSelectionField('stream', 'Stream')}
-                {renderSelectionField('standard', 'Standard')}
-                {renderSelectionField('subject', 'Subject')}
-                {renderSelectionField('section', 'Section')}
-            </Grid>
-
-            <Divider sx={{ my: 1 }} />
-
-            <Box
-                variant="outlined"
-                sx={{
-                    height: '50px',
-                    display: 'flex',
-                    alignItems: 'center'
-                }}
-            >
-                <Typography variant="body1" color="text.secondary">
-                    Topic :-
-                </Typography>
-                {questionData["topic"] ? (
-                    <Box onClick={() => handleOpenMasterDataDialog("topic")} sx={{ display: "flex", alignItems: 'center', '&:hover': { color: 'action.hover', cursor: 'pointer' } }}>
-                        <Typography sx={{ mr: 1, ml: 2 }}>
-                            {selectionOptions["topic"][questionData["topic"]]}
-                        </Typography>
-                        <Edit size={16} />
-                    </Box>
-                ) : (
-                    <Button
-                        size='small'
-                        variant="contained"
-                        onClick={() => handleOpenMasterDataDialog("topic")}
-                        sx={{ ml: 2 }}
-                    >
-                        Select Topic
-                    </Button>
-                )}
-            </Box>
-
-            <Divider sx={{ my: 1 }} />
-
-            <Box sx={{ mb: 2 }}>
-                <Typography variant="h6" gutterBottom color="text.secondary">
-                    Question :-
-                    <Button
-                        size='small'
-                        variant="contained"
-                        onClick={() => handleOpenQuestionDataDialog("question")}
-                        sx={{ ml: 2 }}
-                    >
-                        {questionData?.question ? "Edit Question" : "Add Question"}
-                    </Button>
-                </Typography>
-                <Typography>
-                    {questionData?.question && (
-                        <Box
-                            onClick={() => handleOpenQuestionDataDialog("question")}
-                            sx={{
-                                display: "flex",
-                                alignItems: 'center',
-                                border: 'divider',
-                                ml: 2
-                            }}
-                        >
-                            <StyledDiv dangerouslySetInnerHTML={{ __html: questionData?.question }} />
-                        </Box>
-                    )}
-                </Typography>
-            </Box>
-
-            <Divider />
-
-            {
-                questionData?.question &&
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                }}>
-                    <p>User Input</p>
-                    <Switch
-                        checked={questionData.userInputAnswer}
-                        onChange={(event) => {
-                            setQuestionData({ ...questionData, userInputAnswer: event.target.checked })
-                        }}
-                    />
-                </Box>
-            }
-
-            {
-                questionData?.userInputAnswer ? (
-                    questionData?.question &&
-                    <Grid container spacing={1} sx={{ mb: 2 }}>
-                        <Grid item xs={12} sm={4} md={3}>
-
-                            <TextField
-                                placeholder='Answer *'
-                                size='medium'
-                                label='Answer *'
-                                value={questionData?.answer}
-                                onChange={(event) => setQuestionData({ ...questionData, answer: event.target.value })}
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={4} md={3}>
-                            <TextField
-                                placeholder='Marks *'
-                                size='medium'
-                                label='Marks *'
-                                value={questionData?.marks}
-                                onChange={(event) => setQuestionData({ ...questionData, marks: event.target.value })}
-                            />
-                        </Grid>
-                    </Grid>
-
-                ) : (
-                    questionData?.question &&
-                    <Box sx={{ mt: 1 }}>
-                        {optionLabels.map((label, index) => {
-                            if (index > 0 && !questionData[`option_${optionLabels[index - 1]}`]) return null;
-                            return (
-                                <Paper variant="outlined" sx={{ p: 1, display: 'flex', flexDirection: 'column' }}>
-                                    <Typography variant="body1" color="text.secondary">
-                                        Option {label} :-
-                                        {
-                                            questionData?.[`option_${label}`] &&
-                                            <Button
-                                                size='small'
-                                                variant="contained"
-                                                onClick={() => handleOpenQuestionDataDialog(`option_${label}`)}
-                                                sx={{ ml: 2 }}
-                                            >
-                                                Edit Option {label}
-                                            </Button>
-                                        }
-                                    </Typography>
-
-                                    {questionData[`option_${label}`] ? (
-                                        <Box sx={{ mt: 2 }}>
-                                            <StyledDiv dangerouslySetInnerHTML={{ __html: questionData[`option_${label}`] }} />
-                                        </Box>
-                                    ) : (
-                                        <Button
-                                            size='small'
-                                            variant="contained"
-                                            onClick={() => handleOpenQuestionDataDialog(`option_${label}`)}
-                                            fullWidth
-                                        >
-                                            Add Option {label}
-                                        </Button>
-                                    )}
-                                </Paper>
-                            );
-                        })}
-                    </Box>
-                )
-            }
-
-
-            <Dialog
-                open={dialogMasterDataOpen}
-                onClose={handleCloseMasterDataDialog}
-                maxWidth="xs"
-                fullWidth
-            >
-                <DialogTitle>
-                    Select {selectionType && selectionType.charAt(0).toUpperCase() + selectionType.slice(1)}
-                </DialogTitle>
-                <DialogContent dividers>
-
-                    {selectionType && dialogMasterDataOpen && Object.entries(selectionOptions[selectionType]).map(([id, name]) => (
-                        <ListItemButton
-                            key={id}
-                            onClick={() => handleSelection(parseInt(id))}
-                            selected={questionData[selectionType] === parseInt(id)}
-                        >
-                            <ListItemText primary={name} />
-                        </ListItemButton>
-                    ))}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCloseMasterDataDialog}>Cancel</Button>
-                </DialogActions>
-            </Dialog>
-
-            <Dialog
-                open={dialogQuestionDataOpen}
-                onClose={handleCloseQuestionDataDialog}
-                fullWidth
-            >
-                <DialogTitle>
-                    {questionData[selectionType] ? "Edit" : "Add"} {selectionType && selectionType.replace('_', ' ')}
-                </DialogTitle>
-                <StyledReactQuill
-                    value={questionData[selectionType] || ''}
-                    onChange={(value) => {
-                        if (value == '<p><br></p>' || value === '<p></p>') return setQuestionData({ ...questionData, [selectionType]: '' })
-                        setQuestionData({ ...questionData, [selectionType]: value })
-                    }}
-                    modules={modules}
-                    ref={quillRef}
-                    theme="snow"
-                    placeholder="Write something ..."
-                />
-                <DialogActions>
-                    <Button onClick={handleCloseQuestionDataDialog}>Done</Button>
-                </DialogActions>
-            </Dialog>
-        </Paper>
-    );
-};
 
 export default AddOrEditQuestion;

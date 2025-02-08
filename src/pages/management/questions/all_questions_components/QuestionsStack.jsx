@@ -26,7 +26,8 @@ const QuestionsStack = ({
                             cursor: 'pointer',
                             '&:hover': { bgcolor: 'action.hover' },
                             borderRadius: 0,
-                            borderBottom: 1, borderColor: 'divider'
+                            borderBottom: 1, 
+                            borderColor: 'divider'
                         }}
                         onClick={() => handleRowClick(que.question_id)}
                     >

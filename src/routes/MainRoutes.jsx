@@ -41,7 +41,7 @@ const MainRoutes = {
           element: <AddOrEditQuestions />
         },
         {
-          path: 'question/:id',
+          path: 'question/:question_id',
           element: <AddOrEditQuestions />
         }
       ]

@@ -10,8 +10,7 @@ const QuestionsFilter = ({
     const [selectedKey, setSelectedKey] = useState('');
     const [tempFilters, setTempFilters] = useState({
         stream: new Set(),
-        standard: new Set(),
-        status: new Set(),
+        standard: new Set()
     });
 
     // Get unique values for each filter key
@@ -50,7 +49,7 @@ const QuestionsFilter = ({
         setTempFilters({
             stream: new Set(activeFilters.stream),
             standard: new Set(activeFilters.standard),
-            status: new Set(activeFilters.status),
+            subject: new Set(activeFilters.subject),
         });
         setDialogOpen(true);
     };
@@ -135,7 +134,6 @@ const QuestionsFilter = ({
                             </MenuItem>
                             <MenuItem value="stream">Stream</MenuItem>
                             <MenuItem value="standard">Standard</MenuItem>
-                            <MenuItem value="status">Status</MenuItem>
                         </Select>
                     </Box>
 
@@ -184,5 +182,12 @@ const standards = {
     7: 'Grade 12',
     8: 'Repeater'
 };
+
+const subjects = {
+    1: 'Physics',
+    2: 'Chemistry',
+    3: 'Mathematics',
+    4: 'Biology'
+}
 
 export default QuestionsFilter
