@@ -13,7 +13,7 @@ const Clipboard = Quill.import('modules/clipboard');
 Quill.register('modules/imageResize', ImageResize);
 // Quill.register('modules/clipboard', CustomClipboard);
 
-import { Paper, Box, Typography, Divider, Grid, Button, Dialog, DialogContent, DialogActions, DialogTitle, List, ListItemButton, ListItemText } from '@mui/material';
+import { Paper, Box, Typography, Divider, Grid, Button, Dialog, DialogContent, DialogActions, DialogTitle, List, ListItemButton, ListItemText, Switch, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Edit } from 'iconsax-react';
 
@@ -49,6 +49,21 @@ const StyledReactQuill = styled(ReactQuill)({
     },
 });
 
+const optionLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+const StyledDiv = styled('div')({
+    '& p': {
+        margin: 0,
+        padding: 0,
+    },
+    '& h1': {
+        margin: 0,
+        padding: 0,
+    },
+    '& h2': {
+        margin: 0,
+        padding: 0,
+    },
+});
 const AddOrEditQuestion = () => {
     const quillRef = useRef(null);
 
@@ -85,7 +100,7 @@ const AddOrEditQuestion = () => {
         stream: '',
         standard: '',
         subject: '',
-        section: '',
+        section: null,
         topic: '',
         question: '',
         option_A: '',
@@ -94,7 +109,12 @@ const AddOrEditQuestion = () => {
         option_D: '',
         option_E: '',
         option_F: '',
+        userInputAnswer: false,
+        answer: '',
+        marks: ''
     });
+
+    console.log(questionData)
 
     const [dialogMasterDataOpen, setDialogMasterDataOpen] = useState(false);
     const [dialogQuestionDataOpen, setDialogQuestionDataOpen] = useState(false);
@@ -117,7 +137,7 @@ const AddOrEditQuestion = () => {
 
     const handleCloseQuestionDataDialog = () => {
         setDialogQuestionDataOpen(false);
-        setSelectionType(null);
+        // setSelectionType(null);
     };
 
     const handleSelection = (id) => {
@@ -185,7 +205,7 @@ const AddOrEditQuestion = () => {
     }, []);
 
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden', p: 2 }}>
+        <Paper sx={{ width: '100%', minHeight: 'calc(100vh - 150px)', overflow: 'hidden', p: 2 }}>
             <Grid container spacing={1} sx={{ mb: 2 }}>
                 {renderSelectionField('stream', 'Stream')}
                 {renderSelectionField('standard', 'Standard')}
@@ -227,25 +247,122 @@ const AddOrEditQuestion = () => {
 
             <Divider sx={{ my: 1 }} />
 
-            <Box>
-                <Typography variant="h6" gutterBottom>
-                    Question :-{questionData["question"] ? (
-                        <Box onClick={() => handleOpenQuestionDataDialog("question")} sx={{ display: "flex", alignItems: 'center', '&:hover': { color: 'action.hover', cursor: 'pointer' } }}>
-                            {selectionOptions["question"]}
-                            <Edit size={16} />
-                        </Box>
-                    ) : (
-                        <Button
-                            size='small'
-                            variant="contained"
+            <Box sx={{ mb: 2 }}>
+                <Typography variant="h6" gutterBottom color="text.secondary">
+                    Question :-
+                    <Button
+                        size='small'
+                        variant="contained"
+                        onClick={() => handleOpenQuestionDataDialog("question")}
+                        sx={{ ml: 2 }}
+                    >
+                        {questionData?.question ? "Edit Question" : "Add Question"}
+                    </Button>
+                </Typography>
+                <Typography>
+                    {questionData?.question && (
+                        <Box
                             onClick={() => handleOpenQuestionDataDialog("question")}
-                            sx={{ ml: 2 }}
+                            sx={{
+                                display: "flex",
+                                alignItems: 'center',
+                                border: 'divider',
+                                ml: 2
+                            }}
                         >
-                            Add Question
-                        </Button>
+                            <StyledDiv dangerouslySetInnerHTML={{ __html: questionData?.question }} />
+                        </Box>
                     )}
                 </Typography>
             </Box>
+
+            <Divider />
+
+            {
+                questionData?.question &&
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                }}>
+                    <p>User Input</p>
+                    <Switch
+                        checked={questionData.userInputAnswer}
+                        onChange={(event) => {
+                            setQuestionData({ ...questionData, userInputAnswer: event.target.checked })
+                        }}
+                    />
+                </Box>
+            }
+
+            {
+                questionData?.userInputAnswer ? (
+                    questionData?.question &&
+                    <Grid container spacing={1} sx={{ mb: 2 }}>
+                        <Grid item xs={12} sm={4} md={3}>
+
+                            <TextField
+                                placeholder='Answer *'
+                                size='medium'
+                                label='Answer *'
+                                value={questionData?.answer}
+                                onChange={(event) => setQuestionData({ ...questionData, answer: event.target.value })}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} sm={4} md={3}>
+                            <TextField
+                                placeholder='Marks *'
+                                size='medium'
+                                label='Marks *'
+                                value={questionData?.marks}
+                                onChange={(event) => setQuestionData({ ...questionData, marks: event.target.value })}
+                            />
+                        </Grid>
+                    </Grid>
+
+                ) : (
+                    questionData?.question &&
+                    <Box sx={{ mt: 1 }}>
+                        {optionLabels.map((label, index) => {
+                            if (index > 0 && !questionData[`option_${optionLabels[index - 1]}`]) return null;
+                            return (
+                                <Paper variant="outlined" sx={{ p: 1, display: 'flex', flexDirection: 'column' }}>
+                                    <Typography variant="body1" color="text.secondary">
+                                        Option {label} :-
+                                        {
+                                            questionData?.[`option_${label}`] &&
+                                            <Button
+                                                size='small'
+                                                variant="contained"
+                                                onClick={() => handleOpenQuestionDataDialog(`option_${label}`)}
+                                                sx={{ ml: 2 }}
+                                            >
+                                                Edit Option {label}
+                                            </Button>
+                                        }
+                                    </Typography>
+
+                                    {questionData[`option_${label}`] ? (
+                                        <Box sx={{ mt: 2 }}>
+                                            <StyledDiv dangerouslySetInnerHTML={{ __html: questionData[`option_${label}`] }} />
+                                        </Box>
+                                    ) : (
+                                        <Button
+                                            size='small'
+                                            variant="contained"
+                                            onClick={() => handleOpenQuestionDataDialog(`option_${label}`)}
+                                            fullWidth
+                                        >
+                                            Add Option {label}
+                                        </Button>
+                                    )}
+                                </Paper>
+                            );
+                        })}
+                    </Box>
+                )
+            }
+
 
             <Dialog
                 open={dialogMasterDataOpen}
@@ -279,21 +396,21 @@ const AddOrEditQuestion = () => {
                 fullWidth
             >
                 <DialogTitle>
-                    {questionData[selectionType] ? "Edit" : "Add"} {selectionType && selectionType.charAt(0).toUpperCase() + selectionType.slice(1)}
+                    {questionData[selectionType] ? "Edit" : "Add"} {selectionType && selectionType.replace('_', ' ')}
                 </DialogTitle>
                 <StyledReactQuill
-                    value={questionData?.question}
-                    onChange={(event) => {
+                    value={questionData[selectionType] || ''}
+                    onChange={(value) => {
+                        if (value == '<p><br></p>' || value === '<p></p>') return setQuestionData({ ...questionData, [selectionType]: '' })
+                        setQuestionData({ ...questionData, [selectionType]: value })
                     }}
                     modules={modules}
                     ref={quillRef}
-                    // onBlur={handleOnBlur}
                     theme="snow"
                     placeholder="Write something ..."
                 />
                 <DialogActions>
-                    <Button onClick={handleCloseQuestionDataDialog}>Cancel</Button>
-                    <Button onClick={handleCloseQuestionDataDialog}>Add</Button>
+                    <Button onClick={handleCloseQuestionDataDialog}>Done</Button>
                 </DialogActions>
             </Dialog>
         </Paper>

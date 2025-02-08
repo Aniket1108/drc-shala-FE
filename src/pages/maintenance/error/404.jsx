@@ -40,7 +40,7 @@ export default function Error404() {
           <Typography color="text.secondary" align="center" sx={{ width: { xs: '73%', sm: '61%' } }}>
             The page you are looking was moved, removed, renamed, or might never exist!
           </Typography>
-          <Button component={Link} to={APP_DEFAULT_PATH} variant="contained">
+          <Button component={Link} to={'/overview'} variant="contained">
             Back To Home
           </Button>
         </Stack>
