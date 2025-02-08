@@ -2,8 +2,6 @@ import { useState, useMemo } from 'react'
 import { Box, Typography, Stack, Button, Chip, Dialog, DialogTitle, DialogContent, Select, FormGroup, MenuItem, DialogActions, FormControlLabel, Checkbox } from '@mui/material'
 import { Filter, ArrowDown2, ArrowUp2, Calendar } from 'iconsax-react';
 
-import { streams, standards } from '../mockData';
-
 const QuestionsFilter = ({
     activeFilters,
     setActiveFilters
@@ -174,5 +172,17 @@ const QuestionsFilter = ({
         </Box>
     )
 }
+
+const streams = {
+    1: 'NEET',
+    2: 'JEE',
+    3: 'MHT-CET'
+};
+
+const standards = {
+    6: 'Grade 11',
+    7: 'Grade 12',
+    8: 'Repeater'
+};
 
 export default QuestionsFilter

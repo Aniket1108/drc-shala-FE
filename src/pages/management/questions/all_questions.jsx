@@ -17,6 +17,7 @@ const UserTable = ({ }) => {
         standard: new Set(),
         status: new Set(),
     });
+
     const [allQuestions, setAllQuestions] = useState([]);
 
     const handleChangePage = (_event, newPage) => {
@@ -30,15 +31,20 @@ const UserTable = ({ }) => {
 
 
     useEffect(() => {
-        useHttpMethod.get('/admin/questions/list').then(res => {
+        const filtersToSend = {
+            stream: Array.from(activeFilters.stream),
+            standard: Array.from(activeFilters.standard),
+            status: Array.from(activeFilters.status),
+        };
+    
+        useHttpMethod.post('/admin/questions/list', filtersToSend).then(res => {
             if (res.statusCode == 200) {
                 setAllQuestions(res.data.result)
             } else {
                 alert(res.message)
             }
         });
-
-    }, [])
+    }, [activeFilters])
 
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>

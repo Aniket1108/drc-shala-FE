@@ -11,6 +11,7 @@ const MaintenanceError = Loadable(lazy(() => import('pages/maintenance/error/404
 // render - sample page
 const Overview = Loadable(lazy(() => import('pages/overview/overview')));
 const AllQuestions = Loadable(lazy(() => import('pages/management/questions/all_questions')));
+const AddOrEditQuestions = Loadable(lazy(() => import('pages/management/questions/add_or_edit_question')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -34,6 +35,14 @@ const MainRoutes = {
         {
           path: 'all-questions',
           element: <AllQuestions />
+        },
+        {
+          path: 'question',
+          element: <AddOrEditQuestions />
+        },
+        {
+          path: 'question/:id',
+          element: <AddOrEditQuestions />
         }
       ]
     },
