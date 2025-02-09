@@ -1,6 +1,6 @@
 import Quill from 'quill';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import ImageResize from 'quill-image-resize-module-react';
 import ReactQuill from 'react-quill';
@@ -23,6 +23,7 @@ import { useHttp } from 'src/utils/api_intercepters.js';
 
 const AddOrEditQuestion = () => {
     const quillRef = useRef(null);
+    const navigate = useNavigate();
     const useHttpMethod = useHttp();
 
     const { question_id } = useParams(); // Get the ID from the URL
@@ -58,7 +59,7 @@ const AddOrEditQuestion = () => {
 
         useHttpMethod.post(url, questionData).then(res => {
             if (res.statusCode == 200) {
-
+                navigate('/management/all-questions')
             } else {
                 alert(res.message)
             }
@@ -273,7 +274,7 @@ const questionDataFeilds = {
     option_F: '',
     user_input_answer: false,
     answer: '',
-    marks: ''
+    marks: '4'
 }
 
 const StyledReactQuill = styled(ReactQuill)({

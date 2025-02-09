@@ -1,5 +1,5 @@
 import {
-    Divider, Paper, TablePagination, Box, Typography, Button
+    Divider, Paper, TablePagination, Pagination, Box, Typography, Button
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,12 +12,12 @@ const UserTable = ({ }) => {
     const useHttpMethod = useHttp();
     const navigate = useNavigate();
 
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [page, setPage] = useState(1);
+
     const [activeFilters, setActiveFilters] = useState({
         stream: new Set(),
         standard: new Set(),
-        subject: new Set(),
+        subject: new Set()
     });
 
     const [allQuestions, setAllQuestions] = useState([]);
@@ -26,12 +26,6 @@ const UserTable = ({ }) => {
         setPage(newPage);
     };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
-
-
     useEffect(() => {
         const filtersToSend = {
             stream: Array.from(activeFilters.stream),
@@ -39,14 +33,19 @@ const UserTable = ({ }) => {
             subject: Array.from(activeFilters.subject),
         };
 
-        useHttpMethod.post('/admin/questions/list', filtersToSend).then(res => {
+        const reqPayload = {
+            filters: filtersToSend,
+            page: page
+        };
+
+        useHttpMethod.post('/admin/questions/list', reqPayload).then(res => {
             if (res.statusCode == 200) {
                 setAllQuestions(res.data.result)
             } else {
                 alert(res.message)
             }
         });
-    }, [activeFilters])
+    }, [activeFilters, page])
 
     return (
         <>
@@ -83,15 +82,17 @@ const UserTable = ({ }) => {
                     allQuestions={allQuestions}
                 />
 
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={5}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+
+                    <Pagination
+                        sx={{
+                            mt: 2
+                        }}
+                        count={10}
+                        page={page}
+                        onChange={handleChangePage}
+                    />
+                </Box>
             </Paper>
         </>
     );

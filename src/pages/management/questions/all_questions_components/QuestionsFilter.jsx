@@ -117,7 +117,7 @@ const QuestionsFilter = ({
             )}
 
             <Dialog open={dialogOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
-                <DialogTitle>Filter Users</DialogTitle>
+                <DialogTitle>Filter Questions</DialogTitle>
                 <DialogContent>
                     <Box sx={{ mb: 2 }}>
                         <Typography variant="subtitle2" gutterBottom>

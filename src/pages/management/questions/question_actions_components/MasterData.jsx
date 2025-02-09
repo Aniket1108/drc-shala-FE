@@ -22,44 +22,46 @@ const MasterData = ({
         setSelectionType(null);
     };
 
-    const renderSelectionField = (type, label) => (
-        <Grid item xs={6} sm={4} md={3}>
-            <Paper
-                variant="outlined"
-                sx={{
-                    p: 1,
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
+    const renderSelectionField = (type, label) => {
+        return (
+            <Grid item xs={6} sm={4} md={3}>
+                <Paper
+                    variant="outlined"
+                    sx={{
+                        p: 1,
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
 
-                }}
-            >
-                <Typography variant="body1" color="text.secondary">
-                    {label}
-                </Typography>
-                {questionData[type] ? (
-                    <Button
-                        variant="outlined"
-                        size='small'
-                        startIcon={<Edit size={16} />}
-                        onClick={() => handleOpenMasterDataDialog(type)}
-                        fullWidth
-                    >
-                        {selectionOptions[type][questionData[type]]}
-                    </Button>
-                ) : (
-                    <Button
-                        size='small'
-                        variant="contained"
-                        onClick={() => handleOpenMasterDataDialog(type)}
-                        fullWidth
-                    >
-                        Select {label}
-                    </Button>
-                )}
-            </Paper>
-        </Grid>
-    );
+                    }}
+                >
+                    <Typography variant="body1" color="text.secondary">
+                        {label}
+                    </Typography>
+                    {questionData[type] ? (
+                        <Button
+                            variant="outlined"
+                            size='small'
+                            startIcon={<Edit size={16} />}
+                            onClick={() => handleOpenMasterDataDialog(type)}
+                            fullWidth
+                        >
+                            {selectionOptions[type][questionData[type]]}
+                        </Button>
+                    ) : (
+                        <Button
+                            size='small'
+                            variant="contained"
+                            onClick={() => handleOpenMasterDataDialog(type)}
+                            fullWidth
+                        >
+                            Select {label}
+                        </Button>
+                    )}
+                </Paper>
+            </Grid>
+        )
+    };
 
     const handleSelection = (id) => {
         setQuestionData(prev => ({
@@ -124,8 +126,8 @@ const MasterData = ({
                     {selectionType && dialogMasterDataOpen && Object.entries(selectionOptions[selectionType]).map(([id, name]) => (
                         <ListItemButton
                             key={id}
-                            onClick={() => handleSelection(parseInt(id))}
-                            selected={questionData[selectionType] === parseInt(id)}
+                            onClick={() => handleSelection(id)}
+                            selected={questionData[selectionType] == id}
                         >
                             <ListItemText primary={name} />
                         </ListItemButton>
@@ -157,8 +159,8 @@ const selectionOptions = {
         4: 'Biology',
     },
     section: {
-        1: 'Section A',
-        2: 'Section B'
+        A: 'Section A',
+        B: 'Section B'
     },
     topic_id: {
         1: 'Mechanics',
