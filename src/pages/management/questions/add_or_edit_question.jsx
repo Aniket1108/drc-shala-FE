@@ -264,15 +264,37 @@ const AddOrEditQuestion = () => {
 
                 {
                     questionData?.answer &&
-                    <TextField
-                        id="outlined-multiline-static"
-                        label="Multiline"
-                        multiline
-                        fullWidth
-                        rows={4}
-                        onChange={(event) => setQuestionData({ ...questionData, explanation: event.target.value })}
-                        defaultValue={questionData?.explanation || "Write explanation ..."}
-                    />
+                    <Paper variant="outlined" sx={{ p: 1, display: 'flex', flexDirection: 'column' }} >
+                        <Typography variant="body1" color="text.secondary">
+                            Option {'explanation'} :-
+                            {
+                                questionData?.[`${'explanation'}`] &&
+                                <Button
+                                    size='small'
+                                    variant="contained"
+                                    onClick={() => handleOpenQuestionDataDialog(`${'explanation'}`)}
+                                    sx={{ ml: 2 }}
+                                >
+                                    Edit Option {'explanation'}
+                                </Button>
+                            }
+                        </Typography>
+
+                        {questionData[`${'explanation'}`] ? (
+                            <Box sx={{ mt: 2 }}>
+                                <StyledDiv dangerouslySetInnerHTML={{ __html: questionData[`${'explanation'}`] }} />
+                            </Box>
+                        ) : (
+                            <Button
+                                size='small'
+                                variant="contained"
+                                onClick={() => handleOpenQuestionDataDialog(`${'explanation'}`)}
+                                fullWidth
+                            >
+                                Add Option {'explanation'}
+                            </Button>
+                        )}
+                    </Paper>
                 }
 
                 {
