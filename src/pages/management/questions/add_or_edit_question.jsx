@@ -10,9 +10,7 @@ import katex from 'katex';
 import 'katex/dist/katex.min.css';
 window.katex = katex;
 
-const Clipboard = Quill.import('modules/clipboard');
 Quill.register('modules/imageResize', ImageResize);
-// Quill.register('modules/clipboard', CustomClipboard);
 
 import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Grid, Paper, Switch, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -36,7 +34,7 @@ const AddOrEditQuestion = () => {
         if (question_id) {
             useHttpMethod.get(`/admin/question/fetch?question_id=${question_id}`).then(res => {
                 if (res.statusCode == 200) {
-                    setQuestionData({...res.data})
+                    setQuestionData({ ...res.data })
                 } else {
                     alert(res.message)
                 }
@@ -53,6 +51,7 @@ const AddOrEditQuestion = () => {
         setDialogQuestionDataOpen(false);
         // setSelectionType(null);
     };
+    console.log("asdasdasd", questionData)
 
     const updateQuestion = () => {
         const url = question_id ? '/admin/question/update' : '/admin/question/create'
@@ -79,7 +78,56 @@ const AddOrEditQuestion = () => {
                     ['clean'],
                     ['formula']
                 ],
-            }
+                handlers: {
+                    image: function () {
+                        const input = document.createElement('input');
+                        input.setAttribute('type', 'file');
+                        input.setAttribute('accept', 'image/*');
+                        input.click();
+
+                        input.onchange = async () => {
+                            const file = input.files[0];
+                            const formData = new FormData();
+                            formData.append('image', file);
+
+                            if (!file) {
+                                console.log("no file")
+                            } else {
+                                console.log("type filuas", file.type)
+                            }
+
+                            const fileName = file.name;
+                            const data = await useHttpMethod.get(`/admin/get-presigned-url?fileType=questionImage&fileName=${fileName}`)
+
+                            const preSignedURL = data.data.preSignedURL;
+                            const upload = await fetch(preSignedURL, {
+                                method: 'PUT',
+                                body: file,
+                                headers: {
+                                    "Content-Type": file.type
+                                }
+                            });
+
+                            const imageUrl = data.data.filePath;
+
+                            const editor = this.quill;
+                            const range = editor.getSelection(true);
+                            if (range) {
+                                editor.insertEmbed(range.index, 'image', imageUrl);
+                            } else {
+                                editor.insertEmbed(editor.getLength(), 'image', imageUrl);
+                            }
+
+                            // clear
+                            input.value = '';
+                        };
+                    }
+                }
+            },
+            imageResize: {
+                parchment: Quill.import("parchment"), // Fixes errors in some cases
+                modules: ["Resize", "DisplaySize"]
+            },
         }
     }, []);
 
@@ -257,6 +305,7 @@ const AddOrEditQuestion = () => {
         </>
     );
 };
+
 
 const optionLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
 const questionDataFeilds = {
