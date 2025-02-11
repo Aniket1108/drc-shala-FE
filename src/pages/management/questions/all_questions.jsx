@@ -1,3 +1,7 @@
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
+window.katex = katex;
+
 import {
     Divider, Paper, TablePagination, Pagination, Box, Typography, Button
 } from '@mui/material';
@@ -21,6 +25,8 @@ const UserTable = ({ }) => {
     });
 
     const [allQuestions, setAllQuestions] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
+    const [refresh, setRefresh] = useState(false)
 
     const handleChangePage = (_event, newPage) => {
         setPage(newPage);
@@ -41,11 +47,12 @@ const UserTable = ({ }) => {
         useHttpMethod.post('/admin/questions/list', reqPayload).then(res => {
             if (res.statusCode == 200) {
                 setAllQuestions(res.data.result)
+                setTotalCount(res.data.totalCount)
             } else {
                 alert(res.message)
             }
         });
-    }, [activeFilters, page])
+    }, [activeFilters, page, refresh])
 
     return (
         <>
@@ -80,6 +87,7 @@ const UserTable = ({ }) => {
 
                 <QuestionsStack
                     allQuestions={allQuestions}
+                    setRefresh={setRefresh}
                 />
 
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -88,7 +96,7 @@ const UserTable = ({ }) => {
                         sx={{
                             mt: 2
                         }}
-                        count={10}
+                        count={Math.ceil(totalCount / 10)}
                         page={page}
                         onChange={handleChangePage}
                     />

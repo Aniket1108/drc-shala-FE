@@ -195,7 +195,7 @@ const AddOrEditQuestion = () => {
                 {
                     questionData?.user_input_answer ? null : (
                         questionData?.question &&
-                        <Box sx={{ mt: 1 }}>
+                        <Box sx={{ mt: 1, mb: 3 }}>
                             {optionLabels.map((label, index) => {
                                 if (index > 0 && !questionData[`option_${optionLabels[index - 1]}`]) return null;
                                 return (
@@ -263,6 +263,19 @@ const AddOrEditQuestion = () => {
                 }
 
                 {
+                    questionData?.answer &&
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="Multiline"
+                        multiline
+                        fullWidth
+                        rows={4}
+                        onChange={(event) => setQuestionData({ ...questionData, explanation: event.target.value })}
+                        defaultValue={questionData?.explanation || "Write explanation ..."}
+                    />
+                }
+
+                {
                     <Box sx={{
                         mt: 5,
                         display: 'flex',
@@ -323,17 +336,18 @@ const questionDataFeilds = {
     option_F: '',
     user_input_answer: false,
     answer: '',
-    marks: '4'
+    marks: '4',
+    explanation: ''
 }
 
 const StyledReactQuill = styled(ReactQuill)({
     '& .ql-container': {
-        height: '200px',
+        height: '250px',
         border: 'none',
         boxShadow: 'none',
     },
     '& .ql-editor': {
-        minHeight: '150px',
+        minHeight: '250px',
     },
     '& .ql-tooltip': {
         left: '0 !important',
