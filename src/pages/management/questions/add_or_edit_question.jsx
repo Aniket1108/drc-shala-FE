@@ -12,7 +12,7 @@ window.katex = katex;
 
 Quill.register('modules/imageResize', ImageResize);
 
-import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Grid, Paper, Switch, TextField, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogTitle, Divider, Grid, Paper, Switch, TextField, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import MasterData from './question_actions_components/MasterData';
@@ -266,7 +266,7 @@ const AddOrEditQuestion = () => {
                     questionData?.answer &&
                     <Paper variant="outlined" sx={{ p: 1, display: 'flex', flexDirection: 'column' }} >
                         <Typography variant="body1" color="text.secondary">
-                            Option {'explanation'} :-
+                            {'explanation'} :-
                             {
                                 questionData?.[`${'explanation'}`] &&
                                 <Button
@@ -275,7 +275,7 @@ const AddOrEditQuestion = () => {
                                     onClick={() => handleOpenQuestionDataDialog(`${'explanation'}`)}
                                     sx={{ ml: 2 }}
                                 >
-                                    Edit Option {'explanation'}
+                                    Edit {'explanation'}
                                 </Button>
                             }
                         </Typography>
@@ -291,9 +291,26 @@ const AddOrEditQuestion = () => {
                                 onClick={() => handleOpenQuestionDataDialog(`${'explanation'}`)}
                                 fullWidth
                             >
-                                Add Option {'explanation'}
+                                Add {'explanation'}
                             </Button>
                         )}
+
+                        <FormControl sx={{ width: "220px", mt: 3 }}>
+                            <InputLabel id="demo-simple-select-label">Difficulty level</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={questionData?.difficulty_level}
+                                label="Difficulty level"
+                                onChange={(event) => {
+                                    setQuestionData({ ...questionData, difficulty_level: event.target.value })
+                                }}
+                            >
+                                <MenuItem value={1}>Low</MenuItem>
+                                <MenuItem value={2}>Medium</MenuItem>
+                                <MenuItem value={3}>High</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Paper>
                 }
 
@@ -324,7 +341,7 @@ const AddOrEditQuestion = () => {
                     <StyledReactQuill
                         value={questionData[selectionType] || ''}
                         onChange={(value) => {
-                            if (value == '<p><br></p>' || value === '<p></p>') return setQuestionData({ ...questionData, [selectionType]: '' })
+                            if (value == '<p><br></p>' || value === '<p></p>') return setQuestionData({ ...questionData, [selectionType]: null })
                             setQuestionData({ ...questionData, [selectionType]: value })
                         }}
                         modules={modules}
@@ -350,16 +367,17 @@ const questionDataFeilds = {
     section: null,
     topic_id: '',
     question: '',
-    option_A: '',
-    option_B: '',
-    option_C: '',
-    option_D: '',
-    option_E: '',
-    option_F: '',
+    option_A: null,
+    option_B: null,
+    option_C: null,
+    option_D: null,
+    option_E: null,
+    option_F: null,
     user_input_answer: false,
     answer: '',
     marks: '4',
-    explanation: ''
+    explanation: null,
+    difficulty_level: 0
 }
 
 const StyledReactQuill = styled(ReactQuill)({
