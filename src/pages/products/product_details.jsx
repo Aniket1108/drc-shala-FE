@@ -22,7 +22,7 @@ const product_details = () => {
         "description": "Test Transaction",
         "image": "https://example.com/your_logo",
         "order_id": "",
-        "handler": function (response) {
+        "handler": async function (response) {
             alert(response.razorpay_order_id);
         },
         "prefill": {
@@ -38,7 +38,7 @@ const product_details = () => {
         try {
             options["amount"] = data.order_amount;
             options["order_id"] = data.razorpay_order_id
-            
+
             var rzp1 = new window.Razorpay(options);
 
             rzp1.open();
