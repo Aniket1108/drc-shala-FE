@@ -65,6 +65,7 @@ const product_details = () => {
     }
 
     const createOrder = (e, productId) => {
+        console.log("caread")
         useHttpMethod.post("/app/product/create-order", {
             "productId": productId
         }).then((res) => {
@@ -148,7 +149,7 @@ const product_details = () => {
                                     fullWidth
                                     size="large"
                                     startIcon={<ShoppingCartIcon />}
-                                    onClick={(e) => { createOrder(e, location.state.id) }}
+                                    onClick={(e) => { createOrder(e, product_id) }}
                                 >
                                     Buy Now
                                 </Button>

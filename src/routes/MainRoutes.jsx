@@ -19,7 +19,7 @@ const CourseDetails = Loadable(lazy(() => import('pages/course_details')));
 const Products = Loadable(lazy(() => import('pages/products/product')));
 const ProductDetails = Loadable(lazy(() => import('pages/products/product_details')));
 
-// const L
+const LearningsTestSeries = Loadable(lazy(() => import('pages/my_learnings/test_series')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -98,7 +98,7 @@ const MainRoutes = {
         },
         {
           path: 'test-series',
-          element: <Products />
+          element: <LearningsTestSeries />
         },
       ]
     },
