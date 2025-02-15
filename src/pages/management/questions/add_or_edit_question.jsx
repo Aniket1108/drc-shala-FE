@@ -30,6 +30,18 @@ const AddOrEditQuestion = () => {
     const [questionData, setQuestionData] = useState(questionDataFeilds);
     const [dialogQuestionDataOpen, setDialogQuestionDataOpen] = useState(false);
 
+    let storedFilters = localStorage.getItem('questionsStoredFilter');
+    storedFilters = storedFilters ? JSON.parse(storedFilters) : {};
+
+    useEffect(() => {
+        if (Object.keys(storedFilters).length > 0) {
+            setQuestionData((prevData) => ({
+                ...prevData,
+                ...storedFilters, // Merge stored filters with questionData
+            }));
+        }
+    }, [storedFilters]);
+
     useEffect(() => {
         if (question_id) {
             useHttpMethod.get(`/admin/question/fetch?question_id=${question_id}`).then(res => {

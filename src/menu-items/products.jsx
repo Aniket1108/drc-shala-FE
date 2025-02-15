@@ -13,6 +13,13 @@ const products = {
   type: 'group',
   children: [
     {
+      id: 'products',
+      title: "Products Configure",
+      type: 'item',
+      url: '/management/products',
+      icon: icons.disabledMenu,
+    },
+    {
       id: 'test-series',
       title: "Test Series",
       type: 'collapse',

@@ -64,9 +64,20 @@ const MasterData = ({
     };
 
     const handleSelection = (id) => {
+        let storedFilters = localStorage.getItem('questionsStoredFilter');
+        storedFilters = storedFilters ? JSON.parse(storedFilters) : {}; 
+        
+        if (typeof storedFilters !== "object" || storedFilters === null) {
+            storedFilters = {};
+        }
+        
+        storedFilters[selectionType] = id;
+        localStorage.setItem('questionsStoredFilter', JSON.stringify(storedFilters));
+
+
         if (selectionType == "stream_id" && id != 2) {
             setQuestionData(prev => ({
-                ...prev, 
+                ...prev,
                 section: null
             }))
         }

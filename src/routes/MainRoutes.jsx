@@ -13,6 +13,11 @@ const Overview = Loadable(lazy(() => import('pages/overview/overview')));
 const AllQuestions = Loadable(lazy(() => import('pages/management/questions/all_questions')));
 const AddOrEditQuestions = Loadable(lazy(() => import('pages/management/questions/add_or_edit_question')));
 const SamplePage = Loadable(lazy(() => import('pages/samplepage')));
+
+const AllProducts = Loadable(lazy(() => import('pages/management/products/product_list')));
+const ProductDetails = Loadable(lazy(() => import('pages/management/products/product_details')));
+
+
 // ==============================|| MAIN ROUTES ||============================== //
 
 const MainRoutes = {
@@ -47,6 +52,18 @@ const MainRoutes = {
         {
           path: 'question/:question_id',
           element: <AddOrEditQuestions />
+        },
+        {
+          path: 'products',
+          element: <AllProducts />
+        },
+        // {
+        //   path: 'add-product',
+        //   element: <ProductDetails />
+        // },
+        {
+          path: 'product-details/:product_id',
+          element: <ProductDetails />
         }
       ]
     },
