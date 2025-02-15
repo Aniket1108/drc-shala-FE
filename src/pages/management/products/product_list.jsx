@@ -38,6 +38,25 @@ function ProductList() {
 
     return (
         <>
+            <Box sx={{
+                p: 2,
+                mb: 2,
+                border: '1px solid divider',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+            }}>
+                <Typography>
+                    Product Management
+                </Typography>
+
+                <Button
+                    variant="contained"
+                    disabled
+                >
+                    Add Product
+                </Button>
+            </Box>
 
             <TableContainer component={Paper} elevation={2}>
                 <Table>

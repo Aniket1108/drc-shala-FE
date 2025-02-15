@@ -19,12 +19,14 @@ const product_details = () => {
     const [newFeature, setNewFeature] = useState('');
     const [newOffering, setNewOffering] = useState({ title: '', description: '' });
 
-    const [productDetails, setProductDetails] = useState([]);
+    const [productDetails, setProductDetails] = useState({});
+
+    console.log("prodasd", productDetails)
 
     useEffect(() => {
         useHttpMethod.get("/app/product/details?product_id=" + product_id).then((res) => {
             if (res.statusCode == 200) {
-                setProductDetails(res.data)
+                setProductDetails(getDetails(res.data))
             } else {
                 alert(res.message)
             }
@@ -32,70 +34,15 @@ const product_details = () => {
         setLoading(false);
     }, []);
 
-    const handleSave = async () => {
-        try {
-            // Here you would make your API call to update the product
-            // await updateProduct(product);
-            console.log('Saving product:', productDetails);
-            setIsEditing(false);
-        } catch (error) {
-            console.error('Error saving product:', error);
-        }
-    };
+    const updateProduct = () => {
+        productDetails['product_id'] = product_id;
+        useHttpMethod.post("/admin/product/update", productDetails).then((res) => {
+            setIsEditing(false)
+        })
+    }
 
-    const addSubject = () => {
-        if (newSubject.trim()) {
-            setProductDetails(prev => ({
-                ...prev,
-                subjects: [...prev.subjects, newSubject.trim()]
-            }));
-            setNewSubject('');
-        }
-    };
-
-    const removeSubject = (subjectToRemove) => {
-        setProductDetails(prev => ({
-            ...prev,
-            subjects: prev.subjects.filter(subject => subject !== subjectToRemove)
-        }));
-    };
-
-    const addFeature = () => {
-        if (newFeature.trim()) {
-            setProductDetails(prev => ({
-                ...prev,
-                features: [...prev.features, newFeature.trim()]
-            }));
-            setNewFeature('');
-        }
-    };
-
-    const removeFeature = (featureToRemove) => {
-        setProductDetails(prev => ({
-            ...prev,
-            features: prev.features.filter(feature => feature !== featureToRemove)
-        }));
-    };
-
-    const addOffering = () => {
-        if (newOffering.title.trim() && newOffering.description.trim()) {
-            setProductDetails(prev => ({
-                ...prev,
-                offerings: [...prev.offerings, { ...newOffering }]
-            }));
-            setNewOffering({ title: '', description: '' });
-        }
-    };
-
-    const removeOffering = (index) => {
-        setProductDetails(prev => ({
-            ...prev,
-            offerings: prev.offerings.filter((_, i) => i !== index)
-        }));
-    };
     return (
         <>
-
             <Box sx={{
                 p: 2,
                 mb: 2,
@@ -108,26 +55,13 @@ const product_details = () => {
                     Product Management
                 </Typography>
 
-                <div>
-                    <Button
-                        variant="contained"
-                        startIcon={isEditing ? <DocumentText /> : <Edit2 />}
-                        onClick={() => isEditing ? handleSave() : setIsEditing(true)}
-                    >
-                        {isEditing ? 'Save Changes' : 'Edit Product'}
-                    </Button>
-                    {
-                        isEditing &&
-                        < Button
-                            sx={{ ml: 1 }}
-                            variant="contained"
-                            startIcon={isEditing ? <DocumentText /> : <Edit2 />}
-                            onClick={() => setIsEditing(false)}
-                        >
-                            Cancel
-                        </Button>
-                    }
-                </div>
+                <Button
+                    variant="contained"
+                    startIcon={isEditing ? <DocumentText /> : <Edit2 />}
+                    onClick={() => isEditing ? updateProduct() : setIsEditing(true)}
+                >
+                    {isEditing ? 'Save Changes' : 'Edit Product'}
+                </Button>
             </Box>
             <Paper elevation={3} sx={{ p: 4, mb: 4 }}>
 
@@ -136,14 +70,14 @@ const product_details = () => {
                         <TextField
                             fullWidth
                             label="Title"
-                            value={productDetails.details.title}
+                            value={productDetails.title}
                             onChange={(e) => setProductDetails(prev => ({ ...prev, title: e.target.value }))}
                             sx={{ mb: 2 }}
                         />
                         <TextField
                             fullWidth
                             label="Description"
-                            value={productDetails.details.description}
+                            value={productDetails.description}
                             onChange={(e) => setProductDetails(prev => ({ ...prev, description: e.target.value }))}
                             multiline
                             rows={2}
@@ -151,9 +85,9 @@ const product_details = () => {
                     </Box>
                 ) : (
                     <>
-                        <Typography variant="h5" gutterBottom>{productDetails?.details?.title}</Typography>
+                        <Typography variant="h5" gutterBottom>{productDetails?.title}</Typography>
                         <Typography variant="subtitle1" color="text.secondary" paragraph>
-                            {productDetails?.details?.description}
+                            {productDetails?.description}
                         </Typography>
                     </>
                 )}
@@ -163,13 +97,18 @@ const product_details = () => {
                         <Book1 size={24} /> Subjects Included
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 2 }}>
-                        {productDetails?.details?.subjects.map((subject) => (
+                        {productDetails?.subjects?.map((subject) => (
                             <Chip
                                 key={subject}
                                 label={subject}
                                 color="secondary"
                                 variant="outlined"
-                                onDelete={isEditing ? () => removeSubject(subject) : undefined}
+                                onDelete={isEditing ? () => {
+                                    setProductDetails(prev => ({
+                                        ...prev,
+                                        subjects: prev.subjects.filter(remove => remove !== subject)
+                                    }));
+                                } : undefined}
                             />
                         ))}
                     </Box>
@@ -181,7 +120,15 @@ const product_details = () => {
                                 value={newSubject}
                                 onChange={(e) => setNewSubject(e.target.value)}
                             />
-                            <Button startIcon={<Add size={20} />} onClick={addSubject}>
+                            <Button startIcon={<Add size={20} />} onClick={() => {
+                                if (newSubject.trim()) {
+                                    setProductDetails(prev => ({
+                                        ...prev,
+                                        subjects: [...prev.subjects, newSubject.trim()]
+                                    }));
+                                    setNewSubject('');
+                                }
+                            }}>
                                 Add
                             </Button>
                         </Box>
@@ -193,13 +140,18 @@ const product_details = () => {
                         <Book1 size={24} /> Features
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 2 }}>
-                        {productDetails?.details?.features.map((feature) => (
+                        {productDetails?.features?.map((feature) => (
                             <Chip
                                 key={feature}
                                 label={feature}
                                 color="secondary"
                                 variant="outlined"
-                                onDelete={isEditing ? () => removeFeature(feature) : undefined}
+                                onDelete={isEditing ? () => {
+                                    setProductDetails(prev => ({
+                                        ...prev,
+                                        features: prev.features.filter(remove => remove !== feature)
+                                    }));
+                                } : undefined}
                             />
                         ))}
                     </Box>
@@ -211,7 +163,15 @@ const product_details = () => {
                                 value={newFeature}
                                 onChange={(e) => setNewFeature(e.target.value)}
                             />
-                            <Button startIcon={<Add size={20} />} onClick={addFeature}>
+                            <Button startIcon={<Add size={20} />} onClick={() => {
+                                if (newFeature.trim()) {
+                                    setProductDetails(prev => ({
+                                        ...prev,
+                                        features: [...prev.features, newFeature.trim()]
+                                    }));
+                                    setNewFeature('');
+                                }
+                            }}>
                                 Add
                             </Button>
                         </Box>
@@ -223,7 +183,7 @@ const product_details = () => {
                         <Award size={24} /> What you'll get
                     </Typography>
                     <List>
-                        {productDetails?.details?.offerings.map((offering, index) => (
+                        {productDetails?.offerings?.map((offering, index) => (
                             <ListItem
                                 key={index}
                                 alignItems="flex-start"
@@ -234,8 +194,13 @@ const product_details = () => {
                                         {isEditing && (
                                             <IconButton
                                                 size="small"
-                                                onClick={() => removeOffering(index)}
-                                                sx={{ position: 'absolute', right: 8, top: 8 }}
+                                                onClick={() => {
+                                                    setProductDetails(prev => ({
+                                                        ...prev,
+                                                        offerings: prev.offerings.filter((_, i) => i !== index)
+                                                    }));
+                                                }}
+                                                sx={{ position: 'absolute', right: 0, top: 0, p: 2 }}
                                             >
                                                 X
                                             </IconButton>
@@ -255,7 +220,7 @@ const product_details = () => {
                                                                 newOfferings[index].title = e.target.value;
                                                                 setProductDetails(prev => ({ ...prev, offerings: newOfferings }));
                                                             }}
-                                                            sx={{ mb: 1 }}
+                                                            sx={{ mb: 1, mt: 2 }}
                                                         />
                                                         <TextField
                                                             fullWidth
@@ -308,7 +273,15 @@ const product_details = () => {
                                 rows={2}
                                 sx={{ mb: 1 }}
                             />
-                            <Button startIcon={<Add size={20} />} onClick={addOffering}>
+                            <Button startIcon={<Add size={20} />} onClick={() => {
+                                if (newOffering.title.trim() && newOffering.description.trim()) {
+                                    setProductDetails(prev => ({
+                                        ...prev,
+                                        offerings: [...prev.offerings, { ...newOffering }]
+                                    }));
+                                    setNewOffering({ title: '', description: '' });
+                                }
+                            }}>
                                 Add Offering
                             </Button>
                         </Box>
@@ -318,6 +291,17 @@ const product_details = () => {
 
         </>
     )
+}
+
+const getDetails = (data) => {
+    const details = {
+        title: data?.details?.title || '',
+        description: data?.details?.description || '',
+        subjects: data?.details?.subjects || [],
+        features: data?.details?.features || [],
+        offerings: data?.details?.offerings || [],
+    };
+    return details;
 }
 
 export default product_details
