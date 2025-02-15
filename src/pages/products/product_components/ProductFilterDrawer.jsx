@@ -75,13 +75,13 @@ export default function ProductFilterDrawer({ type, filter, initialState, handle
   return (
     <Drawer
       sx={{
-        width: container && matchLG ? 240 : 320,
+        width: container && matchLG ? 240 : 280,
         flexShrink: 0,
         zIndex: { xs: 1200, lg: 0 },
         mr: openFilterDrawer && !matchDownLG ? 2.5 : 0,
         '& .MuiDrawer-paper': {
           height: matchDownLG ? '100%' : 'auto',
-          width: container && matchLG ? 240 : 320,
+          width: container && matchLG ? 240 : 280,
           boxSizing: 'border-box',
           position: 'relative',
           boxShadow: 'none'

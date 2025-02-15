@@ -1,10 +1,4 @@
-import { Fatrows, Bill, Profile2User } from 'iconsax-react';
-
-const icons = {
-  questions: Fatrows,
-  users: Profile2User,
-  invoice: Bill,
-};
+import { Bill, FolderOpen } from 'iconsax-react';
 
 // ==============================|| MENU ITEMS - products ||============================== //
 
@@ -18,14 +12,20 @@ const products = {
       title: "Courses",
       type: 'item',
       url: '/products/courses',
-      icon: icons.users,
+      icon: FolderOpen,
+      disabled: true,
+      chip: {
+        label: 'Coming soon',
+        color: 'warning',
+        size: 'small'
+      }
     },
     {
       id: 'test-series',
       title: "Test Series",
       type: 'item',
       url: '/products/test-series',
-      icon: icons.invoice,
+      icon: Bill,
     }
   ]
 };

@@ -1,10 +1,4 @@
-import { Fatrows, Bill, Profile2User } from 'iconsax-react';
-
-const icons = {
-    questions: Fatrows,
-    users: Profile2User,
-    invoice: Bill,
-};
+import { PenAdd, Award } from 'iconsax-react';
 
 // ==============================|| MENU ITEMS - myLearnings ||============================== //
 
@@ -13,19 +7,25 @@ const myLearnings = {
     title: "My Learnings",
     type: 'group',
     children: [
-        {
-            id: 'my-courses',
-            title: "My Courses",
-            type: 'item',
-            url: '/users/list',
-            icon: icons.users,
-        },
+        // {
+        //     id: 'my-courses',
+        //     title: "My Courses",
+        //     type: 'item',
+        //     url: '/learnings/courses',
+        //     icon: Award,
+        //     disabled: true,
+        //     chip: {
+        //         label: 'Coming soon',
+        //         color: 'warning',
+        //         size: 'small'
+        //     }
+        // },
         {
             id: 'test-series',
             title: "My Test Series",
             type: 'item',
-            url: '/test-series/list',
-            icon: icons.invoice,
+            url: '/learnings/test-series',
+            icon: PenAdd,
         }
     ]
 };

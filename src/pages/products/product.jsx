@@ -61,10 +61,13 @@ export default function ProductsPage({ type, isUser }) {
 
     const [openFilterDrawer, setOpenFilterDrawer] = useState(true);
 
+    const productIds = {
+        "course": 1,
+        "test-series": 2
+    }
+
     useEffect(() => {
-
-
-        useHttpMethod.get("/app/products/list").then((res) => {
+        useHttpMethod.get("/app/products/list?product_type_id=" + productIds[type]).then((res) => {
             if (res.statusCode == 200) {
                 setProducts(res.data.result)
             } else {
@@ -72,7 +75,7 @@ export default function ProductsPage({ type, isUser }) {
             }
         })
         setLoading(false);
-    }, [filter]);
+    }, [type, filter]);
 
     const handleDrawerOpen = () => {
         setOpenFilterDrawer((prevState) => !prevState);
@@ -92,13 +95,13 @@ export default function ProductsPage({ type, isUser }) {
             <Grid key={index} item xs={12} sm={6} md={4}>
                 <ProductCard
                     id={product.product_id}
-                    name={product?.details?.title}
-                    type={product.product_type}
+                    name={product?.title}
+                    type={type}
                     stream={product.stream}
                     standard={product.standard}
                     offerPrice={product.product_price}
                     salePrice={product.product_offer_price}
-                    features={product?.details?.features}
+                    features={product?.features}
                     isUser={isUser}
                     productDetails={product?.details}
                 />

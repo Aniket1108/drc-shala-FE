@@ -19,6 +19,8 @@ const CourseDetails = Loadable(lazy(() => import('pages/course_details')));
 const Products = Loadable(lazy(() => import('pages/products/product')));
 const ProductDetails = Loadable(lazy(() => import('pages/products/product_details')));
 
+// const L
+
 // ==============================|| MAIN ROUTES ||============================== //
 
 const MainRoutes = {
@@ -73,7 +75,7 @@ const MainRoutes = {
           element: <Products type={"course"} isUser={true} />
         },
         {
-          path: '/products/course/:course',
+          path: '/products/course/:course/:product_id',
           element: <ProductDetails />
         },
         {
@@ -81,8 +83,22 @@ const MainRoutes = {
           element: <Products type={"test-series"} isUser={true} />
         },
         {
-          path: '/products/test-series/:course',
+          path: '/products/test-series/:course/:product_id',
           element: <ProductDetails />
+        },
+      ]
+    },
+    {
+      path: '/learnings',
+      element: <DashboardLayout />,
+      children: [
+        {
+          path: 'courses',
+          element: <Products />
+        },
+        {
+          path: 'test-series',
+          element: <Products />
         },
       ]
     },

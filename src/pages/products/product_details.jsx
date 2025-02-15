@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from 'react-router-dom';
 
 import { Box, Grid, Typography, Button, Card, CardContent, List, ListItem, ListItemText, Divider, Container, Avatar, Chip } from "@mui/material";
@@ -10,7 +10,19 @@ import { useHttp } from 'src/utils/api_intercepters.js';
 const product_details = () => {
     const useHttpMethod = useHttp()
     const location = useLocation();
-    const courseDetails = location.state.productDetails;
+
+    const { product_id } = useParams();
+    const [courseDetails, setCourseDetails] = useState({})
+
+    useEffect(() => {
+        useHttpMethod.get("/app/product/details?product_id=" + product_id).then((res) => {
+            if (res.statusCode == 200) {
+                setCourseDetails(res.data)
+            } else {
+                alert(res.message)
+            }
+        })
+    }, [])
 
     const userData = JSON.parse(localStorage.getItem('userData'));
 
@@ -63,103 +75,89 @@ const product_details = () => {
     }
 
     return (
-        <Container sx={{ padding: 4, marginTop: 8 }}>
-            <Grid container spacing={4}>
-                {/* Left Side: Offering Details */}
-                <Grid item xs={12} md={8}>
-                    <Box>
-                        <Typography variant="h3" gutterBottom color="primary" fontWeight="bold">
-                            {courseDetails.title}
-                        </Typography>
-                        <Typography variant="subtitle1" gutterBottom color="text.secondary">
-                            {courseDetails.description}
-                        </Typography>
-                    </Box>
-
-                    <Box mt={4}>
-                        <Typography variant="h6" gutterBottom color="text.primary">
-                            Standards Available:
-                        </Typography>
+        <>
+            <Container sx={{ padding: 4 }}>
+                <Grid container spacing={4}>
+                    {/* Left Side: Offering Details */}
+                    <Grid item xs={12} md={8}>
                         <Box>
-                            {courseDetails.standards.map((standard, index) => (
-                                <Chip
-                                    key={index}
-                                    label={standard}
-                                    color="primary"
-                                    sx={{ marginRight: 1, marginBottom: 1 }}
-                                />
-                            ))}
+                            <Typography variant="h3" gutterBottom color="primary" fontWeight="bold">
+                                {courseDetails?.details?.title}
+                            </Typography>
+                            <Typography variant="subtitle1" gutterBottom color="text.secondary">
+                                {courseDetails?.details?.description}
+                            </Typography>
                         </Box>
-                    </Box>
 
-                    <Box mt={4}>
-                        <Typography variant="h6" gutterBottom color="text.primary">
-                            Subjects Included:
-                        </Typography>
-                        <Box>
-                            {courseDetails.subjects.map((subject, index) => (
-                                <Chip
-                                    key={index}
-                                    label={subject}
-                                    variant="outlined"
-                                    sx={{ marginRight: 1, marginBottom: 1 }}
-                                />
-                            ))}
-                        </Box>
-                    </Box>
-
-                    <Box mt={4}>
-                        <Typography variant="h6" gutterBottom color="text.primary">
-                            What you'll get:
-                        </Typography>
-                        <List>
-                            {courseDetails.offerings.map((offering, index) => (
-                                <ListItem key={index} alignItems="flex-start">
-                                    <Avatar sx={{ bgcolor: "primary.main", marginRight: 2 }}>
-                                        <LocalOfferIcon />
-                                    </Avatar>
-                                    <ListItemText
-                                        primary={<Typography variant="subtitle1" fontWeight="bold">{offering.title}</Typography>}
-                                        secondary={<Typography variant="body2" color="text.secondary">{offering.description}</Typography>}
+                        <Box mt={4}>
+                            <Typography variant="h6" gutterBottom color="text.primary">
+                                Subjects Included:
+                            </Typography>
+                            <Box>
+                                {courseDetails?.details?.subjects?.map((subject, index) => (
+                                    <Chip
+                                        key={index}
+                                        label={subject}
+                                        variant="outlined"
+                                        sx={{ marginRight: 1, marginBottom: 1 }}
                                     />
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Box>
-                </Grid>
+                                ))}
+                            </Box>
+                        </Box>
 
-                {/* Right Side: Checkout */}
-                <Grid item xs={12} md={4}>
-                    <Card elevation={4} sx={{ borderRadius: 2 }}>
-                        <CardContent>
-                            <Typography variant="h5" gutterBottom color="text.primary">
-                                Price Details
+                        <Box mt={4}>
+                            <Typography variant="h6" gutterBottom color="text.primary">
+                                What you'll get:
                             </Typography>
-                            <Typography
-                                variant="body1"
-                                sx={{ textDecoration: "line-through", color: "gray" }}
-                            >
-                                ₹{courseDetails.price}
-                            </Typography>
-                            <Typography variant="h3" color="secondary" fontWeight="bold" gutterBottom>
-                                ₹{courseDetails.discountedPrice}
-                            </Typography>
-                            <Divider sx={{ marginY: 2 }} />
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                fullWidth
-                                size="large"
-                                startIcon={<ShoppingCartIcon />}
-                                onClick={(e) => { createOrder(e, location.state.id) }}
-                            >
-                                Buy Now
-                            </Button>
-                        </CardContent>
-                    </Card>
+                            <List>
+                                {courseDetails?.details?.offerings?.map((offering, index) => (
+                                    <ListItem key={index} alignItems="flex-start">
+                                        <Avatar sx={{ bgcolor: "primary.main", marginRight: 2 }}>
+                                            <LocalOfferIcon />
+                                        </Avatar>
+                                        <ListItemText
+                                            primary={<Typography variant="subtitle1" fontWeight="bold">{offering.title}</Typography>}
+                                            secondary={<Typography variant="body2" color="text.secondary">{offering.description}</Typography>}
+                                        />
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Box>
+                    </Grid>
+
+                    {/* Right Side: Checkout */}
+                    <Grid item xs={12} md={4}>
+                        <Card elevation={4} sx={{ borderRadius: 2 }}>
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom color="text.primary">
+                                    Price Details
+                                </Typography>
+                                <Typography
+                                    variant="body1"
+                                    sx={{ textDecoration: "line-through", color: "gray" }}
+                                >
+                                    ₹{courseDetails?.product_offer_price}
+                                </Typography>
+                                <Typography variant="h3" color="secondary" fontWeight="bold" gutterBottom>
+                                    ₹{courseDetails?.product_price}
+                                </Typography>
+                                <Divider sx={{ marginY: 2 }} />
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    fullWidth
+                                    size="large"
+                                    startIcon={<ShoppingCartIcon />}
+                                    onClick={(e) => { createOrder(e, location.state.id) }}
+                                >
+                                    Buy Now
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </>
     );
 };
 

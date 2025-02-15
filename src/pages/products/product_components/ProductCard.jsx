@@ -43,7 +43,8 @@ export default function ProductCard({ id, name, salePrice, offerPrice, type, fea
         height: "280px",
         display: "flex",
         flexDirection: "column",
-        padding: "15px"
+        padding: "15px",
+        maxWidth: '380px'
       }}
     >
       <Stack>
@@ -85,9 +86,9 @@ export default function ProductCard({ id, name, salePrice, offerPrice, type, fea
           console.log("id", id)
           isUser
             ?
-            navigate(`/products/${type?.toLowerCase()}/${stream?.toLowerCase()}`, { state: { id, productDetails } })
+            navigate(`/products/${type?.toLowerCase()}/${stream?.toLowerCase()}/${id}`)
             :
-            navigate(`/${type?.toLowerCase()}/${stream?.toLowerCase()}`, { state: { id, productDetails } })
+            navigate(`/${type?.toLowerCase()}/${stream?.toLowerCase()}/${id}`)
         }}>
           View Details
         </Button>
