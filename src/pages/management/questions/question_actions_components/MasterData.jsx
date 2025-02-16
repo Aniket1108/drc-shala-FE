@@ -182,6 +182,8 @@ const selectionOptions = {
         2: 'Chemistry',
         3: 'Mathematics',
         4: 'Biology',
+        5: 'Botany',
+        6: 'Zoology'
     },
     section: {
         A: 'Section A',
