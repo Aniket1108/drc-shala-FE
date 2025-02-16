@@ -9,34 +9,34 @@ const FeaturesSection = () => {
     const features = [
         {
             title: 'Courses',
-            description: 'Explore courses for grades 6-10 and competitive exams like NEET, JEE, and MHT CET.',
+            description: 'Unlock your potential with our NEET, JEE, & MHT-CET courses, plus Foundation programs for classes 8-10 to build a strong academic future! 🚀',
             buttonText: 'View Courses',
             link: '/courses',
-            icon: <SchoolIcon sx={{ fontSize: 50, color: 'white' }} />,
+            icon: <SchoolIcon sx={{ fontSize: 60, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Purple-Blue
         },
         {
             title: 'Test Series',
-            description: 'Attempt test series with detailed performance reports and expert-designed papers.',
+            description: 'Prepare for NEET, JEE, and MHT-CET with Drcshala test series, designed for real exam experience, detailed performance analysis, and expert doubt-solving!.',
             buttonText: 'Take a Test',
             link: '/test-series',
-            icon: <AssessmentIcon sx={{ fontSize: 50, color: 'white' }} />,
+            icon: <AssessmentIcon sx={{ fontSize: 60, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff758c, #ff7eb3)', // Pink-Red
         },
         {
             title: 'Study Materials',
-            description: 'Access curated PDFs, notes, and resources for effective preparation.',
+            description: 'Access expert-curated study materials for NEET, JEE and MHT-CET, designed to simplify concepts, enhance understanding, and boost exam readiness! 🚀',
             buttonText: 'Explore Materials',
-            link: '/study-materials',
-            icon: <MenuBookIcon sx={{ fontSize: 50, color: 'white' }} />,
+            link: '',
+            icon: <MenuBookIcon sx={{ fontSize: 60, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #43cea2, #185a9d)', // Green-Blue
         },
         {
             title: 'Book a Demo',
-            description: 'Schedule a demo session to experience the platform features.',
+            description: 'Experience the Drcshala difference! Book a free demo class today and take the first step towards NEET,JEE, and MHT-CET success! 🚀',
             buttonText: 'Book Now',
             link: '/contact-us',
-            icon: <EventIcon sx={{ fontSize: 50, color: 'white' }} />,
+            icon: <EventIcon sx={{ fontSize: 60, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff9966, #ff5e62)', // Orange-Red
         },
     ];
@@ -56,7 +56,7 @@ const FeaturesSection = () => {
                         overflowX: 'auto',
                         gap: '1.5rem',
                         marginTop: '2rem',
-                        paddingBottom: '1rem',
+                        paddingBottom: '1.5rem',
                         '&::-webkit-scrollbar': {
                             height: '8px',
                         },

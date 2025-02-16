@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from 'react-router-dom';
 
-import { Box, Grid, Typography, Button, Card, CardContent, List, ListItem, ListItemText, Divider, Container, Avatar, Chip } from "@mui/material";
+import { Box, Grid, Typography, Button, Card, CardContent, List, ListItem, ListItemText, Divider, Container, Avatar, Chip, Radio } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
@@ -75,9 +75,10 @@ const product_details = () => {
         })
     }
 
+
     return (
         <>
-            <Container sx={{ padding: 4 }}>
+            <Container sx={{ padding: 2, mt: "120px" }}>
                 <Grid container spacing={4}>
                     {/* Left Side: Offering Details */}
                     <Grid item xs={12} md={8}>
@@ -127,9 +128,9 @@ const product_details = () => {
                     </Grid>
 
                     {/* Right Side: Checkout */}
-                    <Grid item xs={12} md={4}>
-                        <Card elevation={4} sx={{ borderRadius: 2 }}>
-                            <CardContent>
+                    <Grid item xs={12} md={4} sx={{ p: 0 }}>
+                        <Card elevation={4} sx={{ borderRadius: 2 }} >
+                            <CardContent sx={{ p: "15px" }}>
                                 <Typography variant="h5" gutterBottom color="text.primary">
                                     Price Details
                                 </Typography>
@@ -142,6 +143,20 @@ const product_details = () => {
                                 <Typography variant="h3" color="secondary" fontWeight="bold" gutterBottom>
                                     ₹{courseDetails?.product_price}
                                 </Typography>
+
+                                <Box sx={{
+                                    display: 'flex',
+                                    alignItems: 'center'
+                                }}>
+
+                                    <Radio
+                                        size="small"
+                                        checked
+                                    />
+
+                                    <Typography>{courseDetails?.start_time && formatDate(courseDetails?.start_time)}</Typography>
+                                </Box>
+
                                 <Divider sx={{ marginY: 2 }} />
                                 <Button
                                     variant="contained"
@@ -149,9 +164,9 @@ const product_details = () => {
                                     fullWidth
                                     size="large"
                                     startIcon={<ShoppingCartIcon />}
-                                    onClick={(e) => { createOrder(e, product_id) }}
+                                // onClick={(e) => { createOrder(e, product_id) }}
                                 >
-                                    Buy Now
+                                    Coming soon ...
                                 </Button>
                             </CardContent>
                         </Card>
@@ -160,6 +175,13 @@ const product_details = () => {
             </Container>
         </>
     );
+};
+
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate();
+    const suffix = ['th', 'st', 'nd', 'rd'][(day % 10 < 4 && (day % 100 < 10 || day % 100 > 20)) ? day % 10 : 0];
+    return `${day}${suffix} ${date.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' })} ${date.getUTCFullYear()}`;
 };
 
 export default product_details;

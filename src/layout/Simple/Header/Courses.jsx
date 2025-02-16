@@ -42,7 +42,7 @@ const Courses = () => {
                 Courses
             </Typography>
 
-            <Menu
+            {/* <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
                 open={open}
@@ -99,6 +99,18 @@ const Courses = () => {
                         <ArrowForwardIcon size="small" />
                     </ListItemIcon>
                 </MenuItem>
+            </Menu> */}
+
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                }}
+            >
+                <MenuItem onClick={handleClose}>Comming Soon ...</MenuItem>
             </Menu>
         </Box>
     )

@@ -53,7 +53,7 @@ const MainRoutes = {
           element: <Courses type={"course"} />
         },
         {
-          path: '/course/:course',
+          path: '/course/:course/:product_id',
           element: <CourseDetails type={"course"} />
         },
         {
@@ -61,7 +61,7 @@ const MainRoutes = {
           element: <Courses type={"test-series"} />
         },
         {
-          path: '/test-series/:course',
+          path: '/test-series/:course/:product_id',
           element: <CourseDetails type={"test-series"} />
         },
       ]

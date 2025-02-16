@@ -33,7 +33,7 @@ function Item({ item }) {
   return (
     <MainCard sx={{ width: { xs: '300px', md: '420px' }, cursor: 'pointer', my: 0.2, mx: 1.5 }}>
       <Stack direction="row" alignItems="flex-start" spacing={2}>
-        <Avatar alt="Avatar" size="lg" src={item.image}></Avatar>
+        <Avatar alt="Avatar" size="bg" src={item.image}></Avatar>
         <Stack>
           <Typography>{item.text}</Typography>
           <Typography>
@@ -57,22 +57,28 @@ export default function TestimonialPage() {
   const theme = useTheme();
   const items = [
     {
-      image: Avatar3,
+      image: Avatar7,
       text: '“The weekly Online practice tests were a great way to get familiar with the actual JEE exam and build my confidence. 😍“',
-      name: 'Shreya',
+      name: 'Shreya Nalawade',
       designation: 'Test Series'
     },
     {
-      image: Avatar4,
-      text: '“My experience with the Drcshala JEE course was fantastic! The course offers high-quality video lectures, well-designed study materials, DPPs, and a test series, making it stand out from other programs.“',
-      name: 'Aaradhya',
-      designation: 'Courses and Study Materials'
+      image: Avatar7,
+      text: '“My experience with the Drcshala MHT-CET course was fantastic! The course offers high-quality video lectures, well-designed study materials, DPPs, and a test series, making it stand out from other programs.“',
+      name: 'Aaradhya Patil',
+      designation: 'MHCET Courses'
     },
     {
-      image: Avatar7,
-      text: '“I enrolled in Drcshala’s online MHT-CET preparation course, and it was a wonderful experience. 😍 “',
-      name: 'Sagar',
-      designation: 'MHT-CET'
+      image: Avatar3,
+      text: '“I enrolled in Drcshala’s online NEET preparation course, and it was a wonderful experience. 😍 “',
+      name: 'Gopal Maher',
+      designation: 'NEET Course'
+    },
+    {
+      image: Avatar4,
+      text: '“Drcshala’s JEE online course has been a game-changer for me! The test series feels just like the real exam, and the doubt-solving sessions have greatly boosted my confidence.“',
+      name: 'Ram Narhade',
+      designation: 'JEE Course'
     }
   ];
   return (
@@ -94,7 +100,7 @@ export default function TestimonialPage() {
                 <Typography variant="h2">
                   They{' '}
                   <Typography variant="h2" component="span" sx={{ color: theme.palette.primary.main }}>
-                    love
+                    Love
                   </Typography>{' '}
                   Drcshala, Now your turn 😍
                 </Typography>
@@ -111,9 +117,7 @@ export default function TestimonialPage() {
                   delay: 0.4
                 }}
               >
-                <Typography>
-                  Some text.
-                </Typography>
+
               </motion.div>
             </Grid>
           </Grid>

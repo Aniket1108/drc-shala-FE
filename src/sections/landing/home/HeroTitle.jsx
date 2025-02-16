@@ -22,7 +22,7 @@ export default function HeroTitle() {
             <Typography
                 variant="h1"
                 sx={{
-                    fontSize: { xs: '1.825rem', sm: '2rem', md: '3.4375rem' },
+                    fontSize: { xs: '1.725rem', sm: '1.5rem', md: '3rem' },
                     fontWeight: 700,
                     lineHeight: 1.2,
                     mb: 3
@@ -43,7 +43,7 @@ export default function HeroTitle() {
                 >
                     Learn, Achived, Succeed
                 </Typography>{' '}
-                - with best in the business
+                -with Drcshala Coaching
             </Typography>
 
             <Typography
@@ -55,7 +55,7 @@ export default function HeroTitle() {
                     maxWidth: '90%'
                 }}
             >
-                Join India's leading educational platform for NEET, JEE & Foundation courses. Experience personalized learning like never before.
+                Join India's leading educational platform for NEET, JEE, MHT-CET & Foundation courses. Experience personalized learning like never before.
             </Typography>
         </Box>
     );

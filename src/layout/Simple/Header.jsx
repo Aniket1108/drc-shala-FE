@@ -167,7 +167,7 @@ export default function Header({ layout = 'landing', ...others }) {
           bgcolor: alpha(theme.palette.background.default, 0.1),
           backdropFilter: 'blur(8px)',
           color: theme.palette.text.primary,
-          boxShadow: 'none'
+          boxShadow: 'none',
         }}
       >
         <Container maxWidth="xl" disableGutters={matchDownMd}>
@@ -226,7 +226,7 @@ export default function Header({ layout = 'landing', ...others }) {
                   size="small"
                   variant="contained"
                   sx={{ ml: 1 }}
-                  onClick={() => { navigate("/login") }}
+                  // onClick={() => { navigate("/login") }}
                 >
                   Login
                 </Button>
@@ -258,7 +258,7 @@ export default function Header({ layout = 'landing', ...others }) {
                     <Button
                       variant='contained'
                       sx={{ ml: 3 }}
-                      onClick={() => { navigate("/login") }}
+                      // onClick={() => { navigate("/login") }}
                     >
                       Login
                     </Button>

@@ -9,21 +9,21 @@ const TestSeriesSection = () => {
     const streams = [
         {
             title: 'NEET',
-            description: 'Comprehensive test series designed for aspiring medical students. Practice biology, physics, and chemistry with detailed performance reports.',
+            description: 'Master Biology, Physics, and Chemistry with our comprehensive test series, designed to help aspiring medical students excel with detailed performance insights 📊.',
             icon: ScienceIcon,
             gradient: 'linear-gradient(135deg, #ff758c, #ff7eb3)', // Pink-Red
             link: '/test-series/neet',
         },
         {
             title: 'JEE',
-            description: 'Ace your engineering entrance exams with test series tailored for JEE Mains and Advanced. Includes practice for physics, chemistry, and mathematics.',
+            description: 'Ace your JEE Mains & Advanced with our tailored test series, featuring in-depth Physics, Chemistry, and Mathematics practice 🚀.',
             icon: EngineeringIcon,
             gradient: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Purple-Blue
             link: '/test-series/jee',
         },
         {
             title: 'MHT-CET',
-            description: 'Prepare for Maharashtra’s state-level CET with mock tests covering physics, chemistry, and mathematics/biology.',
+            description: 'Get exam-ready for MHT-CET with mock tests covering Physics, Chemistry, and Mathematics/Biology, designed to boost your performance 🎯📊.',
             icon: SchoolIcon,
             gradient: 'linear-gradient(135deg, #43cea2, #185a9d)', // Green-Blue
             link: '/test-series/mht-cet',
@@ -37,7 +37,7 @@ const TestSeriesSection = () => {
                     Test Series
                 </Typography>
                 <Typography variant="subtitle1" align="center" color="textSecondary" gutterBottom>
-                    Unlock your potential with our expertly designed test series tailored for your success.
+                    Unlock your potential with our expertly designed Test-Series tailored for your success.
                 </Typography>
                 <Box
                     sx={{

@@ -8,33 +8,34 @@ import ScienceIcon from '@mui/icons-material/Science';
 
 const CoursesSection = () => {
     const courses = [
-        {
-            title: 'Grades 6-10',
-            description: 'Build a strong foundation with expert-curated courses for middle and high school students.',
-            icon: <BookIcon sx={{ fontSize: 50, color: 'white' }} />,
-            gradient: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Purple-Blue
-            link: '/course/foundation',
-        },
+
         {
             title: 'NEET Preparation',
-            description: 'Comprehensive courses for medical aspirants, covering all key topics with expert guidance.',
+            description: '🚀Your NEET success starts here! Get expert-led courses, in-depth concept clarity, and strategic guidance to turn your medical dreams into reality. Practice. Improve. Succeed🩺📚.',
             icon: <ScienceIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff758c, #ff7eb3)', // Pink-Red
             link: '/course/neet',
         },
         {
             title: 'JEE Preparation',
-            description: 'Top-notch courses for aspiring engineers, focusing on physics, chemistry, and mathematics.',
+            description: '🚀Premier courses for aspiring engineers, covering Physics, Chemistry, and Mathematics, taught by the best faculty to ensure your success⚙️📚.',
             icon: <LaptopMacIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #43cea2, #185a9d)', // Green-Blue
             link: '/course/jee',
         },
         {
             title: 'MHT-CET Preparation',
-            description: 'Specialized courses for Maharashtra’s state-level CET, focusing on physics, chemistry, and mathematics/biology.',
+            description: '🚀Expert-designed courses for MHT-CET, covering Physics, Chemistry, and Mathematics/Biology, to help you excel in Maharashtra’s state-level exam💻📚.',
             icon: <SchoolIcon sx={{ fontSize: 50, color: 'white' }} />,
             gradient: 'linear-gradient(135deg, #ff9966, #ff5e62)', // Orange-Red
             link: '/course/mht-cet',
+        },
+        {
+            title: 'Foundation 8-10',
+            description: '🚀Build a strong foundation with expert-crafted courses designed to enhance learning, boost confidence, and ensure academic success🎯📚.',
+            icon: <BookIcon sx={{ fontSize: 50, color: 'white' }} />,
+            gradient: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Purple-Blue
+            link: '/course/foundation',
         },
     ];
 
@@ -45,9 +46,9 @@ const CoursesSection = () => {
                     Our Courses
                 </Typography>
                 <Typography variant="subtitle1" align="center" color="textSecondary" gutterBottom>
-                    Explore courses tailored to your learning journey.
+                    📚 Discover courses designed to fit your learning journey! 🚀
                 </Typography>
-                <Grid container spacing={6} sx={{ marginTop: '3rem' }}>
+                <Grid container spacing={6} sx={{ marginTop: '2rem' }}>
                     {courses.map((course, index) => (
                         <Grid
                             item
