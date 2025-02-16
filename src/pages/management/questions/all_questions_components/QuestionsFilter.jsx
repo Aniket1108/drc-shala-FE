@@ -187,7 +187,9 @@ const subjects = {
     1: 'Physics',
     2: 'Chemistry',
     3: 'Mathematics',
-    4: 'Biology'
+    4: 'Biology',
+    5: 'Botany',
+    6: 'Zoology'
 }
 
 export default QuestionsFilter

@@ -65,12 +65,12 @@ const MasterData = ({
 
     const handleSelection = (id) => {
         let storedFilters = localStorage.getItem('questionsStoredFilter');
-        storedFilters = storedFilters ? JSON.parse(storedFilters) : {}; 
-        
+        storedFilters = storedFilters ? JSON.parse(storedFilters) : {};
+
         if (typeof storedFilters !== "object" || storedFilters === null) {
             storedFilters = {};
         }
-        
+
         storedFilters[selectionType] = id;
         localStorage.setItem('questionsStoredFilter', JSON.stringify(storedFilters));
 
@@ -210,6 +210,64 @@ const data = {
                 "15": "Waves",
                 "16": "Circular Motion",
                 "17": "Rotational Motion"
+            },
+            "2": {
+                "34": "Some Basic Concepts of Chemistry",
+                "35": "Atomic Structure",
+                "36": "Periodic Table & Periodicity",
+                "37": "Chemical Bonding & Molecular Structure",
+                "38": "States of Matter",
+                "39": "Redox Reaction",
+                "40": "Chemical Thermodynamics",
+                "41": "Chemical Equilibrium",
+                "42": "Ionic Equilibrium",
+                "43": "S-Block( alkali and alkaline metals )",
+                "44": "P-Block elements ( Gr 13 & Gr 14 )",
+                "45": "General Organic Chemistry IUPAC & Nomenclature",
+                "46": "Hydrocarbon",
+                "47": "Principles Related to Practical Chemistry"
+            },
+            "3": {
+                "82": "Basic Mathematics",
+                "83": "Logarithm",
+                "84": "Quadratic Equation",
+                "85": "Trigonometric Ratios and Identities",
+                "86": "Sequence and Progression",
+                "87": "Trigonometric equation",
+                "88": "Solution of Triangle",
+                "89": "Determinant",
+                "90": "Straight line",
+                "91": "Circle",
+                "92": "Parabola",
+                "93": "Ellipse",
+                "94": "Hyperbola",
+                "95": "Binomial Theorem",
+                "96": "Permutation and Combination",
+                "97": "Set & Relation",
+                "98": "Function"
+            },
+            "5": {
+                "99": "Living World",
+                "100": "Biological Classification",
+                "101": "Plant Kingdom",
+                "102": "Morphology of Flowering Plants",
+                "103": "Anatomy of Flowering Plants",
+                "104": "Cell: The unit of life",
+                "105": "Cell Cycle and Cell Division",
+                "106": "Photosynthesis in Higher Plants",
+                "107": "Respiration in Plants",
+                "108": "Plant Growth and Development"
+            },
+            "6": {
+                "125": "Animal Kingdom",
+                "126": "Structural Organisation in Animals",
+                "127": "Biomolecules",
+                "128": "Breathing and Exchange of Gases",
+                "129": "Body Fluids and Circulation",
+                "130": "Excretory Products and Their Elimination",
+                "131": "Locomotion and Movement",
+                "132": "Neural control and co-ordination",
+                "133": "Chemical co-ordination and Integration"
             }
         },
         "7": {
@@ -229,6 +287,64 @@ const data = {
                 "30": "Nuclei",
                 "31": "Semiconductor Electronics: Material, Devices and Simple Circuits",
                 "32": "Communication System"
+            },
+            "2": {
+                "48": "Halogen Derivatives",
+                "49": "Alcohol, Phenol and Ether",
+                "50": "Aldehydes Ketones and Acids",
+                "51": "Amines",
+                "52": "Solid State",
+                "53": "Solution",
+                "54": "Electrochemistry",
+                "55": "Chemical Kinetics",
+                "56": "Co-ordination Chemistry",
+                "57": "Surface Chemistry",
+                "58": "General Principles and Processes of Isolation of Elements",
+                "59": "P-Block elements ( Group 15 & 16 )",
+                "60": "P-Block elements ( Group 17 & 18 )",
+                "61": "D & F Block",
+                "62": "Practical Organic Chemistry",
+                "63": "Biomolecules",
+                "64": "Polymer"
+            },
+            "3": {
+                "65": "Inverse Trigonometric Functions",
+                "66": "Limit",
+                "67": "Continuity",
+                "68": "Derivability",
+                "69": "Method of Differentiation",
+                "70": "Indefinite Integration",
+                "71": "Definite Integration",
+                "72": "Application of Derivatives",
+                "73": "Area under the Curve",
+                "74": "Differential Equations",
+                "75": "Vector",
+                "76": "Three Dimensional Geometry",
+                "77": "Complex Numbers",
+                "78": "Probability",
+                "79": "Mathematical logic",
+                "80": "Matrices",
+                "81": "Statistics"
+            },
+            "5": {
+                "109": "Sexual Reproduction in Flowering Plants",
+                "110": "Principles of Inheritance and Variation",
+                "111": "Molecular Basis of Inheritance",
+                "112": "Biotechnology: Principles and Processes",
+                "113": "Organisms and Populations",
+                "114": "Ecosystem",
+                "115": "Biodiversity and Conservation",
+                "116": "Transport in Plants & Mineral Nutrition",
+                "117": "Strategies of Enhancement in Food Production",
+                "118": "Environmental Issues"
+            },
+            "6": {
+                "119": "Human Reproduction",
+                "120": "Reproductive Health",
+                "121": "Evolution",
+                "122": "Human Health and Disease",
+                "123": "Microbes in Human Welfare",
+                "124": "Biotechnology and Its Applications"
             }
         }
     }
