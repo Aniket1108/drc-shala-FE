@@ -99,8 +99,8 @@ export default function ProductsPage({ type, isUser }) {
                     type={type}
                     stream={product.stream}
                     standard={product.standard}
-                    offerPrice={product.product_price}
-                    salePrice={product.product_offer_price}
+                    offerPrice={product.product_offer_price}
+                    salePrice={product.product_price}
                     features={product?.features}
                     isUser={isUser}
                     productDetails={product?.details}

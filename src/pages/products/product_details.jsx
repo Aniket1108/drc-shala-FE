@@ -27,11 +27,11 @@ const product_details = () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
 
     const options = {
-        "key": "rzp_test_jKP5uKNCoB5oR0",
+        "key": "",
         "amount": "",
         "currency": "INR",
         "name": "Drcshala",
-        "description": "Test Transaction",
+        "description": "Test Series Transaction",
         "image": "https://example.com/your_logo",
         "order_id": "",
         "handler": async function (response) {
@@ -39,7 +39,7 @@ const product_details = () => {
         },
         "prefill": {
             "name": userData.firstName,
-            "email": userData.email,
+            "email": userData.email || '',
             "contact": userData.mobileNumber
         },
         "notes": {},
@@ -49,7 +49,8 @@ const product_details = () => {
     const handlePayment = (e, data) => {
         try {
             options["amount"] = data.order_amount;
-            options["order_id"] = data.razorpay_order_id
+            options["order_id"] = data.razorpay_order_id;
+            options["key"] = data.razorpay_key_id;
 
             var rzp1 = new window.Razorpay(options);
 
@@ -138,10 +139,10 @@ const product_details = () => {
                                     variant="body1"
                                     sx={{ textDecoration: "line-through", color: "gray" }}
                                 >
-                                    ₹{courseDetails?.product_offer_price}
+                                    ₹{courseDetails?.product_price}
                                 </Typography>
                                 <Typography variant="h3" color="secondary" fontWeight="bold" gutterBottom>
-                                    ₹{courseDetails?.product_price}
+                                    ₹{courseDetails?.product_offer_price}
                                 </Typography>
 
                                 <Box sx={{
@@ -164,9 +165,9 @@ const product_details = () => {
                                     fullWidth
                                     size="large"
                                     startIcon={<ShoppingCartIcon />}
-                                // onClick={(e) => { createOrder(e, product_id) }}
+                                onClick={(e) => { createOrder(e, product_id) }}
                                 >
-                                    Coming soon ...
+                                    Buy now
                                 </Button>
                             </CardContent>
                         </Card>

@@ -226,7 +226,7 @@ export default function Header({ layout = 'landing', ...others }) {
                   size="small"
                   variant="contained"
                   sx={{ ml: 1 }}
-                  // onClick={() => { navigate("/login") }}
+                  onClick={() => { navigate("/login") }}
                 >
                   Login
                 </Button>
@@ -258,7 +258,7 @@ export default function Header({ layout = 'landing', ...others }) {
                     <Button
                       variant='contained'
                       sx={{ ml: 3 }}
-                      // onClick={() => { navigate("/login") }}
+                      onClick={() => { navigate("/login") }}
                     >
                       Login
                     </Button>
