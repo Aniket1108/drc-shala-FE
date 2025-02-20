@@ -40,17 +40,17 @@ const teamMembers = [
     {
         name: "Nilesh Maher",
         role: "Founder & CEO",
-        description: "With over a decade of experience in education, our CEO believes in creating an education system that nurtures critical thinking and practical skills while maintaining academic excellence."
+        description: " Dear Students & Parent's, At Drcshala we empower students with top-quality education, preparing them NEET, JEE, and MHT-CET, while building strong foundation in classes 8-10. Our platform combines expert guidance and technology to foster curiosity, critical thinking, and academic excellence. Whether you are a student, instructor, or parent, we stand with you every step of the way to unlock and shape a brighter future!🚀"
     },
     {
         name: "Sagar Maher",
         role: "Co-Founder & COO",
-        description: "Dedicated to making quality education accessible to all, our CMO champions the cause of affordable education, ensuring financial constraints never limit one's access to learning."
+        description: "Unlock your true potential with expert guidance, smart learning, and unwavering determination, while parents gain a trusted partner in shaping their child's future. Together, we create a supportive and inspiring environment that fosters confidence, excellence, and lifelong success."
     },
     {
         name: "Aniket Gholap",
         role: "Co-Founder & CTO",
-        description: "As an expert in educational psychology, our CTO specializes in creating effective mentorship programs and building sustainable learning communities where students can thrive."
+        description: "Achieve your dreams with personalized learning, AI-powered progress tracking, and interactive learning tools to help students succeed. Parents receive clear student performance report. Together, we make inspire, grow, and succeed!"
     }
 ];
 
@@ -66,10 +66,17 @@ const AboutUs = () => {
                             About Drcshala
                         </Typography>
                         <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
-                            At Drcshala, we believe in empowering students to achieve their dreams. Our mission is to provide high-quality
-                            educational resources and tools to help students excel in competitive exams like NEET, JEE, and MHT-CET. With
-                            comprehensive courses, interactive test series, and expert-curated study materials, we strive to make learning
-                            accessible, engaging, and effective.
+                            Welcome to Drcshala! A platform dedicated to revolutionizing education by empowering students, supporting instructors,
+                            and building trust with parents. Our vision is to help students excel in NEET, JEE, and MHT-CET through top-notch guidance and resources.
+                            We lay a strong academic foundation for students in classes 8, 9, and 10 with our comprehensive courses.
+
+                            <br /> <br />
+                            Beyond academics, we foster holistic growth, character development, and a lifelong passion for learning. Our mission is to make quality
+                            education accessible, affordable, and impactful for every student. We combine innovative technology with expert educators to nurture
+                            future leaders and changemakers.
+                            <br /> <br />
+                            At Drcshala, we are committed to transforming learning and unlocking every student’s potential! 🚀
+
                         </Typography>
                         <Button variant="contained" color="primary" size="large">
                             Learn More
@@ -92,8 +99,8 @@ const AboutUs = () => {
                                     Mission
                                 </Typography>
                                 <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-                                    To make quality education accessible to every student, empowering them to succeed in their academic and career
-                                    aspirations.
+                                    We provide students with a comprehensive earning platform that enhances conceptual clarity, fosters curiosity, and boost confidence.
+                                    Empower instructors with advanced teaching tools, and build trust with parents through transparent progress tracking and reliable content.
                                 </Typography>
                             </Box>
                         </Grid>
@@ -103,8 +110,8 @@ const AboutUs = () => {
                                     Vision
                                 </Typography>
                                 <Typography variant="body1" sx={{ color: 'text.secondary' }}>
-                                    To be the leading educational platform offering innovative and personalized learning experiences to students
-                                    across the globe.
+                                    Our vision is to transform the way India learns by creating a world where every student, has access to top-quality education and resources.
+                                    We aspire to bridge the educational gap and inspire millions to achieve their dreams through personalized, technology-driven learning experiences.
                                 </Typography>
                             </Box>
                         </Grid>

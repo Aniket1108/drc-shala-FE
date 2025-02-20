@@ -1,11 +1,13 @@
-import { Box, Button, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+import { Box, Button, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
 
 
 import { useHttp } from 'src/utils/api_intercepters.js';
 
 const test_series = () => {
-    const useHttpMethod = useHttp()
+    const useHttpMethod = useHttp();
+    const navigate = useNavigate();
 
     const [allTestSeries, setAllTestSeries] = useState([]);
 
@@ -62,7 +64,9 @@ const test_series = () => {
                                         justifyContent: 'flex-end',
                                         mt: 3
                                     }}>
-                                        <Button variant='contained'>
+                                        <Button variant='contained' onClick={() => {
+                                            navigate("/learnings/test-series/details/" + testSeries.user_product_id)
+                                        }}>
                                             View Details
                                         </Button>
                                     </Box>

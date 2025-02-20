@@ -20,6 +20,7 @@ const Products = Loadable(lazy(() => import('pages/products/product')));
 const ProductDetails = Loadable(lazy(() => import('pages/products/product_details')));
 
 const LearningsTestSeries = Loadable(lazy(() => import('pages/my_learnings/test_series')));
+const UserTestSeries = Loadable(lazy(() => import('pages/my_learnings/test_series_details')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -99,6 +100,10 @@ const MainRoutes = {
         {
           path: 'test-series',
           element: <LearningsTestSeries />
+        },
+        {
+          path: 'test-series/details/:user_product_id',
+          element: <UserTestSeries />
         },
       ]
     },

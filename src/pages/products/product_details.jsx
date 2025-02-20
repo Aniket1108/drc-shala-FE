@@ -26,31 +26,27 @@ const product_details = () => {
 
     const userData = JSON.parse(localStorage.getItem('userData'));
 
-    const options = {
-        "key": "",
-        "amount": "",
-        "currency": "INR",
-        "name": "Drcshala",
-        "description": "Test Series Transaction",
-        "image": "https://example.com/your_logo",
-        "order_id": "",
-        "handler": async function (response) {
-            alert(response.razorpay_order_id);
-        },
-        "prefill": {
-            "name": userData.firstName,
-            "email": userData.email || '',
-            "contact": userData.mobileNumber
-        },
-        "notes": {},
-        "theme": { "color": "#3399cc" }
-    };
-
     const handlePayment = (e, data) => {
         try {
-            options["amount"] = data.order_amount;
-            options["order_id"] = data.razorpay_order_id;
-            options["key"] = data.razorpay_key_id;
+            const options = {
+                "key": data.razorpay_key_id,
+                "amount": data.order_amount,
+                "currency": "INR",
+                "name": "Drcshala",
+                "description": "Test Series Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": data.razorpay_order_id,
+                "handler": async function (response) {
+                    alert(response.razorpay_order_id);
+                },
+                "prefill": {
+                    "name": userData?.firstName,
+                    "email": userData?.email || '',
+                    "contact": userData?.mobileNumber
+                },
+                "notes": {},
+                "theme": { "color": "#3399cc" }
+            };
 
             var rzp1 = new window.Razorpay(options);
 
@@ -165,7 +161,7 @@ const product_details = () => {
                                     fullWidth
                                     size="large"
                                     startIcon={<ShoppingCartIcon />}
-                                onClick={(e) => { createOrder(e, product_id) }}
+                                    onClick={(e) => { createOrder(e, product_id) }}
                                 >
                                     Buy now
                                 </Button>
