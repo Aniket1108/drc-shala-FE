@@ -22,28 +22,9 @@ const products = {
     {
       id: 'test-series',
       title: "Test Series",
-      type: 'collapse',
-      icon: icons.menuLevel,
-      children: [
-        {
-          id: 'test-series-1.1',
-          title: "All Test Series",
-          type: 'item',
-          url: '#'
-        },
-        {
-          id: 'test-series-1.1',
-          title: "Create",
-          type: 'item',
-          url: '#'
-        },
-        {
-          id: 'test-series-1.1',
-          title: "History",
-          type: 'item',
-          url: '#'
-        },
-      ]
+      type: 'item',
+      url: '/management/test-series',
+      icon: icons.disabledMenu,
     },
     {
       id: 'courses',
