@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Container, Grid, Paper } from '@mui/material';
+import { Box, Typography, Container, Paper } from '@mui/material';
 import SchoolIcon from '@mui/icons-material/School';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
@@ -10,26 +10,26 @@ const WhyDRCShalaSection = () => {
         {
             title: 'Expert Instructors',
             description: 'Learn from experienced educators who are experts in their respective fields and have a track record of student success.',
-            icon: <SchoolIcon sx={{ fontSize: 50, color: '#fff' }} />,
-            background: '#6a11cb', // Purple color
+            icon: <SchoolIcon sx={{ fontSize: 40, color: '#fff' }} />,
+            background: '#6a11cb',
         },
         {
             title: 'Proven Results',
             description: 'Our students consistently achieve top ranks in competitive exams like NEET, JEE, MHT-CET, and more.',
-            icon: <VerifiedUserIcon sx={{ fontSize: 50, color: '#fff' }} />,
-            background: '#43cea2', // Green color
+            icon: <VerifiedUserIcon sx={{ fontSize: 40, color: '#fff' }} />,
+            background: '#43cea2',
         },
         {
             title: '24/7 Support',
             description: 'Get uninterrupted access to personalized guidance and help from our support team, ensuring a smooth learning experience.',
-            icon: <SupportAgentIcon sx={{ fontSize: 50, color: '#fff' }} />,
-            background: '#ff758c', // Pink color
+            icon: <SupportAgentIcon sx={{ fontSize: 40, color: '#fff' }} />,
+            background: '#ff758c',
         },
         {
             title: 'Track Progress',
             description: 'Monitor your progress with detailed reports and analytics that help you stay on track and improve your performance.',
-            icon: <TrendingUpIcon sx={{ fontSize: 50, color: '#fff' }} />,
-            background: '#ff7eb3', // Light Pink color
+            icon: <TrendingUpIcon sx={{ fontSize: 40, color: '#fff' }} />,
+            background: '#ff7eb3',
         },
     ];
 
@@ -42,40 +42,88 @@ const WhyDRCShalaSection = () => {
                 <Typography variant="subtitle1" align="center" color="textSecondary" gutterBottom>
                     Discover the benefits of learning with us and see how we help you succeed in your academic journey.
                 </Typography>
-                <Grid container spacing={6} sx={{ marginTop: '3rem' }}>
+
+                {/* Horizontal Scrollable Container */}
+                <Box
+                    sx={{
+                        display: 'flex',
+                        gap: '1.5rem',
+                        overflowX: 'auto',
+                        whiteSpace: 'nowrap',
+                        padding: '1rem 0',
+                        '&::-webkit-scrollbar': {
+                            height: '8px',
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                            backgroundColor: '#888',
+                            borderRadius: '4px',
+                        },
+                        '&::-webkit-scrollbar-track': {
+                            backgroundColor: '#f1f1f1',
+                        },
+                    }}
+                >
                     {reasons.map((reason, index) => (
-                        <Grid item xs={12} md={6} key={index}>
+                        <Box
+                            key={index}
+                            sx={{
+                                position: 'relative',
+                                minWidth: '280px',
+                                maxWidth: '280px',
+                                flex: '0 0 auto',
+                                paddingTop: '2rem', // Add space for the icon
+                            }}
+                        >
+                            {/* Icon positioned half above the box */}
+                            <Box
+                                sx={{
+                                    position: 'absolute',
+                                    top: '0', // Move icon half above the box
+                                    left: '20px',
+                                    zIndex: 1,
+                                    backgroundColor: reason.background,
+                                    borderRadius: '50%',
+                                    padding: '0.5rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                                }}
+                            >
+                                {reason.icon}
+                            </Box>
                             <Paper
                                 elevation={3}
                                 sx={{
-                                    padding: '2rem',
-                                    backgroundColor: reason.background,
-                                    color: 'white',
+                                    padding: '12px',
+                                    height: '190px',
+                                    // backgroundColor: '#f5f5f5', // Grey background
+                                    color: '#333',
                                     borderRadius: '10px',
                                     display: 'flex',
+                                    flexDirection: 'column',
                                     alignItems: 'center',
-                                    gap: '1.5rem',
+                                    textAlign: 'center',
                                     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
                                     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                    wordWrap: 'break-word',
+                                    overflow: 'hidden',
                                     '&:hover': {
                                         transform: 'translateY(-5px)',
                                         boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)',
                                     },
                                 }}
                             >
-                                <Box>{reason.icon}</Box>
-                                <Box>
-                                    <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-                                        {reason.title}
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ marginTop: '1rem' }}>
-                                        {reason.description}
-                                    </Typography>
-                                </Box>
+                                <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '1rem', mt: 3 }}>
+                                    {reason.title}
+                                </Typography>
+                                <Typography variant="body2" sx={{ marginTop: '0.5rem', fontSize: '0.875rem', whiteSpace: 'normal' }}>
+                                    {reason.description}
+                                </Typography>
                             </Paper>
-                        </Grid>
+                        </Box>
                     ))}
-                </Grid>
+                </Box>
             </Container>
         </Box>
     );
