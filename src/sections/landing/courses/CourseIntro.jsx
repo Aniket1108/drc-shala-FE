@@ -3,7 +3,7 @@ import { Box, Typography, Container, Button, Grid } from '@mui/material';
 
 const CoursesIntro = () => {
     return (
-        <Box sx={{ bgcolor: 'background.default', py: 6 }}>
+        <Box sx={{ bgcolor: 'background.default' }}>
             <Container>
                 <Box sx={{ textAlign: 'center', mb: 6 }}>
                     <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'text.primary' }}>

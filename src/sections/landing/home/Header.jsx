@@ -43,7 +43,6 @@ export default function HeroPage() {
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        pt: { xs: 8, md: 0 }, // Add padding top for mobile to account for navbar
         '&::before': {
           content: '""',
           position: 'absolute',

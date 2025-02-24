@@ -14,11 +14,11 @@ export default function LogoSection({ isIcon, sx, to }) {
       sx={{ fontSize: "24px", fontWeight: 600 }}
       onClick={() => { navigate("/") }}
     >
-      <img src={DRCSHALA} width="24px" />
-      <Typography component="span" sx={{ color: "#0a69a1", fontSize: "22px", fontWeight: 600, letterSpacing: 0.7, ml: 1 }}>
+      {/* <img src={DRCSHALA} width="24px" /> */}
+      <Typography component="span" sx={{ color: "#38b6ff", fontSize: "22px", fontWeight: 800, letterSpacing: 0.7, ml: 1 }}>
         Drc
       </Typography>
-      <Typography component="span" sx={{ color: "#f57c00", fontSize: "22px", fontWeight: 600, letterSpacing: 0.7 }}>
+      <Typography component="span" sx={{ color: "#ff914d", fontSize: "22px", fontWeight: 800, letterSpacing: 0.7 }}>
         shala
       </Typography>
     </ButtonBase>

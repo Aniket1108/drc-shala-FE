@@ -12,6 +12,10 @@ const MaintenanceError = Loadable(lazy(() => import('pages/maintenance/error/404
 const AppContactUS = Loadable(lazy(() => import('pages/contact-us')));
 const AboutUs = Loadable(lazy(() => import('pages/about-us')));
 
+const TermsAndConditions = Loadable(lazy(() => import('pages/terms-and-conditions')));
+const PrivacyPolicy = Loadable(lazy(() => import('pages/privacy-policy')));
+const RefundPolicy = Loadable(lazy(() => import('pages/refund-policy')));
+
 const Overview = Loadable(lazy(() => import('pages/overview/overview')));
 const Courses = Loadable(lazy(() => import('pages/courses')));
 const CourseDetails = Loadable(lazy(() => import('pages/course_details')));
@@ -48,6 +52,18 @@ const MainRoutes = {
         {
           path: 'about-us',
           element: <AboutUs />
+        },
+        {
+          path: 'terms-and-conditions',
+          element: <TermsAndConditions />
+        },
+        {
+          path: 'privacy-policy',
+          element: <PrivacyPolicy />
+        },
+        {
+          path: 'refund-policy',
+          element: <RefundPolicy />
         },
         {
           path: 'courses',

@@ -1,8 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Grid, Typography, Box, Button, Stack, Card, Avatar } from '@mui/material';
+import { Container, Grid, Typography, Box, Button, Stack, Card, Avatar, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import aboutUsImg from "assets/images/landing/aboutUs.png"
+import LeadershipCarousel from 'sections/landing/home/LeadershipCarousel'
+
+import { Heart } from 'iconsax-react'
 
 // Custom styles
 const StyledImage = styled('img')(({ theme }) => ({
@@ -55,35 +58,60 @@ const teamMembers = [
 ];
 
 const AboutUs = () => {
+    const theme = useTheme();
     const navigate = useNavigate()
     return (
-        <Box sx={{ bgcolor: 'background.default', py: 8, pt: "150px" }}>
+        <Box sx={{ bgcolor: 'background.default', py: 8 }}>
             <Container>
                 {/* Hero Section */}
-                <Grid container spacing={4} alignItems="center">
+                <Grid container spacing={6} alignItems="center">
                     <Grid item xs={12} md={6}>
-                        <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'text.primary' }}>
-                            About Drcshala
+                        <Box sx={{ display: 'inline-flex', alignItems: 'center', bgcolor: 'primary.50', p: 1, px: 2, borderRadius: 50, mb: 4 }}>
+                            <Heart size={16} style={{ marginRight: 8, color: theme.palette.primary.main }} />
+                            <Typography variant="body2" color="primary.main" fontWeight="medium">
+                                Transforming Education
+                            </Typography>
+                        </Box>
+                        <Typography variant="h2" component="h1" fontWeight="bold" gutterBottom>
+                            Empowering the Next Generation of Leaders
                         </Typography>
-                        <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
-                            Welcome to Drcshala! A platform dedicated to revolutionizing education by empowering students, supporting instructors,
-                            and building trust with parents. Our vision is to help students excel in NEET, JEE, and MHT-CET through top-notch guidance and resources.
-                            We lay a strong academic foundation for students in classes 8, 9, and 10 with our comprehensive courses.
-
-                            <br /> <br />
-                            Beyond academics, we foster holistic growth, character development, and a lifelong passion for learning. Our mission is to make quality
-                            education accessible, affordable, and impactful for every student. We combine innovative technology with expert educators to nurture
-                            future leaders and changemakers.
-                            <br /> <br />
-                            At Drcshala, we are committed to transforming learning and unlocking every student’s potential! 🚀
-
+                        <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+                            Welcome to Drcshala! We're revolutionizing education by combining cutting-edge technology with expert guidance to help students excel in NEET, JEE, and MHT-CET examinations.
                         </Typography>
-                        <Button variant="contained" color="primary" size="large">
-                            Learn More
+                        <Button
+                            variant="contained"
+                            size="large"
+                            endIcon={'>'}
+                            sx={{ borderRadius: 50, px: 4 }}
+                        >
+                            Get Started
                         </Button>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <StyledImage src={aboutUsImg} alt="About Drcshala" />
+                        <Box sx={{ position: 'relative' }}>
+                            <Box
+                                sx={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    bgcolor: 'primary.light',
+                                    borderRadius: '50%',
+                                    filter: 'blur(80px)',
+                                    opacity: 0.2,
+                                }}
+                            />
+                            <Box
+                                component="img"
+                                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800"
+                                alt="Students learning"
+                                sx={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    borderRadius: 4,
+                                    boxShadow: theme.shadows[20],
+                                    position: 'relative',
+                                }}
+                            />
+                        </Box>
                     </Grid>
                 </Grid>
 
@@ -118,65 +146,42 @@ const AboutUs = () => {
                     </Grid>
                 </Box>
 
-
-                <Container sx={{ py: 10 }}>
-                    <Typography
-                        variant="h4"
-                        align="center"
-                        gutterBottom
-                        sx={{
-                            mb: 6,
-                            background: 'linear-gradient(135deg, #1e40af 0%, #5b21b6 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                        }}
-                    >
+                <Box>
+                    <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'bold', color: 'text.primary', textAlign: 'center', mt: "120px" }}>
                         Our Leadership Team
                     </Typography>
-
-                    <Grid container spacing={4}>
-                        {teamMembers.map((member, index) => (
-                            <Grid item xs={12} md={4} key={index}>
-                                <StyledCard>
-                                    <StyledAvatar src={""} />
-                                    <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
-                                        {member.name}
-                                    </Typography>
-                                    <Typography
-                                        variant="subtitle1"
-                                        gutterBottom
-                                        sx={{
-                                            color: 'primary.main',
-                                            fontWeight: 600,
-                                            mb: 0.5,
-                                        }}
-                                    >
-                                        {member.role}
-                                    </Typography>
-                                    <Typography variant="body1" sx={{ color: 'text.secondary', textAlign: 'center' }}>
-                                        {member.description}
-                                    </Typography>
-                                </StyledCard>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Container>
+                    <LeadershipCarousel />
+                </Box>
 
                 {/* Call to Action Section */}
-                <Box sx={{ mt: 8, textAlign: 'center' }}>
-                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
-                        Ready to Achieve Your Dreams?
-                    </Typography>
-                    <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
-                        Join Drcshala today and take the first step towards success.
-                    </Typography>
-                    <Button variant="contained" color="primary" size="large" onClick={() => {
-                        navigate("/")
-                    }}>
-                        Get Started
-                    </Button>
-                </Box>
             </Container>
+            <Box sx={{ bgcolor: 'primary.main', color: 'white', py: 10, mt: '50px' }}>
+                <Container maxWidth="md" sx={{ textAlign: 'center' }}>
+                    <Typography variant="h3" component="h2" fontWeight="bold" gutterBottom>
+                        Ready to Begin Your Journey?
+                    </Typography>
+                    <Typography variant="h6" sx={{ mb: 4, color: 'primary.50' }}>
+                        Join thousands of students who are already transforming their future with Drcshala.
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        size="large"
+                        endIcon={'>'}
+                        sx={{
+                            bgcolor: 'white',
+                            color: 'primary.main',
+                            borderRadius: 50,
+                            px: 4,
+                            '&:hover': {
+                                bgcolor: 'grey.100',
+                            },
+                        }}
+                        onClick={() => { navigate('/register') }}
+                    >
+                        Start Learning Today
+                    </Button>
+                </Container>
+            </Box>
         </Box>
     );
 };

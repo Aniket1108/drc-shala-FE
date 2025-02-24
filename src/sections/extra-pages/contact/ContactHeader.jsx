@@ -11,7 +11,7 @@ import AuthBackground from 'assets/images/auth/AuthBackground';
 
 export default function ContactHeader() {
   return (
-    <Box sx={{ position: 'relative', overflow: 'hidden', mt: 15 }}>
+    <Box sx={{ position: 'relative', overflow: 'hidden' }}>
       {/* <AuthBackground /> */}
       <Container maxWidth="lg" sx={{ px: { xs: 0, sm: 2 } }}>
         <Box sx={{ width: { xs: '100%', sm: 252, md: 360, lg: 436 }, mx: 'auto' }}>

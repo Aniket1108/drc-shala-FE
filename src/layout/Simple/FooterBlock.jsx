@@ -104,10 +104,10 @@ export default function FooterBlock({ isFull }) {
                   <Stack spacing={3}>
                     <Typography variant="h5">Help & Support</Typography>
                     <Stack spacing={{ xs: 1.5, md: 2.5 }}>
-                      <FooterLink href="/" target="_blank" underline="none">
+                      <FooterLink href="/terms-and-conditions" target="_blank" underline="none">
                         Terms & Conditions
                       </FooterLink>
-                      <FooterLink href="/" target="_blank" underline="none">
+                      <FooterLink href="/refund-policy" target="_blank" underline="none">
                         Refund policy
                       </FooterLink>
                       <FooterLink href="/privacy-policy" target="_blank" underline="none">
@@ -131,16 +131,23 @@ export default function FooterBlock({ isFull }) {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Grid container spacing={2} alignItems="center" sx={{ justifyContent: 'flex-end' }}>
-                <Grid item>
+                {/* <Grid item>
                   <Tooltip title="LinkedIn">
                     <Link href="https://www.linkedin.com/company/drcshala" underline="none" target="_blank" sx={linkSX}>
                       <LinkedIn sx={{ fontSize: 24 }} />
                     </Link>
                   </Tooltip>
+                </Grid> */}
+                <Grid item>
+                  <Tooltip title="Twitter">
+                    <Link href="https://x.com/drcshala" underline="none" target="_blank" sx={linkSX}>
+                      <Twitter sx={{ fontSize: 24 }} />
+                    </Link>
+                  </Tooltip>
                 </Grid>
                 <Grid item>
                   <Tooltip title="Facebook">
-                    <Link href="https://www.facebook.com/drcshala" underline="none" target="_blank" sx={linkSX}>
+                    <Link href="https://www.facebook.com/share/1EQhDDNib7/" underline="none" target="_blank" sx={linkSX}>
                       <Facebook sx={{ fontSize: 24 }} />
                     </Link>
                   </Tooltip>

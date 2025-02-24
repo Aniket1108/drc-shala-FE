@@ -75,7 +75,7 @@ const product_details = () => {
 
     return (
         <>
-            <Container sx={{ padding: 2, mt: "120px" }}>
+            <Container sx={{ padding: 2, mt: "80px" }}>
                 <Grid container spacing={4}>
                     {/* Left Side: Offering Details */}
                     <Grid item xs={12} md={8}>

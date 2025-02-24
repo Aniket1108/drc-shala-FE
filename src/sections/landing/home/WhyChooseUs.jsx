@@ -5,30 +5,35 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
+import ProvenResults from 'assets/images/landing/provenResults.gif'
+import ExperFauclty from 'assets/images/landing/expertFaculty.gif'
+import Progress from 'assets/images/landing/progress.gif'
+import Support from 'assets/images/landing/support.gif'
+
 const WhyDRCShalaSection = () => {
     const reasons = [
         {
             title: 'Expert Instructors',
             description: 'Learn from experienced educators who are experts in their respective fields and have a track record of student success.',
-            icon: <SchoolIcon sx={{ fontSize: 40, color: '#fff' }} />,
+            icon: <img src={ExperFauclty} width='40px' />,
             background: '#6a11cb',
         },
         {
             title: 'Proven Results',
             description: 'Our students consistently achieve top ranks in competitive exams like NEET, JEE, MHT-CET, and more.',
-            icon: <VerifiedUserIcon sx={{ fontSize: 40, color: '#fff' }} />,
+            icon: <img src={ProvenResults} width='40px' />,
             background: '#43cea2',
         },
         {
             title: '24/7 Support',
             description: 'Get uninterrupted access to personalized guidance and help from our support team, ensuring a smooth learning experience.',
-            icon: <SupportAgentIcon sx={{ fontSize: 40, color: '#fff' }} />,
+            icon: <img src={Support} width='40px' />,
             background: '#ff758c',
         },
         {
             title: 'Track Progress',
             description: 'Monitor your progress with detailed reports and analytics that help you stay on track and improve your performance.',
-            icon: <TrendingUpIcon sx={{ fontSize: 40, color: '#fff' }} />,
+            icon: <img src={Progress} width='40px' />,
             background: '#ff7eb3',
         },
     ];
@@ -81,8 +86,7 @@ const WhyDRCShalaSection = () => {
                                     top: '0', // Move icon half above the box
                                     left: '20px',
                                     zIndex: 1,
-                                    backgroundColor: reason.background,
-                                    borderRadius: '50%',
+                                    // borderRadius: '50%',
                                     padding: '0.5rem',
                                     display: 'flex',
                                     alignItems: 'center',
